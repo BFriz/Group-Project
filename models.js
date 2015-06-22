@@ -2,7 +2,10 @@ var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/moodsdb"); // random moodsdb title, should i change?
 
 // defining the blueprint for User
+// http://www.slideshare.net/yuriybogomolov/ybo-mongo-dbmeetup for help
+
 var UserSchema = new mongoose.Schema({
+	// user profile
 	display_name: {type: String, required: true},
 	email: {type: String, unique: true, required: true },
 	password: {type: String, unique: true, required: true }, // clearly needs to be changed
@@ -11,9 +14,23 @@ var UserSchema = new mongoose.Schema({
 	// looking_for: {type: String, default: ''}, this will be next step as it requires validation with gender
 	profile_pic_url: {type: String, default: '' },
 	all_pics_url: {type: Array, default: [] },
+
+	// dynamic attributes
 	mood: {type: Array, default: []}, // see note on validations on the mood
 	location: {type: String, default: ''}, // TBD if it is String
-	xxxxxxx: {type: Array, default: []}
+
+	// uncertainty on the below, need to double check the self-referencing
+  likes: [{
+    type: mongoose.Schema.Types.ObjectId, ref: 'User'
+  }],
+  dislikes: [{
+    type: mongoose.Schema.Types.ObjectId, ref: 'User'
+  }],
+  matches: [{
+    type: mongoose.Schema.Types.ObjectId, ref: 'User'
+  }],
+
+
 });
 
 
