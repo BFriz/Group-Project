@@ -1,3 +1,4 @@
+
 // put our models here
 var mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/moodsdb"); // random moodsdb title, should i change?
@@ -23,3 +24,4 @@ var Comment = mongoose.model('Comment', CommentSchema);
 // making food object available to other enviroments
 module.exports.Post = Post;
 module.exports.Comment = Comment;
+

@@ -32,8 +32,6 @@ app.get('/', function(req, res){
   res.render('index')
 });
 
-
-
 // Start the server
 app.listen(3000, function () {
   console.log("Server running on port", port);
