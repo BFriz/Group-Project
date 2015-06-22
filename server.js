@@ -39,7 +39,7 @@ app.use(bodyParser.json());  // this is if we send data objects through the requ
 // mongoose.connect("mongodb://localhost/moodsdb"); // random moodsdb title, should i change?
 
 
-// // require('./config/passport')(passport); // pass passport for configuration
+require('./config/passport')(passport); // pass passport for configuration
 
 // // required for passport
 app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
