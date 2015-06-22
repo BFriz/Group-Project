@@ -47,6 +47,8 @@ to do
 ** IF user clicks NO on a profile
 - add profile to user Dislikes array
 
+********  USE THE MAP ************
+
 
 
 
