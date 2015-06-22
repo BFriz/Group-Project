@@ -23,11 +23,9 @@ var UserSchema = new mongoose.Schema({
 	// likes: [User],
 	// likes: [UserSchema],
   likes: [{
-    type: mongoose.Schema.Types.ObjectId, ref: 'User'
+    type: mongoose.Schema.Types.ObjectId, ref: 'User', default: []
   }],
-  dislikes: [{
-    type: mongoose.Schema.Types.ObjectId, ref: 'User'
-  }],
+  dislikes: [],
   matches: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }],
@@ -42,8 +40,8 @@ var UserSchema = new mongoose.Schema({
 var User = mongoose.model('User', UserSchema);
 
 // making food object available to other enviroments
-module.exports.Post = Post;
-module.exports.Comment = Comment;
+module.exports.User = User;
+
 
 
 // NOTES - NOTES - NOTES - NOTES NOTES - NOTES

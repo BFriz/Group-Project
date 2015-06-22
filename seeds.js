@@ -10,7 +10,7 @@ repl.context.db = db;
 db.User.collection.remove();
 
 // creating the first user
-db.User.create({
+var mathilda = db.User.create({
 	display_name: 'M@thild@',
 	email: 'aa',
 	password: 'aa',
@@ -18,8 +18,30 @@ db.User.create({
 	gender: 'female',
 	mood: 'party',
 }, function(err, user) {
-	console.log('user creaetd');
+	if (err) { console.log(err) }
+		else { console.log('user creaetd');}
 })
+
+var james = db.User.create({
+	display_name: 'James',
+	email: 'bb',
+	password: 'ag',
+	dob: '19/12/1984',
+	gender: 'male',
+	mood: 'party',
+}, function(err, user) {
+	if (err) { console.log(err) }
+		else { 
+			console.log('user creaetd');
+			console.log(james.likes);
+		}
+});
+
+// trying to say James likes MAthilda, ie Mathilda is inside of Jame's Likes array
+
+// james.likes.push(mathilda);
+
+
 
 // db.Blog.create({
 //   title: 'Rails for Zombies',
