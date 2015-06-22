@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var bcrypt = require('bcrypt-nodejs');
 mongoose.connect("mongodb://localhost/moodsdb"); // random moodsdb title, should i change?
 
 // defining the blueprint for User
@@ -6,14 +7,37 @@ mongoose.connect("mongodb://localhost/moodsdb"); // random moodsdb title, should
 
 var UserSchema = new mongoose.Schema({
   // user profile
-  display_name: {type: String, required: true},
-  email: {type: String, unique: true, required: true },
-  password: {type: String, required: true }, // clearly needs to be changed
-  dob: {type: String, required: true, required: true},  // or "date" type?  see note on DOB vs Set age
-  gender: {type: String, required: true, required: true},
-  // looking_for: {type: String, default: ''}, this will be next step as it requires validation with gender
-  profile_pic_url: {type: String, default: '' },
-  all_pics_url: {type: Array, default: [] },
+   local            : {
+      email        : String,
+      password     : String,
+  },
+  facebook         : {
+      id           : String,
+      token        : String,
+      email        : String,
+      name         : String
+  },
+  twitter          : {
+      id           : String,
+      token        : String,
+      displayName  : String,
+      username     : String
+  },
+  google           : {
+      id           : String,
+      token        : String,
+      email        : String,
+      name         : String
+  },
+  // display_name: {type: String, required: true},
+  // email: {type: String, unique: true, required: true },
+  // password: {type: String, required: true }, // clearly needs to be changed
+  // dob: {type: String, required: true, required: true},  // or "date" type?  see note on DOB vs Set age
+  // gender: {type: String, required: true, required: true},
+  // // looking_for: {type: String, default: ''}, this will be next step as it requires validation with gender
+  // profile_pic_url: {type: String, default: '' },
+  // all_pics_url: {type: Array, default: [] }
+
 
   // dynamic attributes
   mood: {type: String, default: ''}, // see note on validations on the mood
@@ -32,7 +56,19 @@ var UserSchema = new mongoose.Schema({
 
 });
 
+// methods ======================
+// generating a hash
+userSchema.methods.generateHash = function(password) {
+    return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
+};
 
+// checking if password is valid
+userSchema.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password);
+};
+
+// create the model for users and expose it to our app
+module.exports = mongoose.model('User', userSchema);
 
 
 // creating a mongoose Food model to allow us to instantiate new food documents;
