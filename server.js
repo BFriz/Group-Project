@@ -1,3 +1,5 @@
+// Various npm installed: npm install --save body-parser ejs express morgan socket.io mongoose
+
 // Requirements to run the app
 var express = require('express');
 var app = express();
