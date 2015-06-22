@@ -49,7 +49,6 @@ var User = mongoose.model('User', UserSchema);
 
 // making food object available to other enviroments
 module.exports.User = User;
-module.exports.Comment = Comment;
 
 
 // NOTES - NOTES - NOTES - NOTES NOTES - NOTES

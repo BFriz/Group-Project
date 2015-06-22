@@ -14,7 +14,8 @@ var io = require('socket.io')(server);
 var morgan = require('morgan');
 app.use(morgan('dev'));
 // Create connection to Database from the server
-var db = require('./models')
+var db = require('./models');
+
 
 // Setting the views and static folder
 app.set('views', './views');
@@ -32,20 +33,6 @@ app.get('/', function(req, res){
   res.render('index')
 });
 
-
-//Facebook log in ***********************
-// Redirect the user to the OAuth provider for authentication.  When
-// complete, the provider will redirect the user back to the application at
-//     /auth/provider/callback
-app.get('/auth/facebook', passport.authenticate('facebook'));
-
-// The OAuth provider has redirected the user back to the application.
-// Finish the authentication process by attempting to obtain an access
-// token.  If authorization was granted, the user will be logged in.
-// Otherwise, authentication has failed.
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { successRedirect: '/',
-                                      failureRedirect: '/login' }));
 
 // Start the server
 app.listen(3000, function () {
