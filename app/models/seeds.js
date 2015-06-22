@@ -22,7 +22,7 @@ var mathilda = db.User.create({
 	mood: 'party',
 }, function(err, user) {
 	if (err) { console.log(err) }
-		else { console.log('mathilda created');}
+		else { console.log('mathilda creaetd');}
 })
 
 
