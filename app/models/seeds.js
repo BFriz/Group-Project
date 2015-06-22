@@ -9,9 +9,10 @@ repl.context.db = db;
 //Remove all documents from the collection;
 db.User.collection.remove();
 
-// var User = mongoose.model('User', UserSchema);
+// SEEDING:
+// Jerem and Lexie match; Jerem likes Lauren
+// James likes Mathilda, but no match; James doesnt like Lauren 
 
-// creating the first user
 var mathilda = db.User.create({
 	display_name: 'Mathilda',
 	email: 'math@ga',
