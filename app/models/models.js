@@ -16,12 +16,12 @@ var UserSchema = new mongoose.Schema({
   	profile_pic_url: {type: String, default: '' },
   	all_pics_url: {type: Array, default: [] },
    },
-   facebook: {
-    id: String,
-    token: String,
-    email: String,
-    name: String,
-   }, 
+   // facebook: {
+   //  id: String,
+   //  token: String,
+   //  email: String,
+   //  name: String,
+   // }, 
 
 	// dynamic attributes
 	mood: {type: Array, default: []}, // see note on validations on the mood
