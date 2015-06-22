@@ -5,27 +5,27 @@ mongoose.connect("mongodb://localhost/moodsdb"); // random moodsdb title, should
 // http://www.slideshare.net/yuriybogomolov/ybo-mongo-dbmeetup for help
 
 var UserSchema = new mongoose.Schema({
-	// user profile
-	display_name: {type: String, required: true},
-	email: {type: String, unique: true, required: true },
-	password: {type: String, unique: true, required: true }, // clearly needs to be changed
-	dob: {type: String, required: true, required: true},  // or "date" type?  see note on DOB vs Set age
-	gender: {type: String, required: true, required: true},
-	// looking_for: {type: String, default: ''}, this will be next step as it requires validation with gender
-	profile_pic_url: {type: String, default: '' },
-	all_pics_url: {type: Array, default: [] },
+  // user profile
+  display_name: {type: String, required: true},
+  email: {type: String, unique: true, required: true },
+  password: {type: String, required: true }, // clearly needs to be changed
+  dob: {type: String, required: true, required: true},  // or "date" type?  see note on DOB vs Set age
+  gender: {type: String, required: true, required: true},
+  // looking_for: {type: String, default: ''}, this will be next step as it requires validation with gender
+  profile_pic_url: {type: String, default: '' },
+  all_pics_url: {type: Array, default: [] },
 
-	// dynamic attributes
-	mood: {type: String, default: ''}, // see note on validations on the mood
-	location: {type: String, default: ''}, // TBD if it is String
+  // dynamic attributes
+  mood: {type: String, default: ''}, // see note on validations on the mood
+  location: {type: String, default: ''}, // TBD if it is String
 
-	// uncertainty on the below, need to double check the self-referencing
-	// likes: [User],
-	// likes: [UserSchema],
-  likes: [{
+  // uncertainty on the below, need to double check the self-referencing
+  // likes: [User],
+  // likes: [UserSchema],
+  likes: [],
+  dislikes: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User', default: []
   }],
-  dislikes: [],
   matches: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'User'
   }],
