@@ -20,7 +20,7 @@ app.get('/blogs', function(req, res){
    db.Blog.find({}, function(err, blogs){
     res.send(blogs);
   })
-})
+}) 
 
 app.post('/blogs', function(req, res){
   db.Blog.create(req.body, function(err, food){
