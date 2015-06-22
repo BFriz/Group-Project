@@ -15,6 +15,10 @@ var morgan = require('morgan');
 app.use(morgan('dev'));
 // Create connection to Database from the server
 var db = require('./models');
+// 
+var mongoose = require('mongoose');
+// information for the normal login
+var passport = require('passport');
 
 
 // Setting the views and static folder
