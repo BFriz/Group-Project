@@ -1,5 +1,5 @@
 var REPL = require('repl');
-var db = require('./models');
+var db = require('./user');
 
 //Start the repl and assign a prompt;
 var repl = REPL.start("Blogs >");
