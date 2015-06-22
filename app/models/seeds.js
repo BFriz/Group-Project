@@ -9,36 +9,80 @@ repl.context.db = db;
 //Remove all documents from the collection;
 db.User.collection.remove();
 
+// var User = mongoose.model('User', UserSchema);
+
 // creating the first user
 var mathilda = db.User.create({
-	display_name: 'M@thild@',
-	email: 'aa',
+	display_name: 'Mathilda',
+	email: 'math@ga',
 	password: 'aa',
 	dob: '19/12/1988',
 	gender: 'female',
 	mood: 'party',
 }, function(err, user) {
 	if (err) { console.log(err) }
-		else { console.log('user creaetd');}
+		else { console.log('mathilda created');}
 })
 
-var james = db.User.create({
+db.User.create({
 	display_name: 'James',
-	email: 'bb',
+	email: 'james@ga',
 	password: 'ag',
 	dob: '19/12/1984',
 	gender: 'male',
 	mood: 'party',
-}, function(err, user) {
-	if (err) { console.log(err) }
-		else { 
-			console.log('user creaetd');
-			console.log(james.likes);
-		}
-});
+}, function(err, james) {
+		console.log(james.display_name, 'created');
+		console.log(james.likes);
+		console.log(mathilda.emitted.fulfill[0]._id);
+		james.likes.push(mathilda.emitted.fulfill[0]._id);
+		console.log(james.likes);
+
+})
+
+
+
+
+// 		db.User.create({
+// 			display_name: 'Lauren',
+// 			email: 'lauren@ga',
+// 			password: 'ag',
+// 			dob: '19/10/1988',
+// 			gender: 'female',
+// 			mood: 'chatty',
+
+
+
+
+// 	}, function(err, lauren) {
+// 			console.log(lauren.display_name, 'also lauren created');
+// 			db.User.create({
+// 				display_name: 'Jeremy',
+// 				email: 'jerem@ga',
+// 				password: 'ag',
+// 				dob: '19/12/1980',
+// 				gender: 'male',
+// 				mood: 'surprise me',
+
+// 		}, function(err, jeremy) {
+// 				console.log(jeremy.display_name, 'also jeremy created');
+// 				db.User.create({
+// 					display_name: 'Lexie',
+// 					email: 'lexie@ga',
+// 					password: 'ag',
+// 					dob: '19/12/1988',
+// 					gender: 'female',
+// 					mood: 'surprise me',
+// 			}, function(err, lexie){
+// 				console.log('lexie created');
+// 			})
+// 		})
+// 	})
+// });
+
 
 // trying to say James likes MAthilda, ie Mathilda is inside of Jame's Likes array
-
+// console.log(james);
 // james.likes.push(mathilda);
 
 
