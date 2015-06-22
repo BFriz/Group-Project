@@ -15,7 +15,7 @@ db.User.collection.remove();
 var mathilda = db.User.create({
 	display_name: 'Mathilda',
 	email: 'math@ga',
-	password: 'aa',
+	password: 'abvbva',
 	dob: '19/12/1988',
 	gender: 'female',
 	mood: 'party',
@@ -24,21 +24,34 @@ var mathilda = db.User.create({
 		else { console.log('mathilda created');}
 })
 
+// James likes Mathilda
 db.User.create({
 	display_name: 'James',
 	email: 'james@ga',
-	password: 'ag',
+	password: 'avgfgg',
 	dob: '19/12/1984',
 	gender: 'male',
 	mood: 'party',
 }, function(err, james) {
-		console.log(james.display_name, 'created');
-		console.log(james.likes);
-		console.log(mathilda.emitted.fulfill[0]._id);
-		james.likes.push(mathilda.emitted.fulfill[0]._id);
-		console.log(james.likes);
-
+	console.log(james.display_name, 'created');
+	james.likes.push(mathilda.emitted.fulfill[0]._id);
+	console.log('this is James likes ', james.likes);
+// James doesnt like Lauren
+	db.User.create({
+		display_name: 'Lauren',
+		email: 'laurens@ga',
+		password: 'aghgfd',
+		dob: '19/10/1988',
+		gender: 'female',
+		mood: 'chatty',
+	}, function(err, lauren) {
+		// console.log(err);
+			console.log(lauren.display_name, 'created');
+			james.dislikes.push(lauren._id);
+			console.log('this is James dislikes ', james.dislikes);
+	})
 })
+
 
 
 
