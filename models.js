@@ -21,7 +21,7 @@ var UserSchema = new mongoose.Schema({
     token: String,
     email: String,
     name: String,
-   } 
+   }, 
 
 	// dynamic attributes
 	mood: {type: Array, default: []}, // see note on validations on the mood
@@ -48,7 +48,7 @@ var UserSchema = new mongoose.Schema({
 var User = mongoose.model('User', UserSchema);
 
 // making food object available to other enviroments
-module.exports.Post = Post;
+module.exports.User = User;
 module.exports.Comment = Comment;
 
 
