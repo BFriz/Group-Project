@@ -23,12 +23,11 @@ var UserSchema = new mongoose.Schema({
   // likes: [User],
   // likes: [UserSchema],
   likes: [],
-  dislikes: [{
-    type: mongoose.Schema.Types.ObjectId, ref: 'User', default: []
-  }],
-  matches: [{
-    type: mongoose.Schema.Types.ObjectId, ref: 'User'
-  }],
+  dislikes: [],
+  matches: []
+  // matches: [{
+  //   type: mongoose.Schema.Types.ObjectId, ref: 'User'
+  // }],
 
 
 });
