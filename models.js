@@ -6,14 +6,22 @@ mongoose.connect("mongodb://localhost/moodsdb"); // random moodsdb title, should
 
 var UserSchema = new mongoose.Schema({
 	// user profile
-	display_name: {type: String, required: true},
-	email: {type: String, unique: true, required: true },
-	password: {type: String, unique: true, required: true }, // clearly needs to be changed
-	dob: {type: String, required: true, required: true},  // or "date" type?  see note on DOB vs Set age
-	gender: {type: String, required: true, required: true},
-	// looking_for: {type: String, default: ''}, this will be next step as it requires validation with gender
-	profile_pic_url: {type: String, default: '' },
-	all_pics_url: {type: Array, default: [] },
+   local: {
+  	display_name: {type: String, required: true},
+  	email: {type: String, unique: true, required: true },
+  	password: {type: String, unique: true, required: true }, // clearly needs to be changed
+  	dob: {type: String, required: true, required: true},  // or "date" type?  see note on DOB vs Set age
+  	gender: {type: String, required: true, required: true},
+  	// looking_for: {type: String, default: ''}, this will be next step as it requires validation with gender
+  	profile_pic_url: {type: String, default: '' },
+  	all_pics_url: {type: Array, default: [] },
+   },
+   facebook: {
+    id: String,
+    token: String,
+    email: String,
+    name: String,
+   } 
 
 	// dynamic attributes
 	mood: {type: Array, default: []}, // see note on validations on the mood
