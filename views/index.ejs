@@ -8,13 +8,14 @@
 	<script type="text/javascript" src='/js/app.js'></script>
 	<script type="text/javascript" src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/js/mustache.js"></script>
+	<script type="text/javascript" src="/js/map.js"></script>
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
 </head>
 
 <body>
-
+	<h1>Replace huge login div by a button - put huge login div in the login page</h1>
 	<div id="login_area">
 		<div class="container">
 
@@ -45,11 +46,17 @@
 
   <div id="welcome_choose_mood js_welcome_choose_mood">
   	<!-- to be shown on welcome and hidden once logged in -->
+  	<h4>Please choose your mood before continuing (this will disappear once clicked)</h4>
+    <li><a href="#" data-go='flirty' class='active_menu'>Flirty</a></li>
+    <li><a href="#" data-go='party'>Party</a></li>
+    <li><a href="#" data-go='chatty'>Chatty</a></li>
+    <li><a href="#" data-go='surprise_me'>Surprise Me</a></li>
   </div>
 
 	<div id="main_zone">
 
 	  <div id="mood_menu js_mood_menu">
+	  	<h4>menu to choose mood (delete this h4, it is just for info)</h4>
 	    <ul>
 	      <li><a href="#" data-go='flirty' class='active_menu'>Flirty</a></li>
 	      <li><a href="#" data-go='party'>Party</a></li>
@@ -61,7 +68,8 @@
 	  <div id="left_panel" class="panel">
 	  	 
 			<div id="user_profile">
-				<p>put image here</p>
+				<h4>Who are you going to share it with?</h4>
+				<p>put profile_image here</p>
 				<p>put name/age/mood here</p>
 			</div>
 			<div id="yes_no_box js_yes_no_box">
@@ -69,6 +77,15 @@
 			</div>
 
 	  </div> <!-- end left panel -->
+
+	  <div id="middle_panel" class="panel">
+	  	 
+	  	<h4>Crush Map</h4>
+			<div id="googleMap" class='js_googleMap' style="width:500px; height:380px;">
+				<p>map and pins here</p>
+			</div>
+
+	  </div> <!-- end middle panel -->
 
 	  <div id="right_panel" class="panel">
 	  	 
