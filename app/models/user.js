@@ -28,26 +28,27 @@ var userSchema = mongoose.Schema({
         email        : String,
         name         : String
     },
-  //   display_name: {type: String, required: true},
-  //   dob: {type: String, required: true, required: true},  // or "date" type?  see note on DOB vs Set age
-  //   gender: {type: String, required: true, required: true},
-  // // looking_for: {type: String, default: ''}, this will be next step as it requires validation with gender
-  //   profile_pic_url: {type: String, default: '' },
-  //   all_pics_url: {type: Array, default: [] },
+    display_name: {type: String, required: true},
+    dob: {type: String, required: true, required: true},  // or "date" type?  see note on DOB vs Set age
+    gender: {type: String, required: true, required: true},
+  // looking_for: {type: String, default: ''}, this will be next step as it requires validation with gender
+    profile_pic_url: {type: String, default: '' },
+    all_pics_url: {type: Array, default: [] },
 
-  //  // dynamic attributes
-  //   mood: {type: String, default: ''}, // see note on validations on the mood
-  //   location: {type: String, default: ''}, // TBD if it is String
+   // dynamic attributes
+    mood: {type: String, default: ''}, // see note on validations on the mood
+    location: {type: String, default: ''}, // TBD if it is String
 
-  //   // uncertainty on the below, need to double check the self-referencing
-  //   likes: [],
-  //   dislikes: [],
-  //   matches: []
+    // uncertainty on the below, need to double check the self-referencing
+    likes: [],
+    dislikes: [],
+    matches: []
     // matches: [{
     //   type: mongoose.Schema.Types.ObjectId, ref: 'User'
     // }],
 
 });
+
 
 // methods ======================
 // generating a hash
