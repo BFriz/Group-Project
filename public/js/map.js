@@ -1,7 +1,17 @@
+//Initialize function for Google Maps
+var map;
+
+
 function initialize() {
-  var mapProp = {
-    centre:new google.maps.LatLng(51.507351, -0.127758),
+  geocoder = new google.maps.Geocoder();
+  var latlng = new google.maps.LatLng(51.50722, -0.12750);
+  var mapOptions = {
     zoom: 12,
-    mapTypeId: google.maps.mapTypeId.ROADMAP
-  };
-};
+    center: latlng
+  }
+  map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+}
+
+$(document).ready(function() {
+  google.maps.event.addDomListener(window, 'load', initialize);
+});
