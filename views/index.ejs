@@ -43,11 +43,15 @@
 	  <h2>How are you feeling?</h2>
   </header>
 
+  <div id="welcome_choose_mood js_welcome_choose_mood">
+  	<!-- to be shown on welcome and hidden once logged in -->
+  </div>
+
 	<div id="main_zone">
 
-	  <div id="mood_menu">
+	  <div id="mood_menu js_mood_menu">
 	    <ul>
-	      <li><a href="#" data-go='flirty' class='active_menu'>Flirty/a></li>
+	      <li><a href="#" data-go='flirty' class='active_menu'>Flirty</a></li>
 	      <li><a href="#" data-go='party'>Party</a></li>
 	      <li><a href="#" data-go='chatty'>Chatty</a></li>
 	      <li><a href="#" data-go='surprise_me'>Surprise Me</a></li>
@@ -60,10 +64,23 @@
 				<p>put image here</p>
 				<p>put name/age/mood here</p>
 			</div>
-			<div id="yes_no_box">
+			<div id="yes_no_box js_yes_no_box">
 				<p>put yes/no buttons here</p>
 			</div>
-	  </div>
+
+	  </div> <!-- end left panel -->
+
+	  <div id="right_panel" class="panel">
+	  	 
+	  	<h4>Current Crushes</h4>
+			<div id="mini_user_profile js_mini_user_profile">
+				<p>put small image here</p>
+				<p>put name here</p>
+			</div>
+
+	  </div> <!-- end right panel -->
+
+
 
   </div> <!-- end Main zone -->
   
