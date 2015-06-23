@@ -1,0 +1,31 @@
+
+DO NOT WORK ON DEVELOPMENT
+DO NOT WORK ON DEVELOPMENT
+
+Ensure development is fully clean:
+
+1) Create branch "test" and work on it
+Git add and git commit - 
+Push your branch only to have it saved on github: git push origin test
+
+ONLY GO BACK TO DEV WHEN ALL IS ADDED AND COMMITTED ON THE BRANCH
+ONLY GO BACK TO DEV WHEN ALL IS ADDED AND COMMITTED ON THE BRANCH
+
+2) Switch to Dev to ensure you have the latest version of Dev
+git checkout development
+git pull origin development
+
+3) Back to Test to ensure your code works with Dev
+git checkout test
+merge Dev onto Test : git merge development
+run various tests or the server
+
+ONLY CONTINUE IF ZERO ERRORS
+ONLY CONTINUE IF ZERO ERRORS
+
+4) Update Dev with the code from Test
+git checkout development
+git merge test
+Push it for everyone - git push origin development
+
+
