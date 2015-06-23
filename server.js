@@ -18,7 +18,7 @@ var io = require('socket.io').listen(server);
 var morgan = require('morgan');
 app.use(morgan('dev'));
 // // Create connection to Database from the server
-var db = require('./app/models/user.js');
+var User = require('./app/models/user.js');
 // // 
 var mongoose = require('mongoose');
 // // information for the normal login
@@ -61,6 +61,12 @@ app.listen(3000, function () {
 // *****************************
 
 app.get('/map', function(req, res) {
+    User.find({}, function(err, users){
+        res.send(users)
+    })
+})
+
+app.get('/users', function(req, res) {
     User.find({}, function(err, users){
         res.send(users)
     })
