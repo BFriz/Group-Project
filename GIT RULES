@@ -4,7 +4,9 @@ DO NOT WORK ON DEVELOPMENT
 
 Ensure development is fully clean:
 
-1) Create branch "test" and work on it
+1) Create branch "Test" and work on it
+git branch test
+git checkout test
 Git add and git commit - 
 Push your branch only to have it saved on github: git push origin test
 
