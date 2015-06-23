@@ -13,7 +13,6 @@ module.exports = function(app, passport) {
     // =====================================
     // show the login form
     app.get('/login', function(req, res) {
-
         // render the page and pass in any flash data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') }); 
     });
@@ -59,6 +58,25 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
+
+    // =====================================
+    // FACEBOOK ROUTES =====================
+    // =====================================
+    // route for facebook authentication and login
+    app.get('/auth/facebook', passport.authenticate('facebook', { scope : 'email' }));
+
+    // handle the callback after facebook has authenticated the user
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect : '/profile',
+            failureRedirect : '/'
+        }));
+
+    // route for logging out
+    app.get('/logout', function(req, res) {
+        req.logout();
+        res.redirect('/');
+    });
 };
 
 // route middleware to make sure a user is logged in
@@ -72,12 +90,13 @@ function isLoggedIn(req, res, next) {
     res.redirect('/');
 }
 
-// // Facebook stuff
+// Facebook stuff
 // module.exports = function(app, passport) {
 
- //   // route for home page
+//    // route for home page
 //     app.get('/', function(req, res) {
-//         res.render('index.ejs'); // load the index.ejs file
+//         // res.render('index.ejs'); // load the index.ejs file
+
 //     });
 
 //     // route for login form

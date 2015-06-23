@@ -5,7 +5,6 @@ mongoose.connect("mongodb://localhost/moodsdb"); // random moodsdb title, should
 
 // define the schema for our user model
 var userSchema = mongoose.Schema({
-
     local            : {
         email        : String,
         password     : String,
@@ -28,9 +27,9 @@ var userSchema = mongoose.Schema({
         email        : String,
         name         : String
     },
-    display_name: {type: String, required: true},
-    dob: {type: String, required: true, required: true},  // or "date" type?  see note on DOB vs Set age
-    gender: {type: String, required: true, required: true},
+    display_name: {type: String},
+    dob: {type: String},  // or "date" type?  see note on DOB vs Set age
+    gender: {type: String},
   // looking_for: {type: String, default: ''}, this will be next step as it requires validation with gender
     profile_pic_url: {type: String, default: '' },
     all_pics_url: {type: Array, default: [] },

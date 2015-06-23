@@ -49,7 +49,7 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // // routes
-require('./app/routes.js')(app, passport); // load our routes and pass in our app fully config
+require('./app/routes')(app, passport); // load our routes and pass in our app fully config
 
 // Start the server
 app.listen(3000, function () {
@@ -60,6 +60,6 @@ app.listen(3000, function () {
 // ROUTES AND SOCKET REQUESTS FOR THE SERVER
 // *****************************
 
-app.get('/', function(req, res){
-  res.render('index')
-});
+// app.get('/', function(req, res){
+//   res.render('index')
+// });
