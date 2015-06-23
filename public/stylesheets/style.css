@@ -45,8 +45,33 @@ header {
 	width: 500px;
 }
 
+#user_profile img {
+  height: 250px;
+  margin: 0 auto;
+  display: block;
+}
+#yes_no_box li {
+	display: inline;
+	padding: 0 15px;
+	border: 1px solid black;
+	border-radius: 20px;
+}
+#yes_no_box ul {
+	padding-left: 0px;
+}
 
 #right_panel {
 	width: 220px;
+  text-align: left;
+	padding-left: 10px;
+
+}
+#mini_user_profile img {
+  border-radius: 100px;
+  height: 45px;
+  width: 45px;
+}
+#mini_user_profile p {
+	display: inline;
 }
 
