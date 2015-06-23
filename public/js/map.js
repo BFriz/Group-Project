@@ -1,7 +1,6 @@
 //Initialize function for Google Maps
 var map;
 
-
 function initialize() {
   geocoder = new google.maps.Geocoder();
   var latlng = new google.maps.LatLng(51.50722, -0.12750);
@@ -15,3 +14,5 @@ function initialize() {
 $(document).ready(function() {
   google.maps.event.addDomListener(window, 'load', initialize);
 });
+
+
