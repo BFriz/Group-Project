@@ -8,7 +8,7 @@ var path = require("path");
 var server = require('http').createServer(app);
 var port = process.env.PORT || 3000;
 // // tell socket.io we use this server (?)
-var io = require('socket.io')(server);
+var io = require('socket.io').listen(server);
 // //morgan handles the middleware and lets us know about our routes and connections
 // // more info npmjs.com/package/morgan
 var morgan = require('morgan');
