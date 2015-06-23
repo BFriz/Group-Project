@@ -62,13 +62,12 @@ userSchema.methods.validPassword = function(password) {
 };
 
 // create the model for users and expose it to our app
-// module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('User', userSchema);
 // // creating a mongoose Food model to allow us to instantiate new food documents;
-var User = mongoose.model('User', userSchema);
+// var User = mongoose.model('User', userSchema);
 
 // // making food object available to other enviroments
-module.exports.User = User;
-
+// module.exports.User = User;
 
 // // NOTES - NOTES - NOTES - NOTES NOTES - NOTES
 
