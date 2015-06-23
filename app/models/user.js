@@ -44,7 +44,7 @@ var userSchema = mongoose.Schema({
     dislikes: [],
     matches: []
     // matches: [{
-    //   type: mongoose.Schema.Types.ObjectId, ref: 'User'
+      // type: mongoose.Schema.Types.ObjectId, ref: 'User'
     // }],
 
 });
