@@ -1,20 +1,17 @@
 //Initialize function for Google Maps
+var map;
+
+
 function initialize() {
+  geocoder = new google.maps.Geocoder();
+  var latlng = new google.maps.LatLng(51.50722, -0.12750);
   var mapOptions = {
     zoom: 12,
-    center: new.google.maps.LatLng(51.507351, -0.127758)
-  };
-  var map = new google.maps.Map(document.getElementById('googleMap'),
-    mapOptions);
+    center: latlng
+  }
+  map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
 }
 
-function loadScript() {
-  var script = document.createElement('script');
-  script.type = 'text/javascript';
-  script.src = 'https://maps.googleapis.com/maps/api/js?v=3.exp' +
-      '&signed_in=true&callback=initialize';
-  document.body.appendChild(script);
-}
-
-window.onload = loadScript;
-}
+$(document).ready(function() {
+  google.maps.event.addDomListener(window, 'load', initialize);
+});
