@@ -13,43 +13,50 @@
 </head>
 
 <body>
-<div class="container">
 
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
+	<div id="login_area">
+		<div class="container">
 
-        <p>Login or Register with:</p>
+		    <div class="jumbotron text-center">
+		        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
+		        <p>Login or Register with:</p>
+		        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
+		        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
+		    </div>
 
-        <a href="/login" class="btn btn-default"><span class="fa fa-user"></span> Local Login</a>
-        <a href="/signup" class="btn btn-default"><span class="fa fa-user"></span> Local Signup</a>
-    </div>
+		</div>
+		<div class="container">
 
-</div>
-<div class="container">
+		    <div class="jumbotron text-center">
+		        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
+		        <p>Login or Register with:</p>
+		        <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+		    </div>
 
-    <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Node Authentication</h1>
+		</div>
+	</div>   <!-- end login area -->
 
-        <p>Login or Register with:</p>
+	<header>
+	  <h1>Welcome to MooDEE</h1>
 
-        <a href="/auth/facebook" class="btn btn-primary"><span class="fa fa-facebook"></span> Facebook</a>
+	  <h2>How are you feeling?</h2>
+  </header>
 
-    </div>
+	<div id="main_zone">
 
-</div>
-	
-  <h1>Welcome to MooDEE</h1>
+	  <div id="mood_menu">
+	    <ul>
+	      <li><a href="#" data-go='flirty' class='active_menu'>Flirty/a></li>
+	      <li><a href="#" data-go='party'>Party</a></li>
+	      <li><a href="#" data-go='chatty'>Chatty</a></li>
+	      <li><a href="#" data-go='surprise_me'>Surprise Me</a></li>
+	    </ul>
+	  </div>
 
-  <h2>How are you feeling?</h2>
+	  div#
 
-  <div id="mood_menu" class="flirty">
-    <ul>
-      <li><a href="#" data-mood='flirty'>Flirty</a></li>
-      <li><a href="#" data-mood='chatty'>Chatty</a></li>
-      <li><a href="#" data-mood='party'>Party</a></li>
-      <li><a href="#" data-mood='surprise_me'>Surprise Me!</a></li>
-    </ul>
-  </div>
+  </div> <!-- end Main zone -->
+  
 
 
 </body>
@@ -58,5 +65,4 @@
 
 </script>
 
-    
 </html>

@@ -8,6 +8,8 @@ repl.context.db = db;
 
 //Remove all documents from the collection;
 db.User.collection.remove();
+db.User.collection.dropIndex('email_1');
+db.User.collection.dropIndex('password_1');
 
 // SEEDING:
 // Jerem and Lexie match; Jerem likes Lauren
@@ -28,8 +30,8 @@ db.User.create({
 		gender: 'male',
 		mood: 'party',
 	}, function(err, james) {
-		console.log(err);
-		james.likes.push(mathilda.emitted.fulfill[0]._id);
+		// console.log(err);
+		james.likes.push(mathilda._id);
 		console.log('this is James likes ', james.likes);
 	// James doesnt like Lauren
 		db.User.create({
