@@ -1,0 +1,50 @@
+/*Header and welcome menu*/
+header {
+  text-align: center;
+  border: 1px solid black;
+}
+
+#welcome_choose_mood {
+	text-align: center;
+	border: 1px solid red;
+}
+#welcome_choose_mood li {
+	display: inline;
+	padding: 0 15px;
+}
+
+/*Main Zone*/
+
+#main_zone {
+	border: 1px solid black;
+}
+#mood_menu {
+	text-align: center;
+	border: 1px solid blue;
+}
+#mood_menu li {
+	display: inline;
+	padding: 0 15px;
+}
+
+/*VArious panels*/
+
+#panels_container {
+	text-align: center;
+	border: 1px solid yellow;
+}
+
+.panel {
+	/*Ensure height is consistent with the gogleMAP object*/
+	height: 419px;
+	display: inline-block;
+	border: 1px solid green;
+	vertical-align: top;
+}
+#left_panel {
+	width: 500px;
+}
+#right_panel {
+	width: 220px;
+}
+
