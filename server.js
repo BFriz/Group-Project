@@ -1,5 +1,9 @@
 // // Various npm installed: npm install --save body-parser ejs express morgan socket.io mongoose
 
+// ***************************
+// CONFIGURATION OF THE APP, SERVER, DB, LOGINS (passport), ETC
+// *****************************
+
 // // Requirements to run the app
 var express = require('express');
 var app = express();
@@ -23,7 +27,6 @@ var flash = require('connect-flash');
 var configDB = require('./config/database.js');
 var session = require('express-session');
 
-
 // // Setting the views and static folder
 app.set('views', './views');
 app.set('view engine', 'ejs');
@@ -38,7 +41,6 @@ app.use(bodyParser.json());  // this is if we send data objects through the requ
 // mongoose.connect(configDB.url); //connect to our database
 // mongoose.connect("mongodb://localhost/moodsdb"); // random moodsdb title, should i change?
 
-
 require('./config/passport')(passport); // pass passport for configuration
 
 // // required for passport
@@ -50,13 +52,15 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 // // routes
 require('./app/routes.js')(app, passport); // load our routes and pass in our app fully config
 
-app.get('/', function(req, res){
-  res.render('index')
-});
-
-
 // Start the server
 app.listen(3000, function () {
   console.log("Server running on port", port);
 });
 
+// ***************************
+// ROUTES AND SOCKET REQUESTS FOR THE SERVER
+// *****************************
+
+app.get('/', function(req, res){
+  res.render('index')
+});
