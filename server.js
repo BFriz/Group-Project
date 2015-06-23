@@ -18,7 +18,7 @@ var io = require('socket.io').listen(server);
 var morgan = require('morgan');
 app.use(morgan('dev'));
 // // Create connection to Database from the server
-var db = require('./app/models/models.js');
+var db = require('./app/models/user.js');
 // // 
 var mongoose = require('mongoose');
 // // information for the normal login
@@ -40,7 +40,6 @@ app.use(bodyParser.json());  // this is if we send data objects through the requ
 // // configuation
 // mongoose.connect(configDB.url); //connect to our database
 // mongoose.connect("mongodb://localhost/moodsdb"); // random moodsdb title, should i change?
-
 require('./config/passport')(passport); // pass passport for configuration
 
 // // required for passport
