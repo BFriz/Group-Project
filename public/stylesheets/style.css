@@ -1,3 +1,7 @@
+.hidden {
+	display: none;
+}
+
 /*Header and welcome menu*/
 header {
   text-align: center;

@@ -50,9 +50,25 @@ View = {
 
 	// TEST: first show ALL matches, as user didnt choose a mood
 	showMatches: function() {
-		// code here
+		// if (current_user.matches.length === 0) {
+			$('#right_panel').append($('<p class="no_matches">No matches yet on that mood</p>'));
+		// }
+		// else {
+			// $.each(current_user.matches, function(index, match) {
+			// 	// this works IF the match array stores FULL USERS, but at the moment I store user_id
+			// 	// View.render($('#append_to_matches_template'), match, $('#right_panel') )
+
+			// 	// choice 2: at each iteration, $.get to transform id into the object
+			// 	// is that SUB-optimal??
+			// 	$.get('/users/' + match._id, function(response) {
+			// 		View.render($('#append_to_matches_template'), response, $('#right_panel') )
+			// 	})
+					
+			// })
+		// }
+		
 	}
-	
+
 }
 
 // ****** USER FUNCTIONS *****
