@@ -60,6 +60,12 @@ app.listen(3000, function () {
 // ROUTES AND SOCKET REQUESTS FOR THE SERVER
 // *****************************
 
+app.get('/map', function(req, res) {
+    User.find({}, function(err, users){
+        res.send(users)
+    })
+})
+
 // app.get('/', function(req, res){
 //   res.render('index')
 // });
