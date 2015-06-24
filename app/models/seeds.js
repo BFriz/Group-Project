@@ -15,7 +15,7 @@ User.collection.dropIndex('email_1');
 User.collection.dropIndex('password_1');
 
 // SEEDING:
-// Jerem and Lexie match; Jerem likes Lauren
+// Jeremy and Lexie match; Jeremy likes Lauren
 // James likes Mathilda, but no match; James doesnt like Lauren 
 
 User.create({
