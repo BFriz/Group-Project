@@ -36,6 +36,7 @@ header {
 #mood_menu li {
 	display: inline;
 	padding: 0 15px;
+  font-size: 40px;
 }
 
 .active_mood {
@@ -66,6 +67,7 @@ header {
   height: 250px;
   margin: 0 auto;
   display: block;
+  max-width: 350px;
 }
 #yes_no_box li {
 	display: inline;
@@ -87,8 +89,12 @@ header {
   border-radius: 100px;
   height: 45px;
   width: 45px;
+  max-width:100px;
 }
+
 #mini_user_profile p {
 	display: inline;
 }
+
+
 
