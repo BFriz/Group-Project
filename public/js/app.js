@@ -22,7 +22,7 @@ View = {
 	  	View.showRandomProfile();
 	  })
 
-	  $('#js_mood_menu a').on('click', User.changeMood)
+	  $('#mood_menu a').on('click', User.changeMood)
 
 	},
 
@@ -38,7 +38,6 @@ View = {
 	showRandomProfile: function() { 
 		$.get('/users', function(response) {
 			// response = Array with ALL users and current_user
-			console.log(response);
 			var relevant_users = [];
 			var current_user = response.current_user;
 
@@ -51,7 +50,7 @@ View = {
 				})
 				// if mood is surprise me (default upon login), show everyone ;
 				//  otherwise only show profiles with same mood as curr user
-				if (current_user.mood !== 'surprise_me') {
+				if (current_user.mood !== 'surprise me') {
 					relevant_users = relevant_users.filter(function (value) {
 						return (value.mood === current_user.mood)
 					})
@@ -62,11 +61,8 @@ View = {
 				relevant_users = response;
 			}
 
-			console.log('relevant users', relevant_users);
-
 			// get random profile within the relevant ones
 			var i = getRandomInt(0, relevant_users.length);
-			console.log('random user', relevant_users[i]);
 			// clear the profile box before adding the new one
 			$('#left_panel').empty();
 			View.render($('#random_profile_template'), relevant_users[i], $('#left_panel'));
@@ -122,16 +118,30 @@ User = {
 
 	changeMood: function(event) {
 		event.preventDefault();
+		console.log('change mood');
 		// update mood
-		// current_user.mood = $(this).attr('data-mood');
-		// OR?? db.users.update()
+		var mood = $(this).attr('data-mood');
+		console.log('new mood is', mood);
+		$.ajax({
+			type: 'PUT',
+			url: '/users',
+			data: {mood: mood}, 
+			dataType: 'json'
+		})
+		.done(function(data){
+			console.log('success put?');
+			console.log(data);
+		})
+		
+		// highlight mood in the menu
+
+
 		// emit socket new mood
 
 		// update profile shown
 		// update matches shown
-
-
 	}
+
 }
 
 
