@@ -17,6 +17,10 @@ header {
 	padding: 0 15px;
 }
 
+#info_current_user {
+	position: fixed;
+}
+
 /*Main Zone*/
 
 #main_zone {
