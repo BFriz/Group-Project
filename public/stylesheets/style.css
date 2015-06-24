@@ -8,18 +8,21 @@ header {
   border: 1px solid black;
 }
 
-#welcome_choose_mood {
-	text-align: center;
-	border: 1px solid red;
-}
-#welcome_choose_mood li {
-	display: inline;
-	padding: 0 15px;
-}
-
 #info_current_user {
 	position: fixed;
 }
+#info_current_user p {
+	margin: 5px 0 0 0;
+}
+#info_current_user img {
+	display: inline-block;
+  vertical-align: top;
+
+}
+#info_current_user div {
+	display: inline-block;
+}
+
 
 /*Main Zone*/
 
@@ -37,7 +40,7 @@ header {
 
 .active_mood {
 	border: 1px solid blue;
-	border-radius: 90px;
+	border-radius: 70px;
 	background-color: lightgray;s
 }
 
