@@ -1,8 +1,9 @@
 //Initialize function for Google Maps
 var map;
+var geocoder;
+var locations = [];
 
 function initialize() {
-  geocoder = new google.maps.Geocoder();
   var latlng = new google.maps.LatLng(51.50722, -0.12750);
   var mapOptions = {
     zoom: 12,
@@ -12,24 +13,19 @@ function initialize() {
   var marker = new google.maps.Marker({
     position: latlng,
     map: map,
-    title: 'Hello World!'
   });
 }
-var locations = [];
 
+//Function for obtaining the locations 
 function listLocation() {
     $.get('/map', function(response) {
       console.log(response);
         $.each(response, function(index, user) {
           locations.push(user.location);
-            console.log(user.location);
-            // function mapMarker() {
-            //   geocoder = new google.maps.Geocoder();
-            //   var dblatlng = new google.maps.LatLng()
-            // }
-            // here write code to add a pin for user.location
-        })
-    })
+        });
+    }).done(function(){
+      addMarkers();
+    });
 }
 
 
@@ -39,3 +35,17 @@ $(document).ready(function() {
   listLocation();
 });
 
+function addMarkers() {
+  geocoder = new google.maps.Geocoder();
+    for (i = 0; i < locations.length; i++) {
+      var address = locations[i];
+      geocoder.geocode( {'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          var marker = new google.maps.Marker({
+          position: results[0].geometry.location,
+          map: map,
+          });
+        }  
+      });
+    }
+}
