@@ -102,19 +102,13 @@ module.exports = function(app, passport) {
     app.put('/users', isLoggedIn, function(req, res) {
       console.log('req.user', req.user);
       console.log('req.body', req.body);
-
-      // User.findAndModify({
-      // query: { _id: req.user._id },
-      // update: { mood: req.body.mood } 
-      // })
-
       User.update(
         { _id: req.user._id },
         { $set: { mood: req.body.mood } },
         { multi: true }
         , function(err, user) {
           console.log('update worked?', user);
-          // res.send(201, user);
+          res.send(201, user);
         });
     })
 
