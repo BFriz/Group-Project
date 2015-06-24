@@ -22,8 +22,11 @@
 <body>
 
   <div id="info_current_user">
-    <p>Logged in as <%= user.facebook.name.split(' ')[0] %> | Currently feeling <%= user.mood %> </p>
     <img src="<%=user.facebook.profile_pic_url %>" alt=""> 
+    <div>
+      <p>Logged in as <%= user.facebook.name.split(' ')[0] %></p>
+      <p>Currently feeling: <%= user.mood %> </p>
+    </div>
   </div>
 
   <header>
@@ -37,7 +40,7 @@
     <div id="mood_menu" class="js_mood_menu">
       <h4>menu to choose mood (delete this h4, it is just for info)</h4>
       <ul>
-        <li class='active_mood'><a href="#" data-mood='surprise_me' >Surprise Me</a></li>
+        <li><a href="#" data-mood='surprise_me' >Surprise Me</a></li>
         <li><a href="#" data-mood='flirty' >Flirty</a></li>
         <li><a href="#" data-mood='party'>Party</a></li>
         <li><a href="#" data-mood='chatty'>Chatty</a></li>
