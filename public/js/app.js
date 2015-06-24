@@ -8,11 +8,6 @@ View = {
 
 	eventListeners: function() {
 
-		$( "#mood_menu a" ).on('click', function(event) {
-	    console.log("button clicked!")
-	    event.preventDefault();
-	  });
-
 	  $('#left_panel').on('click', '#yes_button', function(event){ 
 	  	event.preventDefault();
 	  	console.log('add to likes');
@@ -27,7 +22,10 @@ View = {
 	  	View.showRandomProfile();
 	  })
 
+	  $('#js_mood_menu a').on('click', changeMood)
+
 	},
+
   render: function(templateElement, object, parentElement) {
     var template = templateElement.html();
     Mustache.parse(template);
@@ -36,15 +34,26 @@ View = {
   },
 
   // FIRST: show is a random profile
-	// NEXT with conditions: relevant gender, and not in the user's arrays, and not yourself
+	// NEXT with conditions: relevant gender, and not in the user's arrays (no need to check for yourself as you are a different gender!)
 	showRandomProfile: function() { 
 		$.get('/users', function(response) {
-			// get random index in the response.length (response = array with ALL profiles)
-			var i = getRandomInt(0, response.length - 1);
-			console.log(response[i]);
+			// response = Array with ALL users
+			var relevant_users = [];
+			// if someone logged in, only keep profiles matching their mood - HARCDODING mood party for the moment
+			// if (current_user) {
+			// 	relevant_users = response.filter(function (value) {
+			// 		return (value.mood === current_user.mood);
+			// 	})
+			// } else {
+			// 	// else use all users
+				relevant_users = response;
+			// }
+			// get random profile within the relevant ones
+			var i = getRandomInt(0, relevant_users.length - 1);
+			console.log(relevant_users[i]);
 			// clear the profile box before adding the new one
 			$('#left_panel').empty();
-			View.render($('#random_profile_template'), response[i], $('#left_panel'));
+			View.render($('#random_profile_template'), relevant_users[i], $('#left_panel'));
 		})
 	},
 
@@ -93,6 +102,19 @@ User = {
 	addToDislikes: function() {
 		// add to Dislike array
 		// emit socket DISLIKE
+	},
+
+	changeMood: function(event) {
+		event.preventDefault();
+		// update mood
+		current_user.mood = $(this).attr('data-mood');
+		// OR?? db.users.update()
+		// emit socket new mood
+
+		// update profile shown
+		// update matches shown
+
+
 	}
 }
 
