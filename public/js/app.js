@@ -41,17 +41,19 @@ View = {
 			console.log(response);
 			var relevant_users = [];
 			// if someone logged in, only keep profiles matching their mood - HARCDODING mood party for the moment
-			// if (current_user) {
-			// 	relevant_users = response.filter(function (value) {
-			// 		return (value.mood === current_user.mood);
-			// 	})
-			// } else {
+			if (response.current_user) {
+				relevant_users = response.users.filter(function (value) {
+					return (value.gender !== response.current_user.facebook.gender 
+									&& value._id !== response.current_user._id);
+				})
+			} else {
 			// 	// else use all users
 				relevant_users = response;
-			// }
+			}
+			console.log('relevant users', relevant_users);
 			// get random profile within the relevant ones
-			var i = getRandomInt(0, relevant_users.length - 1);
-			console.log(relevant_users[i]);
+			var i = getRandomInt(0, relevant_users.length);
+			console.log('random user', relevant_users[i]);
 			// clear the profile box before adding the new one
 			$('#left_panel').empty();
 			View.render($('#random_profile_template'), relevant_users[i], $('#left_panel'));
@@ -130,7 +132,6 @@ function getRandomInt(min, max) {
 
 $(document).ready(function() {
 	View.eventListeners();
-
 	// AS MVP we TEST with showing randome profile and ALL matches
 	View.showRandomProfile();
 	View.showMatches();
