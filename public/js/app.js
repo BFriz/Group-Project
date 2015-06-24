@@ -36,6 +36,16 @@ View = {
     parentElement.append(rendered);
   },
 
+  setMood: function() {
+  	$.get('/users', function(response) {
+  		var current_user = response.current_user;
+  		if (current_user) {
+  			var element = $("#mood_menu a[data-mood='" +current_user.mood+ "']");
+  			var highlight = element.parent();
+  		} else { var highlight = $("#mood_menu li:first") }
+  		highlight.addClass('active_mood');
+  	})
+  },
   
 	showRandomProfile: function() { 
 		$.get('/users', function(response) {
@@ -68,8 +78,6 @@ View = {
 				relevant_users = response.users;
 			}
 
-			console.log('storage in same function', StorageUser);
-
 			// clear the profile box before adding the new one
 			$('#left_panel').empty();
 
@@ -81,7 +89,7 @@ View = {
 			else {
 				var p = "<p class='nothing_here'>No users with such mood at the moment</p>";
 				$('#left_panel').append(p);
-			}		
+			}	
 		})
 	},
 
@@ -161,13 +169,9 @@ User = {
 		})
 
 		View.showRandomProfile();
-		
 		View.changeActiveMood($(this), mood);
 
-
 		// emit socket new mood
-
-		// update profile shown
 		// update matches shown
 	}
 
@@ -184,7 +188,7 @@ function getRandomInt(min, max) {
 
 $(document).ready(function() {
 	View.eventListeners();
-	// AS MVP we TEST with showing randome profile and ALL matches
+	View.setMood();
 	View.showRandomProfile();
 	View.showMatches();
 
