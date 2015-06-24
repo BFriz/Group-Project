@@ -66,12 +66,7 @@ app.get('/map', function(req, res) {
     })
 })
 
-app.get('/users', function(req, res) {
-    User.find({}, function(err, users){
-        res.send(users);
-    })
-    // User.findOne();// would that be even faster??
-})
+
 
 app.get('/users/:id', function(req, res) {
 	User.find({_id: id}, function(err, user) {

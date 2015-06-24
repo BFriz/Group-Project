@@ -82,6 +82,13 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
+    app.get('/users', isLoggedIn, function(req, res) {
+    console.log(req.user)
+    User.find({}, function(err, users){
+        res.send(users);
+    })
+    // User.findOne();// would that be even faster??
+    })
 };
 
 // route middleware to make sure a user is logged in
@@ -94,6 +101,10 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
+
+
+
+
 
 // Facebook stuff
 // module.exports = function(app, passport) {
