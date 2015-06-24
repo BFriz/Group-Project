@@ -99,18 +99,28 @@ module.exports = function(app, passport) {
       })
     })
 
-    app.put('/users', isLoggedIn, function(req, res) {
-      console.log('req.user', req.user);
-      console.log('req.body', req.body);
+    app.put('/users/mood', isLoggedIn, function(req, res) {
       User.update(
         { _id: req.user._id },
         { $set: { mood: req.body.mood } },
         { multi: true }
         , function(err, user) {
-          console.log('update worked?', user);
+          console.log('success update mood?', user);
           res.send(201, user);
         });
     })
+
+    app.put('/users/dislikes', isLoggedIn, function(req, res) {
+      User.update(
+        { _id: req.user._id },
+        { $set: {dislikes: req.body.new_dislikes } },
+        { multi: true }
+        , function(err, user) {
+          console.log('success update dislikes?', user);
+          res.send(201, user);
+        });
+    })
+
 
     app.get('/users/:id', function(req, res) {
       User.find({_id: id}, function(err, user) {

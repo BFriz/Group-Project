@@ -8,6 +8,7 @@ function StoreCurrentUser() {
 	$.get('/users', function(response) {
 		// response = Array with ALL users and current_user
 		StorageUSer = response.current_user;
+		console.log(StorageUSer);
 	})
 }
 
@@ -61,8 +62,6 @@ View = {
 			console.log('response', response);
 			var relevant_users = [];
 			var current_user = response.current_user;
-
-			StorageUSer = response
 
 			// if someone logged in, show profiles based on them"
 			if (current_user) {
@@ -155,9 +154,19 @@ User = {
 	},
 
 	addToDislikes: function() {
-		// add to Dislike array
-
-
+		var id = $('#showing_now_id').text();
+		StorageUSer.dislikes.push(id);
+		var new_dislikes = StorageUSer.dislikes;
+		console.log('new dislike', new_dislikes);
+		$.ajax({
+			type: 'PUT',
+			url: '/users/dislikes',
+			data: {id: id, new_dislikes: new_dislikes}, 
+			dataType: 'json'
+		})
+		.done(function(data) {
+			console.log('succes add dislikes', data);
+		})
 
 		// emit socket DISLIKE
 	},
@@ -168,12 +177,12 @@ User = {
 		var mood = $(this).attr('data-mood');
 		$.ajax({
 			type: 'PUT',
-			url: '/users',
+			url: '/users/mood',
 			data: {mood: mood}, 
 			dataType: 'json'
 		})
 		.done(function(data) {
-			console.log('succes put', data);
+			console.log('succes change mood', data);
 		})
 
 		View.showRandomProfile();
