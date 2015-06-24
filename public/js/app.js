@@ -80,6 +80,13 @@ View = {
 		})
 	},
 
+	changeActiveMood: function(element) {
+		$('#mood_menu li').removeClass('active_mood');
+		// get the <li> where the new mood is
+		var highlight = element.parent()
+		highlight.addClass('active_mood');
+	},
+
 	// TEST: first show ALL matches, as user didnt choose a mood
 	showMatches: function() {
 		// if (current_user.matches.length === 0) {
@@ -146,7 +153,7 @@ User = {
 
 		View.showRandomProfile();
 		
-		// View.changeActiveMood(mood);
+		View.changeActiveMood($(this));
 
 
 		// emit socket new mood
