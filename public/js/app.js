@@ -22,7 +22,7 @@ View = {
 	  	View.showRandomProfile();
 	  })
 
-	  $('#js_mood_menu a').on('click', changeMood)
+	  $('#js_mood_menu a').on('click', User.changeMood)
 
 	},
 
@@ -107,7 +107,7 @@ User = {
 	changeMood: function(event) {
 		event.preventDefault();
 		// update mood
-		current_user.mood = $(this).attr('data-mood');
+		// current_user.mood = $(this).attr('data-mood');
 		// OR?? db.users.update()
 		// emit socket new mood
 
