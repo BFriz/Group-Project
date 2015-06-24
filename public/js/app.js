@@ -38,6 +38,7 @@ View = {
 	showRandomProfile: function() { 
 		$.get('/users', function(response) {
 			// response = Array with ALL users and current_user
+			console.log('response', response);
 			var relevant_users = [];
 			var current_user = response.current_user;
 
@@ -48,9 +49,11 @@ View = {
 					return (value.gender !== current_user.facebook.gender 
 									&& value._id !== current_user._id);
 				})
+				console.log(relevant_users);
+				console.log(current_user.mood);
 				// if mood is surprise me (default upon login), show everyone ;
 				//  otherwise only show profiles with same mood as curr user
-				if (current_user.mood !== 'surprise me') {
+				if (current_user.mood !== 'surprise_me') {
 					relevant_users = relevant_users.filter(function (value) {
 						return (value.mood === current_user.mood)
 					})
@@ -58,14 +61,22 @@ View = {
 			}
 
 			else { 	// else noone logged in so show index page so show all users
-				relevant_users = response;
+				relevant_users = response.users;
 			}
 
-			// get random profile within the relevant ones
-			var i = getRandomInt(0, relevant_users.length);
 			// clear the profile box before adding the new one
 			$('#left_panel').empty();
-			View.render($('#random_profile_template'), relevant_users[i], $('#left_panel'));
+
+			console.log(relevant_users);
+			if (relevant_users.length > 0) {
+				// get random profile within the relevant ones
+				var i = getRandomInt(0, relevant_users.length);
+				View.render($('#random_profile_template'), relevant_users[i], $('#left_panel'));			
+			} 
+			else {
+				var p = "<p class='nothing_here'>No users with such mood at the moment</p>";
+				$('#left_panel').append(p);
+			}		
 		})
 	},
 
@@ -118,6 +129,7 @@ User = {
 
 	changeMood: function(event) {
 		event.preventDefault();
+
 		console.log('change mood');
 		// update mood
 		var mood = $(this).attr('data-mood');
@@ -127,13 +139,11 @@ User = {
 			url: '/users',
 			data: {mood: mood}, 
 			dataType: 'json'
-		})
-		.done(function(data){
-			console.log('success put?');
-			console.log(data);
-		})
+		});
+
+		View.showRandomProfile();
 		
-		// highlight mood in the menu
+		// View.changeActiveMood(mood);
 
 
 		// emit socket new mood

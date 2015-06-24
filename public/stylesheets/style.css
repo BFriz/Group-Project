@@ -35,6 +35,12 @@ header {
 	padding: 0 15px;
 }
 
+.active_mood {
+	border: 1px solid blue;
+	border-radius: 90px;
+	background-color: lightgray;s
+}
+
 /*VArious panels*/
 
 #panels_container {

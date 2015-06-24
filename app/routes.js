@@ -112,7 +112,10 @@ module.exports = function(app, passport) {
         { _id: req.user._id },
         { $set: { mood: req.body.mood } },
         { multi: true }
-        );
+        , function(err, user) {
+          console.log('update worked?', user);
+          // res.send(201, user);
+        });
     })
 
     app.get('/users/:id', function(req, res) {
