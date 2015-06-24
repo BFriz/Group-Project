@@ -20,7 +20,7 @@
 
 <body>
 
-  <p>show logged in as <%= user.facebook.name %> </p>
+  <p>Logged in as <%= user.facebook.name.split(' ')[0] %> | Currently feeling <%= user.mood %> WHAT IS DEFAULT MOOD???</p>
   <img src="<%=user.facebook.profile_pic_url %>" alt=""> 
 
   <header>
