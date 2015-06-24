@@ -1,6 +1,15 @@
 var View = View || {};
 var User = User || {};
 
+var StorageUSer; 
+
+
+function StoreCurrentUser() {
+	$.get('/users', function(response) {
+		// response = Array with ALL users and current_user
+		StorageUSer = response.current_user;
+	})
+}
 
 // *************************
 // VIEW FUNCTIONS
@@ -53,11 +62,13 @@ View = {
 			var relevant_users = [];
 			var current_user = response.current_user;
 
+			StorageUSer = response
+
 			// if someone logged in, show profiles based on them"
 			if (current_user) {
 				// keep users with relevant gender, and not being current user
 				relevant_users = response.users.filter(function (value) {
-					return (value.gender !== current_user.facebook.gender 
+					return (value.facebook.gender !== current_user.facebook.gender 
 									&& value._id !== current_user._id);
 				})
 				// if mood is surprise me (default upon login), show everyone ;
@@ -137,14 +148,17 @@ User = {
 	chechIfMatch: function() {
 		// IF match
 		// showAnimationMatch,
-		// add to Match array, 
-		// emit socket Match, 
+		// add to Match array,
 		// and add to Panel of Matches
+		// emit socket Match, 
 		// ELSE nothing
 	},
 
 	addToDislikes: function() {
 		// add to Dislike array
+
+
+
 		// emit socket DISLIKE
 	},
 
@@ -181,6 +195,7 @@ function getRandomInt(min, max) {
 
 
 $(document).ready(function() {
+	StoreCurrentUser();
 	View.eventListeners();
 	View.setMood();
 	View.showRandomProfile();
