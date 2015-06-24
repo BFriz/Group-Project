@@ -23,6 +23,7 @@ User.create({
 	dob: '19/12/1988',
 	gender: 'female',
 	mood: 'party',
+	location: 'st pancras'
 }, function(err, mathilda) {
 	if (err) { console.log(err) }
 	else { console.log('mathilda creaetd');}
@@ -32,6 +33,7 @@ User.create({
 		dob: '19/12/1984',
 		gender: 'male',
 		mood: 'party',
+		location: 'stratford'
 	}, function(err, james) {
 		// console.log(err);
 		james.likes.push(mathilda._id);
@@ -42,6 +44,7 @@ User.create({
 			dob: '19/10/1988',
 			gender: 'female',
 			mood: 'chatty',
+			location: 'millbank'
 		}, function(err, lauren) {
 				james.dislikes.push(lauren._id);
 				console.log('James dislikes lauren, here are his dislikes ', james.dislikes);
@@ -50,6 +53,7 @@ User.create({
 					dob: '19/10/1980',
 					gender: 'male',
 					mood: 'surprise me',
+					location: 'old street'
 				}, function(err, jeremy) {
 					if (!err) console.log ('jeremy created');
 					User.create({
@@ -57,6 +61,7 @@ User.create({
 						dob: '19/07/1988',
 						gender: 'female',
 						mood: 'surprise me',
+						location: 'holborn'
 					}, function(err, lexie) {
 						// Jerem and Lexie match; Jerem likes Lauren
 						jeremy.likes.push(lexie._id);
