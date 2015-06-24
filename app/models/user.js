@@ -9,13 +9,13 @@ var userSchema = mongoose.Schema({
         email        : String,
         password     : String,
     },
-    facebook         : {
-        id           : String,
-        token        : String,
-        email        : String,
-        name         : String,
+    facebook            : {
+        id              : String,
+        token           : String,
+        email           : String,
+        name            : String,
         profile_pic_url :String,
-        gender       :String
+        gender          :String
     },
     twitter          : {
         id           : String,
@@ -30,14 +30,10 @@ var userSchema = mongoose.Schema({
         name         : String
     },
     display_name: {type: String},
-    dob: {type: String},  // or "date" type?  see note on DOB vs Set age
-    gender: {type: String},
   // looking_for: {type: String, default: ''}, this will be next step as it requires validation with gender
-    profile_pic_url: {type: String, default: '' },
-    all_pics_url: {type: Array, default: [] },
 
    // dynamic attributes
-    mood: {type: String, default: 'surprise me'}, // see note on validations on the mood
+    mood: {type: String, default: 'surprise_me'}, // see note on validations on the mood
     location: {type: String, default: ''}, // TBD if it is String
 
     // uncertainty on the below, need to double check the self-referencing
