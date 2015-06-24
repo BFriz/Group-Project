@@ -1,8 +1,11 @@
 var View = View || {};
 var User = User || {};
 
+var StorageUser;
 
-// ****** VIEW FUNCTIONS *****
+// *************************
+// VIEW FUNCTIONS
+// *************************
 
 View = {
 
@@ -33,14 +36,17 @@ View = {
     parentElement.append(rendered);
   },
 
-  // FIRST: show is a random profile
-	// NEXT with conditions: relevant gender, and not in the user's arrays (no need to check for yourself as you are a different gender!)
+  
 	showRandomProfile: function() { 
 		$.get('/users', function(response) {
 			// response = Array with ALL users and current_user
 			console.log('response', response);
 			var relevant_users = [];
 			var current_user = response.current_user;
+
+			/// store current_user in a global variable so we can use it in 
+			// other functions without the get request
+			StorageUser = response.current_user;
 
 			// if someone logged in, show profiles based on them"
 			if (current_user) {
@@ -49,8 +55,6 @@ View = {
 					return (value.gender !== current_user.facebook.gender 
 									&& value._id !== current_user._id);
 				})
-				console.log(relevant_users);
-				console.log(current_user.mood);
 				// if mood is surprise me (default upon login), show everyone ;
 				//  otherwise only show profiles with same mood as curr user
 				if (current_user.mood !== 'surprise_me') {
@@ -64,10 +68,11 @@ View = {
 				relevant_users = response.users;
 			}
 
+			console.log('storage in same function', StorageUser);
+
 			// clear the profile box before adding the new one
 			$('#left_panel').empty();
 
-			console.log(relevant_users);
 			if (relevant_users.length > 0) {
 				// get random profile within the relevant ones
 				var i = getRandomInt(0, relevant_users.length);
@@ -81,6 +86,7 @@ View = {
 	},
 
 	changeActiveMood: function(element, mood) {
+		console.log('storage in DIFFERENT function', StoreUser);
 		$('#mood_menu li').removeClass('active_mood');
 		// get the <li> where the new mood is
 		var highlight = element.parent();
@@ -114,7 +120,9 @@ View = {
 
 }
 
-// ****** USER FUNCTIONS *****
+// ************************
+//USER FUNCTIONS 
+// *************************
 
 User = {
 
@@ -140,11 +148,8 @@ User = {
 
 	changeMood: function(event) {
 		event.preventDefault();
-
-		console.log('change mood');
 		// update mood
 		var mood = $(this).attr('data-mood');
-		console.log('new mood is', mood);
 		$.ajax({
 			type: 'PUT',
 			url: '/users',
