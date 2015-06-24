@@ -40,17 +40,30 @@ View = {
 			// response = Array with ALL users and current_user
 			console.log(response);
 			var relevant_users = [];
-			// if someone logged in, only keep profiles matching their mood - HARCDODING mood party for the moment
-			if (response.current_user) {
+			var current_user = response.current_user;
+
+			// if someone logged in, show profiles based on them"
+			if (current_user) {
+				// keep users with relevant gender, and not being current user
 				relevant_users = response.users.filter(function (value) {
-					return (value.gender !== response.current_user.facebook.gender 
-									&& value._id !== response.current_user._id);
+					return (value.gender !== current_user.facebook.gender 
+									&& value._id !== current_user._id);
 				})
-			} else {
-			// 	// else use all users
+				// if mood is surprise me (default upon login), show everyone ;
+				//  otherwise only show profiles with same mood as curr user
+				if (current_user.mood !== 'surprise_me') {
+					relevant_users = relevant_users.filter(function (value) {
+						return (value.mood === current_user.mood)
+					})
+				}
+			}
+
+			else { 	// else noone logged in so show index page so show all users
 				relevant_users = response;
 			}
+
 			console.log('relevant users', relevant_users);
+
 			// get random profile within the relevant ones
 			var i = getRandomInt(0, relevant_users.length);
 			console.log('random user', relevant_users[i]);
