@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Moodee</title>
+  <script type="text/javascript" src='/js/jquery.js'></script>
+  <script type="text/javascript" src='/js/app.js'></script>
+  <!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
+  <script type="text/javascript" src="/js/mustache.js"></script>
+  <!-- Maps -->
+  <script type="text/javascript" src="/js/map.js"></script>
+  <script src="http://maps.googleapis.com/maps/api/js"></script>
+<!--   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCzGEys1YWZjlBxSHMp_xun5e-g26E7SJs"></script> -->
+  <!-- Style -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+  <link rel='stylesheet' href='/stylesheets/normalize.css'></style>
+  <link rel='stylesheet' href='/stylesheets/style.css'></style>
+</head>
+
+<body>
+
+  <p>show logged in as <%= user.facebook.name %> </p>
+
+  <header>
+    <h1>Welcome to MooDEE</h1>
+
+    <h2>How are you feeling?</h2>
+  </header>
+
+  <div id="welcome_choose_mood" class="js_welcome_choose_mood">
+    <!-- to be shown on welcome and hidden once logged in -->
+    <h4>Please choose your mood before continuing (this will disappear once clicked)</h4>
+    <ul>
+      <li><a href="#" data-go='flirty' class='active_menu'>Flirty</a></li>
+      <li><a href="#" data-go='party'>Party</a></li>
+      <li><a href="#" data-go='chatty'>Chatty</a></li>
+      <li><a href="#" data-go='surprise_me'>Surprise Me</a></li>
+    </ul>
+  </div>
+
+  <div id="main_zone">
+
+    <div id="mood_menu" class="js_mood_menu">
+      <h4>menu to choose mood (delete this h4, it is just for info)</h4>
+      <ul>
+        <li><a href="#" data-go='flirty' class='active_menu'>Flirty</a></li>
+        <li><a href="#" data-go='party'>Party</a></li>
+        <li><a href="#" data-go='chatty'>Chatty</a></li>
+        <li><a href="#" data-go='surprise_me'>Surprise Me</a></li>
+      </ul>
+    </div>
+
+    <div id="panels_container">
+
+      <div id="left_panel" class="panel">
+         
+        <!-- <div id="user_profile">
+          <h4>Share the Mood Around</h4>
+          <img src="./img/tilda.jpg">
+          <p> Mystique, 25</p>
+        </div>
+        <div id="yes_no_box" class="yes_no_box">
+          <ul>
+            <li id="yes_button">YES</li>
+            <li id="no_button">NO</li>
+          </ul>
+        </div> -->
+
+      </div> <!-- end left panel -->
+
+      <div id="middle_panel" class="panel">
+         
+        <h4>Crush Map</h4>
+        <div id="googleMap" class='js_googleMap' style="width:500px; height:380px;">
+        </div>
+
+      </div> <!-- end middle panel -->
+
+      <div id="right_panel" class="panel">
+         
+        <h4>Current Crushes</h4>
+        <!-- <div id="mini_user_profile" class="js_mini_user_profile">
+          <img src="./img/tilda.jpg">
+          <p> Mystique, 25</p>
+        </div> -->
+
+      </div> <!-- end right panel -->
+
+    </div> <!-- end panels container -->
+
+
+  </div> <!-- end Main zone -->
+  
+
+
+</body>
+
+<script type="x-tmpl-mustache" id="random_profile_template">
+  <div id="user_profile">
+    <h4>Share the Mood Around</h4>
+    <img src="./img/tilda.jpg">
+    <p> {{display_name}}, {{dob}}<br>{{mood}}</p>
+  </div>
+  <div id="yes_no_box" class="yes_no_box">
+    <ul>
+      <li><a href="#" id="yes_button">YES</a></li>
+      <li><a href="#" id="no_button">NO</a></li>
+    </ul>
+  </div>
+</script>
+
+<script type="x-tmpl-mustache" id="append_to_matches_template">
+  <div id="mini_user_profile" class="js_mini_user_profile">
+    <img src="./img/tilda.jpg">
+    <p> {{display_name}}, {{dob}}</p>
+  </div>
+</script>
+
+
+
+</html>
