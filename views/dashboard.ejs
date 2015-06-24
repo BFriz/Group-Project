@@ -38,7 +38,7 @@
   <div id="main_zone">
 
     <div id="mood_menu" class="js_mood_menu">
-      <h4>menu to choose mood (delete this h4, it is just for info)</h4>
+   
       <ul>
         <li><a href="#" data-mood='surprise_me' >Surprise Me</a></li>
         <li><a href="#" data-mood='flirty' >Flirty</a></li>
@@ -95,8 +95,9 @@
 <script type="x-tmpl-mustache" id="random_profile_template">
   <div id="user_profile">
     <h4>Share the Mood Around</h4>
-    <img src="./img/tilda.jpg">
-    <p> {{display_name}}, {{dob}}<br>{{mood}}</p>
+
+    <img src= '{{facebook.profile_pic_url}}' >
+    <p> {{facebook.name}}, {{dob}}<br>{{mood}}</p>
   </div>
   <div id="yes_no_box" class="yes_no_box">
     <ul>
@@ -109,7 +110,7 @@
 <script type="x-tmpl-mustache" id="append_to_matches_template">
   <div id="mini_user_profile" class="js_mini_user_profile">
     <img src=>
-    <p> {{display_name}}, {{dob}}</p>
+    <p> {{facebook.name}}, {{dob}}</p>
   </div>
 </script>
 
