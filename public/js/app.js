@@ -1,7 +1,6 @@
 var View = View || {};
 var User = User || {};
 
-var StorageUser;
 
 // *************************
 // VIEW FUNCTIONS
@@ -54,10 +53,6 @@ View = {
 			var relevant_users = [];
 			var current_user = response.current_user;
 
-			/// store current_user in a global variable so we can use it in 
-			// other functions without the get request
-			StorageUser = response.current_user;
-
 			// if someone logged in, show profiles based on them"
 			if (current_user) {
 				// keep users with relevant gender, and not being current user
@@ -94,7 +89,6 @@ View = {
 	},
 
 	changeActiveMood: function(element, mood) {
-		console.log('storage in DIFFERENT function', StoreUser);
 		$('#mood_menu li').removeClass('active_mood');
 		// get the <li> where the new mood is
 		var highlight = element.parent();
