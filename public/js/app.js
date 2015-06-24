@@ -58,26 +58,25 @@ View = {
 						return (value.mood === current_user.mood)
 					})
 				}
-				// clear the profile box before adding the new one
-				$('#left_panel').empty();
-				console.log(relevant_users);
-				
-				if (relevant_users) {
-					// get random profile within the relevant ones
-					var i = getRandomInt(0, relevant_users.length);
-					View.render($('#random_profile_template'), relevant_users[i], $('#left_panel'));			
-				} 
-				else {
-					var p = "<p class='nothing_here'>No users with such mood at the moment</p>";
-					$('#left_panel').append(p);
-				}		
 			}
 
 			else { 	// else noone logged in so show index page so show all users
 				relevant_users = response.users;
 			}
 
-			
+			// clear the profile box before adding the new one
+			$('#left_panel').empty();
+
+			console.log(relevant_users);
+			if (relevant_users.length > 0) {
+				// get random profile within the relevant ones
+				var i = getRandomInt(0, relevant_users.length);
+				View.render($('#random_profile_template'), relevant_users[i], $('#left_panel'));			
+			} 
+			else {
+				var p = "<p class='nothing_here'>No users with such mood at the moment</p>";
+				$('#left_panel').append(p);
+			}		
 		})
 	},
 
