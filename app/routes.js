@@ -92,8 +92,11 @@ module.exports = function(app, passport) {
 
     app.get('/users', isLoggedIn, function(req, res) {
       console.log(req.user)
+      // var current_user = req.user.facebook;
+      var to_send = {current_user: req.user}
       User.find({}, function(err, users){
-          res.send(users);
+          to_send.users = users
+          res.send(to_send);
       })
     })
 
@@ -124,6 +127,13 @@ function isLoggedIn(req, res, next) {
     // if they aren't redirect them to the home page
     res.redirect('/');
 }
+
+
+
+
+
+
+
 
 
 

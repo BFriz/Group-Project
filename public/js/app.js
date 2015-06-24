@@ -37,7 +37,8 @@ View = {
 	// NEXT with conditions: relevant gender, and not in the user's arrays (no need to check for yourself as you are a different gender!)
 	showRandomProfile: function() { 
 		$.get('/users', function(response) {
-			// response = Array with ALL users
+			// response = Array with ALL users and current_user
+			console.log(response);
 			var relevant_users = [];
 			// if someone logged in, only keep profiles matching their mood - HARCDODING mood party for the moment
 			// if (current_user) {

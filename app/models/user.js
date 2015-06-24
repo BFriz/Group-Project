@@ -36,7 +36,7 @@ var userSchema = mongoose.Schema({
     all_pics_url: {type: Array, default: [] },
 
    // dynamic attributes
-    mood: {type: String, default: ''}, // see note on validations on the mood
+    mood: {type: String, default: 'surprise me'}, // see note on validations on the mood
     location: {type: String, default: ''}, // TBD if it is String
 
     // uncertainty on the below, need to double check the self-referencing
