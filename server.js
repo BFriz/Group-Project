@@ -60,19 +60,7 @@ app.listen(3000, function () {
 // ROUTES AND SOCKET REQUESTS FOR THE SERVER
 // *****************************
 
-app.get('/map', function(req, res) {
-    User.find({}, function(err, users){
-        res.send(users)
-    })
-})
 
-
-
-app.get('/users/:id', function(req, res) {
-	User.find({_id: id}, function(err, user) {
-		res.send(user);
-	})
-})
 
 // app.get('/', function(req, res){
 //   res.render('index')

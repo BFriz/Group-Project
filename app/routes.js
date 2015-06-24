@@ -1,4 +1,6 @@
-// app/routes.js
+var User = require('./models/user.js');
+
+
 module.exports = function(app, passport) {
 
     // =====================================
@@ -82,14 +84,35 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
+
+    // =====================================
+    // OUR OWN ROUTES TO RUN THE APP =====================
+    // =====================================
+
+
     app.get('/users', isLoggedIn, function(req, res) {
-    console.log(req.user)
-    User.find({}, function(err, users){
-        res.send(users);
+      console.log(req.user)
+      User.find({}, function(err, users){
+          res.send(users);
+      })
     })
-    // User.findOne();// would that be even faster??
+
+    app.get('/users/:id', function(req, res) {
+      User.find({_id: id}, function(err, user) {
+        res.send(user);
+      })
     })
-};
+
+    app.get('/map', function(req, res) {
+        User.find({}, function(err, users){
+            res.send(users)
+        })
+    })
+
+
+
+
+}; // end module export
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
