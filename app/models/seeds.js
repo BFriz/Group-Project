@@ -15,7 +15,7 @@ User.collection.dropIndex('email_1');
 User.collection.dropIndex('password_1');
 
 // SEEDING:
-// Jerem and Lexie match; Jerem likes Lauren
+// Jeremy and Lexie match; Jeremy likes Lauren
 // James likes Mathilda, but no match; James doesnt like Lauren 
 
 User.create({
@@ -23,7 +23,7 @@ User.create({
 	dob: '19/12/1988',
 	gender: 'female',
 	mood: 'party',
-	location: 'st pancras'
+	location: 'E1 5JL'
 }, function(err, mathilda) {
 	if (err) { console.log(err) }
 	else { console.log('mathilda creaetd');}
@@ -33,7 +33,7 @@ User.create({
 		dob: '19/12/1984',
 		gender: 'male',
 		mood: 'party',
-		location: 'stratford'
+		location: 'E1 6BX'
 	}, function(err, james) {
 		// console.log(err);
 		james.likes.push(mathilda._id);
@@ -44,7 +44,7 @@ User.create({
 			dob: '19/10/1988',
 			gender: 'female',
 			mood: 'chatty',
-			location: 'millbank'
+			location: 'SW8 1SP'
 		}, function(err, lauren) {
 				james.dislikes.push(lauren._id);
 				console.log('James dislikes lauren, here are his dislikes ', james.dislikes);
@@ -53,7 +53,7 @@ User.create({
 					dob: '19/10/1980',
 					gender: 'male',
 					mood: 'surprise me',
-					location: 'old street'
+					location: 'W1D 4UR'
 				}, function(err, jeremy) {
 					if (!err) console.log ('jeremy created');
 					User.create({
@@ -61,7 +61,7 @@ User.create({
 						dob: '19/07/1988',
 						gender: 'female',
 						mood: 'surprise me',
-						location: 'holborn'
+						location: 'EC4N 5AW'
 					}, function(err, lexie) {
 						// Jerem and Lexie match; Jerem likes Lauren
 						jeremy.likes.push(lexie._id);
