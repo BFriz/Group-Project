@@ -33,7 +33,9 @@ View = {
 	  	View.showRandomProfile();
 	  })
 
-	  $('#mood_menu a').on('click', User.changeMood)
+	  $('#mood_menu a').on('click', User.changeMood);
+
+	  $('#submitLocation').on('submit', User.changeLocation);
 
 	},
 
@@ -203,6 +205,21 @@ User = {
 
 		// emit socket new mood
 		// update matches shown
+	},
+
+	changeLocation: function(event) {
+		event.preventDefault();
+		var location = $('#location_input').val();	
+		console.log(location);
+		$.ajax({
+			type: 'PUT',
+			url: '/users/location',
+			data: {location: location}, 
+			dataType: 'json'
+		})
+		.done(function(data) {
+			console.log('succes updated location', data);
+		})
 	}
 
 }

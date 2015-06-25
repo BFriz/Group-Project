@@ -133,6 +133,17 @@ module.exports = function(app, passport, server) {
         });
     })
 
+    app.put('/users/location', isLoggedIn, function(req, res) {
+        console.log(req.body);
+      User.update(
+        { _id: req.user._id },
+        { $set: { location: req.body.location } },
+        { multi: true }
+        , function(err, user) {
+          console.log('success update location?', user);
+          res.send(201, user);
+        });
+    })
 
 
 
@@ -146,6 +157,8 @@ module.exports = function(app, passport, server) {
     app.get('/chat', function(req, res){
       res.render('chat', {header: 'chat'})
     })
+
+
 
 }; // end module export
 
