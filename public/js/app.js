@@ -65,8 +65,11 @@ View = {
 
 			// if someone logged in, show profiles based on them"
 			if (current_user) {
-				// keep users with relevant gender, and not being current user
+				// keep users with relevant gender, and not being current user, and not previously seen
 				relevant_users = response.users.filter(function (value) {
+					var oppositeGender = (value.facebook.gender !== current_user.facebook.gender 
+									&& value._id !== current_user._id);
+					var notInLikes = 
 					return (value.facebook.gender !== current_user.facebook.gender 
 									&& value._id !== current_user._id);
 				})
@@ -224,7 +227,6 @@ User = {
 			User.addToMatchView(data[0]);
 
 			// ***************************
-			// TO DO and add to Panel of Matches
 			// TO DO emit socket Match,
 			// *************************** 
 		})
