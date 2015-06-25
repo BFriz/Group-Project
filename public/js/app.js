@@ -119,6 +119,7 @@ User = {
 
 	showMatches: function(user, all_users) {
 		// passing it on StorageUser and AllUsers
+		console.log('the user is', user);
 		if (user.matches.length === 0) {
 			$('#right_panel').append($('<p class="no_match">No matches yet</p>'));
 		}
@@ -303,15 +304,10 @@ function writeLine(name, line) {
 
 
 
-
-
-
-
 $(document).ready(function() {
 	View.initialize();
 	View.eventListeners();
 	View.showRandomProfile();
-	View.showMatches();
 
 	// var socket = io.connect('http://localhost:3000/');
  //  console.log(socket);
