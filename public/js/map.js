@@ -24,15 +24,9 @@ function initialize() {
 //Function for obtaining the locations 
 function listLocation() {
     $.get('/map', function(response) {
-      // also return user name from database
-      console.log(response);
       $.each(response, function(index, user) {
         locations.push(user.location);
         all_users = response;
-        //locations.push([user.location, user.name]);
-        // you~ll need to push an array with two elements
-        // then you want to re'write addmarker to get each postcode
-
       });
       return all_users;
     })
@@ -41,11 +35,15 @@ function listLocation() {
         var usersAndCoordinates = _.zip(all_users, coords);
 
         for (var i = 0; i < usersAndCoordinates.length; i++) {
+          var name = usersAndCoordinates[i][0].facebook.name;
+          var mood = usersAndCoordinates[i][0].mood;
+          var pic = usersAndCoordinates[i][0].facebook.profile_pic_url;
+          var id = usersAndCoordinates[i][0]._id;
+
           var marker = new google.maps.Marker({
-            //icon: usersAndCoordinates[i][0].facebook.profile_pic_url,
             position: usersAndCoordinates[i][1],
             map: map,
-            html: '<h1>' + usersAndCoordinates[i][0].facebook.name + '</h1>' 
+            html: '<div class="mini_marker_info" data-pic="' + pic + '" data-id="' + id + '"><p>' + name + '</p> <p>' + mood + '</p></div>' 
           });
 
           var infoWindow = new google.maps.InfoWindow( { content: "Loading content..." } );
@@ -71,15 +69,9 @@ function addMarkers(all_users, callback) {
       // name will then be locations(i)(1)
     var address = users[i].location;
     var windowContent = '<h1>' + users[i].facebook.name + '</h1>';
-      console.log('window contente', windowContent);
-
-      console.log(users[i]); // WORKS
 
     geocoder.geocode( {'address': address}, function(results, status) {
       if (status == google.maps.GeocoderStatus.OK) {
-        console.log(users);  // UNDEFINED
-        console.log(windowContent);
-
         coords.push(results[0].geometry.location);
 
         if(coords.length === users.length) {
@@ -90,53 +82,17 @@ function addMarkers(all_users, callback) {
   }
 }
 
-
-
-
-
-
-
-
-
-
-          // var marker = new google.maps.Marker({
-          //   // icon: users[i].facebook.profile_pic_url,
-          //   position: results[0].geometry.location,
-          //   map: map,
-          //   html: windowContent  // ALWAYS CHRIS HAINES
-          // });
-
-
-
-          // infoWindow = new google.maps.InfoWindow( { content: "Loading content..." } );
-
-          // google.maps.event.addListener( marker, 'click', function() {
-          //   infoWindow.setContent(this.html);
-          //   console.log('marker is', marker);
-          //   infoWindow.open(map, this);
-          // });
-
-// var profileContent ='<div id="content">' +
-//   '<div id="siteNotice">' + 
-//   '</div>' + 
-//   '<h1 id="userName" class="userName">Mathilda</h1>' + 
-//   '<div id="bodyContent">' +
-//   '<p>Current Mood: </p>' +
-//   '</div>' +
-//   '</div>';
-
-
-// var infoindow = new google.maps.InfoWindow({
-//   content: profileContent
-// });
+function showInsideProfiles() {
+  event.preventDefault();
+  console.log('show me in the profile');
+}
 
 //Document.ready function and event listener for the map to load.
 $(document).ready(function() {
   google.maps.event.addDomListener(window, 'load', initialize);
   listLocation();
 
-
-  
+  $('#middle_panel').on('click', '.mini_marker_info', showInsideProfiles);  
 });
 
 
