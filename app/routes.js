@@ -120,7 +120,7 @@ module.exports = function(app, passport, server) {
           // also return the "liked" profile so I can check the match
           User.find(
             {_id: req.body.id},
-            function(err, liked_user) {;
+            function(err, liked_user) {
               res.send(liked_user);
             })
         });
@@ -156,15 +156,21 @@ module.exports = function(app, passport, server) {
         { $set: { matches: req.body.new_matches_me } },
         { multi: true }
         
-        , function(err, user) {
+        , function(err, curr_user) {
           console.log('updated my matches', curr_user);
           User.update(
             {_id: req.body.id_match},
             { $set: { matches: req.body.new_matches_match } },
             { multi: true }
-            , function(err, user) {
-              console.log('updated matched user');
-              res.send(201, user);
+            , function(err, matched_user) {
+              if (err) {console.log('error updating HER on match', err) };
+              console.log('updated matched user', matched_user);
+
+              User.find(
+                {_id: req.body.id_match},
+                function(err, liked_user) {
+                  res.send(liked_user);
+              }) 
           })
       });
     })
