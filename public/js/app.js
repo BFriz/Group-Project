@@ -65,14 +65,10 @@ View = {
 
 			// if someone logged in, show profiles based on them"
 			if (current_user) {
-				// keep users with relevant gender, and not being current user, and not previously seen
 				relevant_users = response.users.filter(function (value) {
-					var oppositeGender = (value.facebook.gender !== current_user.facebook.gender 
-									&& value._id !== current_user._id);
-					// var notInLikes = 
-					return (value.facebook.gender !== current_user.facebook.gender 
-									&& value._id !== current_user._id);
+					return User.okToShow(value, current_user);
 				})
+
 				// if mood is surprise me (default upon login), show everyone ;
 				//  otherwise only show profiles with same mood as curr user
 				if (current_user.mood !== 'surprise_me') {
@@ -119,6 +115,16 @@ View = {
 // *************************
 
 User = {
+
+	okToShow: function(user, current_user) {
+		// keep users with relevant gender, and not being current user, and not previously seen
+		var oppositeGender = (user.facebook.gender !== current_user.facebook.gender 
+				&& user._id !== current_user._id);
+		var notInLikes = (current_user.likes.indexOf(user._id) === -1);
+		var notInDislikes = (current_user.dislikes.indexOf(user._id) === -1);
+
+		return oppositeGender && notInLikes && notInDislikes;
+	},
 
 	showMatches: function(user, all_users) {
 		// passing it on StorageUser and AllUsers
@@ -369,4 +375,5 @@ function animationClick(element, animation){
 };
 
 });
+
 
