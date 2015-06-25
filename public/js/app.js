@@ -209,8 +209,7 @@ User = {
 
 	changeLocation: function(event) {
 		event.preventDefault();
-		var location = $('#submitLocation').val();	
-		debugger;
+		var location = $('#location_input').val();	
 		console.log(location);
 		$.ajax({
 			type: 'PUT',
