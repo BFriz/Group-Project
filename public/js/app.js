@@ -2,14 +2,9 @@ var View = View || {};
 var User = User || {};
 
 var StorageUser; 
+var AllUsers;
 
-function StoreCurrentUser() {
-	$.get('/users', function(response) {
-		// response = Array with ALL users and current_user
-		StorageUser = response.current_user;
-		console.log('Storage User: ', StorageUser);
-	})
-}
+
 
 // *************************
 // VIEW FUNCTIONS
@@ -37,6 +32,20 @@ View = {
 
 	},
 
+	initialize: function() {
+		
+		$.get('/users', function(response) {
+			// store the current user and all the users so far
+			StorageUser = response.current_user;
+			console.log('Storage User: ', StorageUser);
+			AllUsers = response.users;
+			console.log('AllUsers: ', AllUsers);
+
+			View.setMood(StorageUser);
+			User.showMatches(StorageUser);
+		})
+	},
+
   render: function(templateElement, object, parentElement) {
     var template = templateElement.html();
     Mustache.parse(template);
@@ -44,15 +53,10 @@ View = {
     parentElement.append(rendered);
   },
 
-  setMood: function() {
-  	$.get('/users', function(response) {
-  		var current_user = response.current_user;
-  		if (current_user) {
-  			var element = $("#mood_menu a[data-mood='" +current_user.mood+ "']");
-  			var highlight = element.parent();
-  		} else { var highlight = $("#mood_menu li:first") }
+  setMood: function(user) {
+			var element = $("#mood_menu a[data-mood='" +user.mood+ "']");
+			var highlight = element.parent();
   		highlight.addClass('active_mood');
-  	})
   },
   
 	showRandomProfile: function() { 
@@ -84,7 +88,6 @@ View = {
 
 			// clear the profile box before adding the new one
 			$('#left_panel').empty();
-
 			if (relevant_users.length > 0) {
 				// get random profile within the relevant ones
 				var i = getRandomInt(0, relevant_users.length);
@@ -108,35 +111,27 @@ View = {
 		$p.text("Currently feeling " + mood)
 	},
 
-	// TEST: first show ALL matches, as user didnt choose a mood
-	showMatches: function() {
-		// if (current_user.matches.length === 0) {
-			$('#right_panel').append($('<p class="no_matches">No matches yet on that mood</p>'));
-		// }
-		// else {
-			// $.each(current_user.matches, function(index, match) {
-			// 	// this works IF the match array stores FULL USERS, but at the moment I store user_id
-			// 	// View.render($('#append_to_matches_template'), match, $('#right_panel') )
-
-			// 	// choice 2: at each iteration, $.get to transform id into the object
-			// 	// is that SUB-optimal??
-			// 	$.get('/users/' + match._id, function(response) {
-			// 		View.render($('#append_to_matches_template'), response, $('#right_panel') )
-			// 	})
-					
-			// })
-		// }
-		
-	}
-
 }
 
 // ************************
-//USER FUNCTIONS 
+// USER FUNCTIONS 
 // *************************
 
 User = {
 
+	showMatches: function(user) {
+		if (user.matches.length === 0) {
+			$('#right_panel').append($('<p class="no_matches">No matches yet</p>'));
+		}
+		else {
+			$.each(user.matches, function(index, match) {
+				// find corresponding user in ALL USERS
+
+				// add to VIEW
+				// View.render($('#append_to_matches_template'), response, $('#right_panel') )	
+			})
+		}	
+	},
 
 	addToDislikes: function() {
 		var id = $('#showing_now_id').text();
@@ -153,7 +148,9 @@ User = {
 			console.log('succes add dislikes', data);
 		})
 
+		// ***************************
 		// TO DO emit socket DISLIKE
+		// ***************************
 	},
 
 	addToLikes: function() {
@@ -172,7 +169,10 @@ User = {
 			// put request is also returning the "liked" profile
 			User.chechIfMatch(data[0]);
 		})
+
+		// ***************************
 		// TO DO emit socket LIKE to server
+		// ***************************
 
 	},
 
@@ -185,7 +185,9 @@ User = {
 
 			console.log("IT'S A MATCH !");
 
-			// showAnimationMatch,
+			// ***************************
+			// TO DO showAnimationMatch,
+			// ***************************
 
 			StorageUser.matches.push(id_match);
 			var new_matches_me = StorageUser.matches;
@@ -202,9 +204,11 @@ User = {
 		})
 		.done(function(data) {
 			console.log('succes add Match', data);
-			
-			// and add to Panel of Matches
-			// emit socket Match, 
+
+			// ***************************
+			// TO DO and add to Panel of Matches
+			// TO DO emit socket Match,
+			// *************************** 
 		})
 		} else { 
 			console.log('NOT a match yet')
@@ -228,8 +232,10 @@ User = {
 		View.showRandomProfile();
 		View.changeActiveMood($(this), mood);
 
-		// emit socket new mood
-		// update matches shown
+		// ***************************
+		// TO DO emit socket new mood
+		// TO DO update matches shown
+		// ***************************
 	},
 
 	changeLocation: function(event) {
@@ -246,12 +252,7 @@ User = {
 			console.log('succes updated location', data);
 		})
 	}
-
 }
-
-
-
-
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
@@ -259,10 +260,7 @@ function getRandomInt(min, max) {
 
 
 $(document).ready(function() {
-	StoreCurrentUser();
+	View.initialize();
 	View.eventListeners();
-	View.setMood();
 	View.showRandomProfile();
-	View.showMatches();
-
 })
