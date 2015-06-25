@@ -308,8 +308,15 @@ function writeLine(name, line) {
 
 
 $(document).ready(function() {
-animationHover('#logo', 'tada');
-animationClick('#hi', 'tada');
+
+animationHover('#surprise_me', 'flip');
+
+
+animationClick('#surprise_me', 'bounceOutDown');
+animationClick('#flirty', 'bounce');
+animationClick('#party', 'flash');
+animationClick('#chatty', 'swing');
+
 
 
 	View.initialize();
