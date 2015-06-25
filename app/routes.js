@@ -115,9 +115,13 @@ module.exports = function(app, passport) {
         { _id: req.user._id },
         { $set: {likes: req.body.new_likes } },
         { multi: true }
-        , function(err, user) {
-          console.log('success update likes?', user);
-          res.send(201, user);
+        , function(err, curr_user) {
+          // also return the "liked" profile so I can check the match
+          User.find(
+            {_id: req.body.id},
+            function(err, liked_user) {;
+              res.send(liked_user);
+            })
         });
     })
 

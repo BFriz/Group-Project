@@ -7,7 +7,7 @@ function StoreCurrentUser() {
 	$.get('/users', function(response) {
 		// response = Array with ALL users and current_user
 		StorageUSer = response.current_user;
-		console.log(StorageUSer);
+		console.log('Storagge User: ', StorageUSer);
 	})
 }
 
@@ -20,15 +20,13 @@ View = {
 	eventListeners: function() {
 
 	  $('#left_panel').on('click', '#yes_button', function(event){ 
-	  	event.preventDefault();
-	  	console.log('add to likes');
+	  	event.preventDefault();;
 	  	User.addToLikes();
 	  	View.showRandomProfile();
 	  })
 
 	  $('#left_panel').on('click', '#no_button', function(event){
 	  	event.preventDefault();
-	  	console.log('add to DISlikes');
 	  	User.addToDislikes();
 	  	View.showRandomProfile();
 	  })
@@ -60,7 +58,7 @@ View = {
 	showRandomProfile: function() { 
 		$.get('/users', function(response) {
 			// response = Array with ALL users and current_user
-			console.log('response', response);
+			console.log('response random profile', response);
 			var relevant_users = [];
 			var current_user = response.current_user;
 
@@ -144,7 +142,7 @@ User = {
 		var id = $('#showing_now_id').text();
 		StorageUSer.dislikes.push(id);
 		var new_dislikes = StorageUSer.dislikes;
-		console.log('new dislike', new_dislikes);
+
 		$.ajax({
 			type: 'PUT',
 			url: '/users/dislikes',
@@ -162,7 +160,7 @@ User = {
 		var id = $('#showing_now_id').text();
 		StorageUSer.likes.push(id);
 		var new_likes = StorageUSer.likes;
-		console.log('new dislike', new_likes);
+
 		$.ajax({
 			type: 'PUT',
 			url: '/users/likes',
@@ -170,14 +168,15 @@ User = {
 			dataType: 'json'
 		})
 		.done(function(data) {
-			console.log('succes add dislikes', data);
-			User.chechIfMatch();
+			console.log('succes add likes', data);
+			// put request is also returning the "liked" profile
+			User.chechIfMatch(data);
 		})
 		// TO DO emit socket LIKE to server
 
 	},
 
-	chechIfMatch: function() {
+	chechIfMatch: function(user) {
 		// IF match
 		// showAnimationMatch,
 		// add to Match array,
@@ -210,7 +209,7 @@ User = {
 	changeLocation: function(event) {
 		event.preventDefault();
 		var location = $('#location_input').val();	
-		console.log(location);
+
 		$.ajax({
 			type: 'PUT',
 			url: '/users/location',
