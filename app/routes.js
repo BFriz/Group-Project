@@ -156,15 +156,17 @@ module.exports = function(app, passport, server) {
         { $set: { matches: req.body.new_matches_me } },
         { multi: true }
         
-        , function(err, user) {
+        , function(err, curr_user) {
+          if (err) {console.log('error updating me on match', err) };
           console.log('updated my matches', curr_user);
           User.update(
             {_id: req.body.id_match},
             { $set: { matches: req.body.new_matches_match } },
             { multi: true }
-            , function(err, user) {
+            , function(err, matched_user) {
+              if (err) {console.log('error updating HER on match', err) };
               console.log('updated matched user');
-              res.send(201, user);
+              res.send(201, matched_user);
           })
       });
     })

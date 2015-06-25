@@ -119,7 +119,6 @@ User = {
 
 	showMatches: function(user, all_users) {
 		// passing it on StorageUser and AllUsers
-		console.log('the user is', user);
 		if (user.matches.length === 0) {
 			$('#right_panel').append($('<p class="no_match">No matches yet</p>'));
 		}
@@ -132,6 +131,7 @@ User = {
 					return user._id === id;
 				});
 			User.addToMatchView(retrieved_match);
+			console.log('the match is', retrieved_match);
 			})
 		}	
 	},
