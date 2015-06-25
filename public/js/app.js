@@ -1,13 +1,13 @@
 var View = View || {};
 var User = User || {};
 
-var StorageUSer; 
+var StorageUser; 
 
 function StoreCurrentUser() {
 	$.get('/users', function(response) {
 		// response = Array with ALL users and current_user
-		StorageUSer = response.current_user;
-		console.log('Storagge User: ', StorageUSer);
+		StorageUser = response.current_user;
+		console.log('Storage User: ', StorageUser);
 	})
 }
 
@@ -140,8 +140,8 @@ User = {
 
 	addToDislikes: function() {
 		var id = $('#showing_now_id').text();
-		StorageUSer.dislikes.push(id);
-		var new_dislikes = StorageUSer.dislikes;
+		StorageUser.dislikes.push(id);
+		var new_dislikes = StorageUser.dislikes;
 
 		$.ajax({
 			type: 'PUT',
@@ -158,8 +158,8 @@ User = {
 
 	addToLikes: function() {
 		var id = $('#showing_now_id').text();
-		StorageUSer.likes.push(id);
-		var new_likes = StorageUSer.likes;
+		StorageUser.likes.push(id);
+		var new_likes = StorageUser.likes;
 
 		$.ajax({
 			type: 'PUT',
@@ -170,19 +170,45 @@ User = {
 		.done(function(data) {
 			console.log('succes add likes', data);
 			// put request is also returning the "liked" profile
-			User.chechIfMatch(data);
+			User.chechIfMatch(data[0]);
 		})
 		// TO DO emit socket LIKE to server
 
 	},
 
-	chechIfMatch: function(user) {
-		// IF match
-		// showAnimationMatch,
-		// add to Match array,
-		// and add to Panel of Matches
-		// emit socket Match, 
-		// ELSE nothing
+	chechIfMatch: function(match) {
+		var id_me = StorageUser._id;
+		var id_match = match._id;
+
+		if ( StorageUser.likes.indexOf(id_match) !== -1
+			&& match.likes.indexOf(id_me) !== -1 ) {
+
+			console.log("IT'S A MATCH !");
+
+			// showAnimationMatch,
+
+			StorageUser.matches.push(id_match);
+			var new_matches_me = StorageUser.matches;
+			match.matches.push(id_me);
+			var new_matches_match = match.matches;
+
+			$.ajax({
+			type: 'PUT',
+			url: '/users/match',
+			data: { id_match: id_match,
+					   new_matches_me: new_matches_me, 
+					   new_matches_match: new_matches_match}, 
+			dataType: 'json'
+		})
+		.done(function(data) {
+			console.log('succes add Match', data);
+			
+			// and add to Panel of Matches
+			// emit socket Match, 
+		})
+		} else { 
+			console.log('NOT a match yet')
+		}
 	},
 
 	changeMood: function(event) {

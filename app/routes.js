@@ -148,6 +148,26 @@ module.exports = function(app, passport) {
         });
     })
 
+    app.put('/users/match', isLoggedIn, function(req, res) {
+      console.log(req.body);
+      User.update(
+        { _id: req.user._id },
+        { $set: { matches: req.body.new_matches_me } },
+        { multi: true }
+        
+        , function(err, user) {
+          console.log('updated my matches', curr_user);
+          User.update(
+            {_id: req.body.id_match},
+            { $set: { matches: req.body.new_matches_match } },
+            { multi: true }
+            , function(err, user) {
+              console.log('updated matched user');
+              res.send(201, user);
+          })
+      });
+    })
+
 
 
     app.get('/map', function(req, res) {
