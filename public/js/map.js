@@ -63,9 +63,9 @@ function addMarkers() {
 $(document).ready(function() {
   google.maps.event.addDomListener(window, 'load', initialize);
   listLocation();
-  google.maps.event.addListener(marker, 'click', function() {
-    infowindow.open(map,marker);
-  });
+  // google.maps.event.addListener(marker, 'click', function() {
+    // infowindow.open(map,marker);
+  // });
 });
 
 
