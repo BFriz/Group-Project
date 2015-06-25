@@ -69,7 +69,7 @@ View = {
 				relevant_users = response.users.filter(function (value) {
 					var oppositeGender = (value.facebook.gender !== current_user.facebook.gender 
 									&& value._id !== current_user._id);
-					var notInLikes = 
+					// var notInLikes = 
 					return (value.facebook.gender !== current_user.facebook.gender 
 									&& value._id !== current_user._id);
 				})
