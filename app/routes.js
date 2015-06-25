@@ -120,7 +120,7 @@ module.exports = function(app, passport, server) {
           // also return the "liked" profile so I can check the match
           User.find(
             {_id: req.body.id},
-            function(err, liked_user) {;
+            function(err, liked_user) {
               res.send(liked_user);
             })
         });
@@ -157,7 +157,6 @@ module.exports = function(app, passport, server) {
         { multi: true }
         
         , function(err, curr_user) {
-          if (err) {console.log('error updating me on match', err) };
           console.log('updated my matches', curr_user);
           User.update(
             {_id: req.body.id_match},
@@ -165,8 +164,13 @@ module.exports = function(app, passport, server) {
             { multi: true }
             , function(err, matched_user) {
               if (err) {console.log('error updating HER on match', err) };
-              console.log('updated matched user');
-              res.send(201, matched_user);
+              console.log('updated matched user', matched_user);
+
+              User.find(
+                {_id: req.body.id_match},
+                function(err, liked_user) {
+                  res.send(liked_user);
+              }) 
           })
       });
     })

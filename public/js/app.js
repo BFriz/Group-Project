@@ -140,7 +140,7 @@ User = {
 		if ($('.no_match')) {  
 			$('.no_match').remove()
 		};
-		console.log(user)
+		console.log('add to match view', user)
 		View.render($('#append_to_matches_template'), user, $('#right_panel') )	
 	},
 
@@ -220,7 +220,8 @@ User = {
 			dataType: 'json'
 		})
 		.done(function(data) {
-			console.log('succes add Match');
+			console.log('succes add Match', data);
+			User.addToMatchView(data[0]);
 
 			// ***************************
 			// TO DO and add to Panel of Matches
