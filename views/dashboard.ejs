@@ -68,6 +68,10 @@
       <div id="middle_panel" class="panel">
          
         <h4>Update your location</h4>
+        <form id="submitLocation" action="/users" method="put">
+          <input type="text" name="location" placeholder="Please enter your postcode">          
+          <input type="submit" value="Submit">
+        </form>
         <div id="googleMap" class='js_googleMap' style="width:500px; height:380px;">
         </div>
 
