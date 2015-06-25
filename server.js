@@ -49,10 +49,10 @@ app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 // // routes
-require('./app/routes')(app, passport); // load our routes and pass in our app fully config
+require('./app/routes')(app, passport, server); // load our routes and pass in our app fully config
 
 // Start the server
-app.listen(3000, function () {
+server.listen(3000, function () {
   console.log("Server running on port", port);
 });
 
@@ -61,7 +61,30 @@ app.listen(3000, function () {
 // *****************************
 
 
+    io.sockets.on('connection', function(socket){
+      socket.emit('connected');
+
+      socket.on('chat', function(data) {
+        socket.broadcast.emit('chat', data);
+      });
+      
+      socket.on('action', function(data) {
+        socket.broadcast.emit('action', data);
+      });
+    });
 
 // app.get('/', function(req, res){
 //   res.render('index')
 // });
+
+
+
+
+// app.get('/chat', function(req, res){
+//   res.render('chat', {header: 'chat'})
+// })
+
+
+
+
+
