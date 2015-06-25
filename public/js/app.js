@@ -65,8 +65,11 @@ View = {
 
 			// if someone logged in, show profiles based on them"
 			if (current_user) {
-				// keep users with relevant gender, and not being current user
+				// keep users with relevant gender, and not being current user, and not previously seen
 				relevant_users = response.users.filter(function (value) {
+					var oppositeGender = (value.facebook.gender !== current_user.facebook.gender 
+									&& value._id !== current_user._id);
+					var notInLikes = 
 					return (value.facebook.gender !== current_user.facebook.gender 
 									&& value._id !== current_user._id);
 				})
@@ -119,7 +122,6 @@ User = {
 
 	showMatches: function(user, all_users) {
 		// passing it on StorageUser and AllUsers
-		console.log('the user is', user);
 		if (user.matches.length === 0) {
 			$('#right_panel').append($('<p class="no_match">No matches yet</p>'));
 		}
@@ -132,6 +134,7 @@ User = {
 					return user._id === id;
 				});
 			User.addToMatchView(retrieved_match);
+			console.log('the match is', retrieved_match);
 			})
 		}	
 	},
@@ -140,7 +143,7 @@ User = {
 		if ($('.no_match')) {  
 			$('.no_match').remove()
 		};
-		console.log(user)
+		console.log('add to match view', user)
 		View.render($('#append_to_matches_template'), user, $('#right_panel') )	
 	},
 
@@ -220,10 +223,10 @@ User = {
 			dataType: 'json'
 		})
 		.done(function(data) {
-			console.log('succes add Match');
+			console.log('succes add Match', data);
+			User.addToMatchView(data[0]);
 
 			// ***************************
-			// TO DO and add to Panel of Matches
 			// TO DO emit socket Match,
 			// *************************** 
 		})
