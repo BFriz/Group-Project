@@ -42,7 +42,7 @@ View = {
 			console.log('AllUsers: ', AllUsers);
 
 			View.setMood(StorageUser);
-			User.showMatches(StorageUser);
+			User.showMatches(StorageUser, AllUsers);
 		})
 	},
 
@@ -62,7 +62,6 @@ View = {
 	showRandomProfile: function() { 
 		$.get('/users', function(response) {
 			// response = Array with ALL users and current_user
-			console.log('response random profile', response);
 			var relevant_users = [];
 			var current_user = response.current_user;
 
@@ -119,23 +118,36 @@ View = {
 
 User = {
 
-	showMatches: function(user) {
+	showMatches: function(user, all_users) {
+		// passing it on StorageUser and AllUsers
 		if (user.matches.length === 0) {
-			$('#right_panel').append($('<p class="no_matches">No matches yet</p>'));
+			$('#right_panel').append($('<p class="no_match">No matches yet</p>'));
 		}
 		else {
-			$.each(user.matches, function(index, match) {
-				// find corresponding user in ALL USERS
+			// for each id in user.matches, go into all_users and select the user having this id
+			user.matches = _.uniq(user.matches);
 
-				// add to VIEW
-				// View.render($('#append_to_matches_template'), response, $('#right_panel') )	
+			$.each(user.matches, function(index, id) {
+				var retrieved_match = _.find(all_users, function(user){
+					return user._id === id;
+				});
+			User.addToMatchView(retrieved_match);
 			})
 		}	
+	},
+
+	addToMatchView: function(user) {
+		if ($('.no_match')) {  
+			$('.no_match').remove()
+		};
+		console.log(user)
+		View.render($('#append_to_matches_template'), user, $('#right_panel') )	
 	},
 
 	addToDislikes: function() {
 		var id = $('#showing_now_id').text();
 		StorageUser.dislikes.push(id);
+		StorageUser.dislikes = _.uniq(StorageUser.dislikes);
 		var new_dislikes = StorageUser.dislikes;
 
 		$.ajax({
@@ -145,7 +157,7 @@ User = {
 			dataType: 'json'
 		})
 		.done(function(data) {
-			console.log('succes add dislikes', data);
+			console.log('succes add dislikes');
 		})
 
 		// ***************************
@@ -156,6 +168,7 @@ User = {
 	addToLikes: function() {
 		var id = $('#showing_now_id').text();
 		StorageUser.likes.push(id);
+		StorageUser.likes = _.uniq(StorageUser.likes);
 		var new_likes = StorageUser.likes;
 
 		$.ajax({
@@ -165,7 +178,7 @@ User = {
 			dataType: 'json'
 		})
 		.done(function(data) {
-			console.log('succes add likes', data);
+			console.log('succes add likes');
 			// put request is also returning the "liked" profile
 			User.chechIfMatch(data[0]);
 		})
@@ -190,9 +203,13 @@ User = {
 			// ***************************
 
 			StorageUser.matches.push(id_match);
+			StorageUser.matches = _.uniq(StorageUser.matches);
 			var new_matches_me = StorageUser.matches;
+
 			match.matches.push(id_me);
+			match.matches = _.uniq(match.matches);
 			var new_matches_match = match.matches;
+
 
 			$.ajax({
 			type: 'PUT',
@@ -203,7 +220,7 @@ User = {
 			dataType: 'json'
 		})
 		.done(function(data) {
-			console.log('succes add Match', data);
+			console.log('succes add Match');
 
 			// ***************************
 			// TO DO and add to Panel of Matches
@@ -226,7 +243,7 @@ User = {
 			dataType: 'json'
 		})
 		.done(function(data) {
-			console.log('succes change mood', data);
+			console.log('succes change mood');
 		})
 
 		View.showRandomProfile();
@@ -249,7 +266,7 @@ User = {
 			dataType: 'json'
 		})
 		.done(function(data) {
-			console.log('succes updated location', data);
+			console.log('succes updated location');
 		})
 	}
 }
