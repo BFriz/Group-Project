@@ -34,7 +34,13 @@ h1 {
 #info_current_user div {
   display: inline-block;
 }
-
+.btn {
+  position: absolute;
+  z-index: 2;
+  top: 290px;
+  font-size: 40px;
+  margin-left: -115px;
+}
 
 /*Main Zone*/
 
@@ -155,19 +161,25 @@ div#slider figure {
 }
 
 
-.btn {
+#login_area{
   top: 250px;
   z-index: 2;
   text-align: center;
+  /*line-height: 1.2em;*/
+  z-index: 2
+  
 }
 
-#login_area{
-  text-align: center;
+.logo {
+  z-index: 2;
+  color: white;
+
 }
 
-
-
-
+header {
+  z-index: 2;
+  color: white;
+};
 
 
 
