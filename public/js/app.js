@@ -4,13 +4,13 @@ var User = User || {};
 var StorageUser; 
 var AllUsers;
 
+
 // *************************
 // VIEW FUNCTIONS
 // *************************
 
 View = {
-
-	eventListeners: function() {
+		eventListeners: function() {
 
 	  $('#left_panel').on('click', '#yes_button', function(event){ 
 	  	event.preventDefault();;
@@ -305,6 +305,10 @@ function writeLine(name, line) {
 
 
 $(document).ready(function() {
+animationHover('#logo', 'tada');
+animationClick('#hi', 'tada');
+
+
 	View.initialize();
 	View.eventListeners();
 	View.showRandomProfile();
@@ -321,6 +325,38 @@ $(document).ready(function() {
     writeLine($name.val(), $line.val());
     $line.val("");
 	});
+	// if( location.href == "http://lvh.me:3000/profile#_=_" )
+	// {
+	// 	$('#logo').addClass('animated bounceInDown')
+	// }
+	//Animate on hover function
+	function animationHover(element, animation){
+  element = $(element);
+  element.hover(
+    function() {
+      element.addClass('animated ' + animation);
+    },
+    function(){
+      //wait for animation to finish before removing classes
+      window.setTimeout( function(){
+        element.removeClass('animated ' + animation);
+      }, 2000);
+    }
+  );
+};
+	//Animate on Click Function
+function animationClick(element, animation){
+  element = $(element);
+  element.click(
+    function() {
+      element.addClass('animated ' + animation);
+      //wait for animation to finish before removing classes
+      window.setTimeout( function(){
+          element.removeClass('animated ' + animation);
+      }, 2000);
+    }
+  );
+};
 
 });
 
