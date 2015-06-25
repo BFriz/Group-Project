@@ -7,7 +7,7 @@ function StoreCurrentUser() {
 	$.get('/users', function(response) {
 		// response = Array with ALL users and current_user
 		StorageUSer = response.current_user;
-		console.log(StorageUSer);
+		// console.log(StorageUSer);
 	})
 }
 
@@ -58,7 +58,7 @@ View = {
 	showRandomProfile: function() { 
 		$.get('/users', function(response) {
 			// response = Array with ALL users and current_user
-			console.log('response', response);
+			// console.log('response', response);
 			var relevant_users = [];
 			var current_user = response.current_user;
 
@@ -85,7 +85,7 @@ View = {
 			// clear the profile box before adding the new one
 			$('#left_panel').empty();
 
-			if (relevant_users.length > 0) {
+			if (relevant_users) {
 				// get random profile within the relevant ones
 				var i = getRandomInt(0, relevant_users.length);
 				View.render($('#random_profile_template'), relevant_users[i], $('#left_panel'));			
@@ -215,6 +215,38 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
+// ************************************************************************************************************************************************************************************************************
+// Chat things are below
+// ****************************************************************************************************************************************
+function writeLine(name, line) {
+  $('.chatlines').append('<li class="talk"><span class="nick"&lt;' + name + '&gt;</span>' + line + '</li>');
+}
+
+
+  $('.actions button').on('click', function(ev) {
+    var $name = $('#nick');
+    var $button = $(ev.currentTarget);
+    socket.emit('action', {name: $name.val(), action: $button.data('type')});
+      writeAction($name.val(), $button.data('type'));
+  });
+
+
+    var socket = io.connect('http://localhost:3000/');
+   
+
+    socket.on('connected', function(){
+    	console.log('connnnnnected')
+		});
+	  socket.on('chat', function(data){
+      	writeLine(data.name, data.line);
+    })
+
+
+
+
+
+
+
 
 $(document).ready(function() {
 	StoreCurrentUser();
@@ -223,4 +255,17 @@ $(document).ready(function() {
 	View.showRandomProfile();
 	View.showMatches();
 
-})
+	// var socket = io.connect('http://localhost:3000/');
+ //  console.log(socket);
+	
+	$('form').on('submit', function(ev) {
+    ev.preventDefault();
+    var $name = $('#nick');
+    var $line = $('#text');
+    socket.emit('chat', {name: $name.val(), line: $line.val()});
+    writeLine($name.val(), $line.val());
+    $line.val("");
+	});
+});
+
+
