@@ -25,9 +25,11 @@
 
   <div id="info_current_user">
     <img src="<%=user.facebook.profile_pic_url %>" alt=""> 
-    <div>
-      <p>Logged in as <%= user.facebook.name.split(' ')[0] %></p>
-      <p>Currently feeling: <%= user.mood %> </p>
+    <div id="the_current_user">
+      <p>Hey there: <%= user.facebook.name.split(' ')[0] %></p>
+      <p>Your current mood is: <%= user.mood %> </p>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+      
     </div>
   </div>
 
