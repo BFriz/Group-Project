@@ -3,7 +3,6 @@ var User = User || {};
 
 var StorageUSer; 
 
-
 function StoreCurrentUser() {
 	$.get('/users', function(response) {
 		// response = Array with ALL users and current_user
@@ -138,20 +137,6 @@ View = {
 
 User = {
 
-	addToLikes: function() {
-		// add to current user array of likes
-		// emit socket LIKE to server
-		// chechIfMatch();
-	},
-
-	chechIfMatch: function() {
-		// IF match
-		// showAnimationMatch,
-		// add to Match array,
-		// and add to Panel of Matches
-		// emit socket Match, 
-		// ELSE nothing
-	},
 
 	addToDislikes: function() {
 		var id = $('#showing_now_id').text();
@@ -168,7 +153,35 @@ User = {
 			console.log('succes add dislikes', data);
 		})
 
-		// emit socket DISLIKE
+		// TO DO emit socket DISLIKE
+	},
+
+	addToLikes: function() {
+		var id = $('#showing_now_id').text();
+		StorageUSer.likes.push(id);
+		var new_likes = StorageUSer.likes;
+		console.log('new dislike', new_likes);
+		$.ajax({
+			type: 'PUT',
+			url: '/users/likes',
+			data: {id: id, new_likes: new_likes}, 
+			dataType: 'json'
+		})
+		.done(function(data) {
+			console.log('succes add dislikes', data);
+			User.chechIfMatch();
+		})
+		// TO DO emit socket LIKE to server
+
+	},
+
+	chechIfMatch: function() {
+		// IF match
+		// showAnimationMatch,
+		// add to Match array,
+		// and add to Panel of Matches
+		// emit socket Match, 
+		// ELSE nothing
 	},
 
 	changeMood: function(event) {

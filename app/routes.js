@@ -110,6 +110,17 @@ module.exports = function(app, passport) {
         });
     })
 
+    app.put('/users/likes', isLoggedIn, function(req, res) {
+      User.update(
+        { _id: req.user._id },
+        { $set: {likes: req.body.new_likes } },
+        { multi: true }
+        , function(err, user) {
+          console.log('success update likes?', user);
+          res.send(201, user);
+        });
+    })
+
     app.put('/users/dislikes', isLoggedIn, function(req, res) {
       User.update(
         { _id: req.user._id },
@@ -122,11 +133,7 @@ module.exports = function(app, passport) {
     })
 
 
-    app.get('/users/:id', function(req, res) {
-      User.find({_id: id}, function(err, user) {
-        res.send(user);
-      })
-    })
+
 
     app.get('/map', function(req, res) {
         User.find({}, function(err, users){
