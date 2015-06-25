@@ -312,6 +312,24 @@ animationHover('#logo', 'tada');
 animationClick('#hi', 'tada');
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+animationClick('#submit', 'zoomOutLeft');
+
+
 	View.initialize();
 	View.eventListeners();
 	View.showRandomProfile();
