@@ -3,19 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Moodee</title>
-  <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
-  <script type="text/javascript" src='/js/jquery.js'></script>
-  <script type="text/javascript" src='/js/underscore.js'></script>
-  <script type="text/javascript" src='/js/app.js'></script>
-  <!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
-  <script type="text/javascript" src="/js/mustache.js"></script>
-  <!-- Maps -->
-  <script type="text/javascript" src="/js/map.js"></script>
-  <script src="http://maps.googleapis.com/maps/api/js"></script>
+ 
 <!--   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCzGEys1YWZjlBxSHMp_xun5e-g26E7SJs"></script> -->
   <!-- Style -->
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
   <link rel='stylesheet' href='/stylesheets/normalize.css'></style>
   <link rel='stylesheet' href='/stylesheets/style.css'></style>
   <link rel='stylesheet' href='/stylesheets/dashboard.css'></style>
@@ -25,34 +21,35 @@
 </head>
 
 <body>
-   <div> <img src="<%=user.facebook.profile_pic_url %>" alt=""> </div>
+   <div class="col-sm-3"> <img class=" profile_pic" src="<%=user.facebook.profile_pic_url %>" alt=""> 
+      <p>Hey there: </p><%= user.facebook.name.split(' ')[0] %></p></br>
+      <p>Your current mood is: <%= user.mood %> </p></br>
+   </div>
 
-  <div id="info_current_user">
-    <div id="the_current_user">
+    <div class="all_moods col-sm-4 darkerbg">
+          <li class="" ="surprise_me"><a href="#" data-mood='surprise_me' >Surprise Me</a></li>
+        <li class="flirty"><a href="#" data-mood='flirty' >Flirty</a></li>
+        <li class="party"><a href="#" data-mood='party'>Party</a></li>
+        <li class="chatty"><a href="#" data-mood='chatty'>Chatty</a></li>
+    </div>
+        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
+
+     <h1 class="col-sm-3 the_logo">MooDEE</h1>
+
+
+
+
+    <div id="the_current_user" >
       <p>Hey there: </p><%= user.facebook.name.split(' ')[0] %></p></br>
       <p>Your current mood is: <%= user.mood %> </p></br>
         <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-      
     </div>
-  </div>
 
-  <header>
-    <h1>MooDEE</h1>
-
-    <h2>How are you feeling today?</h2>
-  </header>
+  
 
   <div id="main_zone">
 
-    <div id="mood_menu" class="bounce">
-   
-      <ul class="all_moods">
-        <li id="surprise_me"><a href="#" data-mood='surprise_me' >Surprise Me</a></li>
-        <li id="flirty"><a href="#" data-mood='flirty' >Flirty</a></li>
-        <li id="party"><a href="#" data-mood='party'>Party</a></li>
-        <li id="chatty"><a href="#" data-mood='chatty'>Chatty</a></li>
-      </ul>
-    </div>
+    
 
     <div id="panels_container">
 
@@ -84,8 +81,16 @@
 
   </div> <!-- end Main zone -->
   
-
-
+ <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+  <script type="text/javascript" src='/js/jquery.js'></script>
+  <script type="text/javascript" src='/js/underscore.js'></script>
+  <script type="text/javascript" src='/js/app.js'></script>
+  <!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
+  <script type="text/javascript" src="/js/mustache.js"></script>
+  <!-- Maps -->
+  <script type="text/javascript" src="/js/map.js"></script>
+  <script src="http://maps.googleapis.com/maps/api/js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </body>
 
 <script type="x-tmpl-mustache" id="random_profile_template">

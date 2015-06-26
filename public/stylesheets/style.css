@@ -1,79 +1,17 @@
 
-ul, ol {
-    margin-top: -70px;
-  margin-bottom: 150px;
-
-}
-img {
-  width: 140px;
-  position: absolute;
-  top: 10px;
-}
-h1 {
-  font-size: 5em;
-  color: lightseagreen;
-}
-header {
-  text-align: right;
-  font-family: 'Rokkitt', serif;
-}
-
-#info_current_user {
+.all_moods {
   font-size: 40px;
-  position: absolute;
-  /*position: fixed;*/
-  -ms-align-items: left;
-  align-items: left;
-}
-
-#the_current_user {
-
-}
-#info_current_user p {
-  font-family: 'Rokkitt', serif;
-  font-size: 20px;
-  display: inline-block;
-}
-#info_current_user img {
-  display: inline-block;
-  vertical-align: top;
-  width: 50%;
-  margin: -20px;
-}
-#info_current_user div {
-  display: inline-block;
-}
-.btn {
-  position: absolute;
-  z-index: 2;
-  top: 290px;
-  font-size: 40px;
-  margin-left: -115px;
-}
-
-/*Main Zone
-
-/*#main_zone {
-  border: 1px solid black;
-}*/
-#mood_menu {
   text-align: center;
-  color: grey;
-}
-#mood_menu li {
-  display: inline;
-  padding: 0 15px;
-  font-size: 40px;
 }
 
-.active_mood {
+.the_logo {
+  text-align: right;
 
-  border-radius: 70px;
-  background-color: lightgray;s
 }
 
-/*VArious panels*/
-
+.profile_pic{
+ max-width: 60%;
+}
 #panels_container {
   text-align: center;
   border: 1px solid yellow;
@@ -126,8 +64,10 @@ header {
 
 
 
-
-
+ul
+{
+    list-style-type: none;
+}
 
 
 
@@ -189,19 +129,24 @@ div#slider figure {
   
 }
 
-.logo {
-  z-index: 2;
-  color: white;
 
+.btn {
+  position: absolute;
+  z-index: 2;
+  top: 290px;
+  font-size: 40px;
+  margin-left: -115px;
 }
 
-header {
+
+.main_logo {
+  position: absolute;
+  text-align: right;
+  color: #0074D9;
   z-index: 2;
-  color: white;
-};
-
-
-
+  font-size: 40px;
+  font-family: 'Rokkitt', serif;
+}
 
 
 
