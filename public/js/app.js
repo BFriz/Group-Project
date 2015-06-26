@@ -3,8 +3,6 @@ var User = User || {};
 
 var StorageUser; 
 var AllUsers;
-var $button = document.querySelector('.button');
-
 
 // *************************
 // VIEW FUNCTIONS
@@ -12,7 +10,6 @@ var $button = document.querySelector('.button');
 
 View = {
 		eventListeners: function() {
-
 	  $('#left_panel').on('click', '#yes_button', function(event){ 
 	  	event.preventDefault();;
 	  	User.addToLikes();
@@ -33,13 +30,7 @@ View = {
 	  	$('#chat_panel').hide();
 	  	$('#google_maps_panel').show();
 	  })
-    $('body').on('click', '.button', function() {
-      var duration = 0.3,
-      delay = 0.08;
-        TweenMax.to($button, duration, {scaleY: 1.6, ease: Expo.easeOut});
-        TweenMax.to($button, duration, {scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay});
-        TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
-    });
+
 
 
 	},
@@ -350,12 +341,10 @@ function writeLine(name, line) {
 
 
 $(document).ready(function() {
-
 animationHover('#surprise_me', 'flip');
 animationClick('#surprise_me', 'bounceOutDown');
 animationClick('#flirty', 'bounce');
 animationClick('#flirty', 'bounce');
-
 animationClick('#party', 'flash');
 animationClick('#chatty', 'swing');
 

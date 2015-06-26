@@ -1,7 +1,7 @@
 
 ul, ol {
     margin-top: -70px;
-  margin-bottom: 150px;
+  margin-bottom: 70px;
 
 }
 header {
@@ -90,16 +90,20 @@ header {
 #middle_panel {
   height: 550px;
   display: block;
-    width: 400px;
-  margin: 0 auto;
+    width: 100%;
+  margin: 115px auto 0 auto;
   text-align: center;
 }
 
+.user-profile {
+  overflow: hidden;
+  height: 450px;
+}
+
 #user_profile img {
-  height: 250px;
   margin: 0 auto;
   display: block;
-  max-width: 350px;
+  width: 100%;
   margin-bottom: 18px;
   margin-top: 22px;
 }
@@ -264,6 +268,9 @@ header {
 };
 
 
+
+
+/*********************************************************************************************************************/
 
 
 
