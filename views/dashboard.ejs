@@ -18,10 +18,7 @@
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
   <link rel='stylesheet' href='/stylesheets/normalize.css'></style>
   <link rel='stylesheet' href='/stylesheets/style.css'></style>
-  <link rel='stylesheet' href='/stylesheets/dashboard.css'></style>
-  <link rel="stylesheet" href="http://cdn.jsdelivr.net/animatecss/2.1.0/animate.min.css">
   <link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.3.0/animate.min.css">
 </head>
 
 <body>
@@ -30,12 +27,12 @@
     <img src="<%=user.facebook.profile_pic_url %>" alt=""> 
     <div id="the_current_user">
       <p>Hey there: <%= user.facebook.name.split(' ')[0] %></p>
-      <p>Your current mood is: <%= user.mood %> </p>
-        <a href="/logout" class="btn btn-default btn-sm">Logout</a>
-      
+      <p>Your current mood is: <%= user.mood %> </p>  
+      <a href="/logout" class="btn btn-default btn-sm">Logout</a>  
     </div>
   </div>
 
+  
   <header>
     <h1>MooDEE</h1>
 
@@ -45,46 +42,59 @@
   <div id="main_zone">
 
     <div id="mood_menu" class="bounce">
-   
-      <ul>
-
-        <li id="logo"><a href="#" data-mood='surprise_me' >Surprise Me</a></li>
-        <li id="hi"><a href="#" data-mood='flirty' >Flirty</a></li>
-        <li><a href="#" data-mood='party'>Party</a></li>
-        <li><a href="#" data-mood='chatty'>Chatty</a></li>
+          <ul class="all_moods">
+        <li id="surprise_me"><a href="#" data-mood='surprise_me' >Surprise Me</a></li>
+        <li id="flirty"><a href="#" class="flirty" data-mood='flirty' >Flirty</a></li>
+        <li id="party"><a href="#" data-mood='party'>Party</a></li>
+        <li id="chatty"><a href="#" data-mood='chatty'>Chatty</a></li>
       </ul>
     </div>
 
     <div id="panels_container">
 
       <div id="left_panel" class="panel">
+  
 
       </div> <!-- end left panel -->
-
-      <div id="middle_panel" class="panel">
-         
-        <h4>Update your Location</h4>
-        <form id="submitLocation" action="/users" method="put">
-          <input type="text" id="location_input" name="location" placeholder="Please enter your postcode">          
-          <input type="submit" id="submit" value="Submit">
-        </form>
-        <div id="googleMap" class='js_googleMap' style="width:500px; height:380px;">
-        </div>
-
-      </div> <!-- end middle panel -->
+      
 
       <div id="right_panel" class="panel">
          
         <h4>Current Crushes</h4>
-      
+        <!-- <div id="mini_user_profile" class="js_mini_user_profile">
+          <img src="./img/tilda.jpg">
+          <p> Mystique, 25</p>
+        </div> -->
 
       </div> <!-- end right panel -->
+
+  
+      <div id="middle_panel" class="panel">
+
+        <div id="google_maps_panel">
+                <h4>Update your location</h4>
+                <form id="submitLocation" action="/users" method="put">
+                  <input type="text" id="location_input" name="location" placeholder="Please enter your postcode">          
+                  <input type="submit" value="Submit">
+                </form>
+                <div id="googleMap" class='js_googleMap' style="width:500px; height:380px;">
+                </div>
+        </div>
+
+          <div id="chat_panel" class="panel">
+         <!-- use mustache to update with user name -->
+         </div>
+      </div>
+
+
 
     </div> <!-- end panels container -->
 
 
   </div> <!-- end Main zone -->
-  
+
+
+
 
 
 </body>
@@ -94,7 +104,7 @@
     <h4>Share the Mood Around</h4>
 
     <img src= '{{facebook.profile_pic_url}}' >
-    <p> {{facebook.name}}<br>{{mood}}</p>
+    <p> {{facebook.name}}, {{dob}}<br>{{mood}}</p>
     <p id="showing_now_id" class="hidden">{{ _id }}</p>
   </div>
   <div id="yes_no_box" class="yes_no_box">
@@ -107,9 +117,23 @@
 
 <script type="x-tmpl-mustache" id="append_to_matches_template">
   <div id="mini_user_profile" class="js_mini_user_profile">
-    <img src={{ facebook.profile_pic_url }}>
-    <p> {{ facebook.name }}</p>
+    <img src=>
+    <p> {{facebook.name}}, {{dob}}</p>
   </div>
+</script>
+<script type="x-tmpl-mustache" id="append_to_chat_template">
+  <h1>Are you really flirty?</h1>
+  <button id="close_chat">Close chat</button>
+     <!-- <p class="connecting">Please wait, connecting to server...</p> -->
+
+    <ul id='chat_container' class="chatlines">
+      </ul>
+
+    <form action="#">
+      <input id="nick" type="text" value= {{ facebook.name  }}  />
+      <input type="text" id="text" placeholder="Tell them about your mood" />
+      <input type="submit" value="Speak!"  />
+    </form>
 </script>
 
 

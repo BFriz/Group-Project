@@ -1,26 +1,31 @@
-/*.hidden {
-  display: none;
-}
 
-/*Header and welcome menu*/
+ul, ol {
+    margin-top: -70px;
+  margin-bottom: 150px;
+
+}
 header {
   text-align: right;
   font-family: 'Rokkitt', serif;
 }
-h1 {
-  padding-right: 75px;
+
+#the_current_user {
+    display: inline-block;
 }
+
+#the_current_user a {
+    position: inherit;
+}
+
 #info_current_user {
-  position: fixed;
+  font-size: 40px;
+  position: absolute;
+  /*position: fixed;*/
   -ms-align-items: left;
   align-items: left;
 }
 
-#the_current_user {
-
-}
 #info_current_user p {
-  margin: 5px 0 0 0;
   font-family: 'Rokkitt', serif;
   font-size: 20px;
   display: inline-block;
@@ -28,27 +33,31 @@ h1 {
 #info_current_user img {
   display: inline-block;
   vertical-align: top;
-  width: 50%;
+  width: 23%;
   margin: -20px;
 }
 #info_current_user div {
   display: inline-block;
 }
-.btn {
+.facebook {
   position: absolute;
   z-index: 2;
   top: 290px;
   font-size: 40px;
   margin-left: -115px;
 }
+.btn-default {
+  top: 300px;
+  position: relative;
+  font-size: 20px;
+  text-align: center;
+}
 
 /*Main Zone*/
 
-/*#main_zone {
-  border: 1px solid black;
-}*/
 #mood_menu {
   text-align: center;
+  color: grey;
 }
 #mood_menu li {
   display: inline;
@@ -66,18 +75,24 @@ h1 {
 
 #panels_container {
   text-align: center;
-  border: 1px solid yellow;
+  /*border: 1px solid yellow;*/
 }
 
 .panel {
-  /*Ensure height is consistent with the gogleMAP object*/
-  height: 419px;
+  width: 500px;
   display: inline-block;
-  border: 1px solid green;
+  /*border: 1px solid green;*/
   vertical-align: top;
 }
 #left_panel {
-  width: 500px;
+    height: 400px;
+}
+#middle_panel {
+  height: 550px;
+  display: block;
+    width: 400px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 #user_profile img {
@@ -85,24 +100,29 @@ h1 {
   margin: 0 auto;
   display: block;
   max-width: 350px;
+  margin-bottom: 18px;
+  margin-top: 22px;
 }
 #yes_no_box li {
   display: inline;
   padding: 0 15px;
   border: 1px solid black;
   border-radius: 20px;
+  position: relative;
+  top: 68px;
 }
+
 #yes_no_box ul {
   padding-left: 0px;
 }
 
 #right_panel {
-  width: 220px;
+  height: 400px;
   text-align: left;
   padding-left: 10px;
 
 }
-#mini_user_profile img {
+.js_mini_user_profile img {
   border-radius: 100px;
   height: 45px;
   width: 45px;
@@ -113,6 +133,64 @@ h1 {
   display: inline;
 }
 
+************************
+/*CHAT RELATED*/
+************************
+
+#chat_panel {
+  width: 500px;
+  padding-top: 10px;
+}
+#chat_panel h1 {
+  font-size: 2em;
+  color: lightseagreen;
+  display: inline;
+  position: relative;
+  left: 32px;
+}
+#chat_panel form {
+  position: relative;
+  top: 235px;
+
+}
+
+#close_chat {
+  display: inline;
+  height: 22px;
+  width: 57px;
+  font-size: 10px;
+  position: relative;
+  left: 79px;
+  padding: 2px;
+}
+
+ul.chatlines {
+  border: 1px solid #aaa;
+  /*background-color: #ccc;*/
+  min-height: 50px;
+  overflow: hidden;
+  margin: 20px 10px 20px 10px;
+}
+
+ul.chatlines li {
+  list-style-type: none;
+  text-align: left;
+}
+#nick {
+  width: 123px;
+}
+.nick {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+
+#action {
+  font-style: italic;
+}
+#text {
+  width: 223px;
+}
 
 
 
@@ -121,10 +199,8 @@ h1 {
 
 
 
-
-
-/*****************************************************************************/
-/*/*landing page*/
+/****************************************************************************
+/*landing page*/
 
 
 @keyframes slidy {
@@ -141,7 +217,6 @@ h1 {
 
 body { 
   margin: 0;
-  /*background-image: url('../img/bg-4.jpeg')*/
 } 
 div#slider { overflow: hidden; }
 div#slider figure img { width: 20%; float: left; }
@@ -174,21 +249,20 @@ div#slider figure {
   top: 250px;
   z-index: 2;
   text-align: center;
-  /*line-height: 1.2em;*/
   z-index: 2
-  
-}
+  }
+
 
 .logo {
   z-index: 2;
   color: white;
-
 }
 
 header {
   z-index: 2;
   color: white;
 };
+
 
 
 
