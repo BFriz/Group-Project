@@ -33,13 +33,14 @@ View = {
 	  	$('#chat_panel').hide();
 	  	$('#google_maps_panel').show();
 	  })
-    $button.addEventListener('click', function() {
-      var duration = 0.3,
-      delay = 0.08;
-        TweenMax.to($button, duration, {scaleY: 1.6, ease: Expo.easeOut});
-        TweenMax.to($button, duration, {scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay});
-        TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
-    });
+    // $button.addEventListener('click', function() {
+    // debugger;
+    //   var duration = 0.3,
+    //   delay = 0.08;
+    //     TweenMax.to($button, duration, {scaleY: 1.6, ease: Expo.easeOut});
+    //     TweenMax.to($button, duration, {scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay});
+    //     TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
+    // });
 
 
 	},
@@ -351,11 +352,13 @@ function writeLine(name, line) {
 
 $(document).ready(function() {
 
-animationHover('#surprise_me', 'flip');
+animationHover('.surprise_me', 'flip');
 
 
 animationClick('.surprise_me', 'bounceOutDown');
 animationClick('#flirty', 'bounce');
+animationClick('.flirty', 'bounce');
+
 animationClick('#party', 'flash');
 animationClick('#chatty', 'swing');
 

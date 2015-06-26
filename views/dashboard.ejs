@@ -27,10 +27,10 @@
     <img src="<%=user.facebook.profile_pic_url %>" alt=""> 
     <div id="the_current_user">
       <p>Hey there: <%= user.facebook.name.split(' ')[0] %></p>
-      <p>Your current mood is: <%= user.mood %> </p>    
+      <p>Your current mood is: <%= user.mood %> </p>  
+      <a href="/logout" class="btn btn-default btn-sm">Logout</a>  
     </div>
   </div>
-<a href="/logout" class="btn btn-default btn-sm">Logout</a>
   <header>
     <h1>MooDEE</h1>
 
@@ -42,7 +42,7 @@
     <div id="mood_menu" class="bounce">
           <ul class="all_moods">
         <li id="surprise_me"><a href="#" data-mood='surprise_me' >Surprise Me</a></li>
-        <li id="flirty"><a href="#" data-mood='flirty' >Flirty</a></li>
+        <li id="flirty"><a href="#" class="flirty" data-mood='flirty' >Flirty</a></li>
         <li id="party"><a href="#" data-mood='party'>Party</a></li>
         <li id="chatty"><a href="#" data-mood='chatty'>Chatty</a></li>
       </ul>
@@ -55,17 +55,6 @@
 
       </div> <!-- end left panel -->
 
-      <div id="middle_panel" class="panel">
-         
-        <h4>Update your location</h4>
-        <form id="submitLocation" action="/users" method="put">
-          <input type="text" id="location_input" name="location" placeholder="Please enter your postcode">          
-          <input type="submit" value="Submit">
-        </form>
-        <div id="googleMap" class='js_googleMap' style="width:500px; height:380px;">
-        </div>
-
-      </div> <!-- end middle panel -->
 
       <div id="right_panel" class="panel">
          
@@ -77,11 +66,25 @@
 
       </div> <!-- end right panel -->
 
+  
+      <div id="middle_panel" class="panel">
+        <h4>Update your location</h4>
+            <form id="submitLocation" action="/users" method="put">
+              <input type="text" id="location_input" name="location" placeholder="Please enter your postcode">          
+              <input type="submit" value="Submit">
+            </form>
+            <div id="googleMap" class='js_googleMap' style="width:500px; height:380px;">
+            </div>
+        </div>
+
+
     </div> <!-- end panels container -->
 
 
   </div> <!-- end Main zone -->
-  
+
+
+
 
 
 </body>

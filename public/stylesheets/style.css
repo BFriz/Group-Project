@@ -4,18 +4,17 @@ ul, ol {
   margin-bottom: 150px;
 
 }
-/*img {
-  width: 140px;
-  position: absolute;
-  top: 10px;*/
-/*}*/
-/*h1 {
-  font-size: 5em;
-  color: lightseagreen;*/
-/*}*/
 header {
   text-align: right;
   font-family: 'Rokkitt', serif;
+}
+
+#the_current_user {
+    display: inline-block;
+}
+
+#the_current_user a {
+    position: inherit;
 }
 
 #info_current_user {
@@ -26,9 +25,6 @@ header {
   align-items: left;
 }
 
-#the_current_user {
-
-}
 #info_current_user p {
   font-family: 'Rokkitt', serif;
   font-size: 20px;
@@ -37,7 +33,7 @@ header {
 #info_current_user img {
   display: inline-block;
   vertical-align: top;
-  width: 50%;
+  width: 23%;
   margin: -20px;
 }
 #info_current_user div {
@@ -51,7 +47,7 @@ header {
   margin-left: -115px;
 }
 .btn-default {
-  top: 200px;
+  top: 300px;
   position: relative;
   font-size: 20px;
   text-align: center;
@@ -79,17 +75,24 @@ header {
 
 #panels_container {
   text-align: center;
-  border: 1px solid yellow;
+  /*border: 1px solid yellow;*/
 }
 
 .panel {
-  height: 419px;
+  width: 500px;
   display: inline-block;
-  border: 1px solid green;
+  /*border: 1px solid green;*/
   vertical-align: top;
 }
 #left_panel {
-  width: 500px;
+    height: 400px;
+}
+#middle_panel {
+  height: 550px;
+  display: block;
+    width: 400px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 #user_profile img {
@@ -97,19 +100,24 @@ header {
   margin: 0 auto;
   display: block;
   max-width: 350px;
+  margin-bottom: 18px;
+  margin-top: 22px;
 }
 #yes_no_box li {
   display: inline;
   padding: 0 15px;
   border: 1px solid black;
   border-radius: 20px;
+  position: relative;
+  top: 68px;
 }
+
 #yes_no_box ul {
   padding-left: 0px;
 }
 
 #right_panel {
-  width: 220px;
+  height: 400px;
   text-align: left;
   padding-left: 10px;
 
@@ -125,7 +133,7 @@ header {
   display: inline;
 }
 
-/*************************
+************************
 CHAT RELATED
 ************************
 
@@ -158,7 +166,7 @@ CHAT RELATED
 
 ul.chatlines {
   border: 1px solid #aaa;
-/*  background-color: #ccc;*/
+  background-color: #ccc;
   min-height: 50px;
   overflow: hidden;
   margin: 20px 10px 20px 10px;
@@ -191,7 +199,7 @@ ul.chatlines li {
 
 
 
-/*****************************************************************************/
+/****************************************************************************
 /*/*landing page*/
 
 
