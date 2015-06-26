@@ -25,8 +25,14 @@ View = {
 	  })
 
 	  $('#mood_menu a').on('click', User.changeMood);
-
 	  $('#submitLocation').on('submit', User.changeLocation);
+
+	  $('#main_zone').on('click', '#close_chat', function(event) {
+	  	event.preventDefault();
+	  	$('#chat_panel').hide();
+	  	$('#google_maps_panel').show();
+	  })
+
 
 	},
 
@@ -55,6 +61,10 @@ View = {
 			var element = $("#mood_menu a[data-mood='" +user.mood+ "']");
 			var highlight = element.parent();
   		highlight.addClass('active_mood');
+
+  		if (user.mood === 'flirty') {
+  			View.showChat();
+  		}
   },
   
 	showRandomProfile: function() { 
@@ -103,10 +113,27 @@ View = {
 		var highlight = element.parent();
 		highlight.addClass('active_mood');
 
+		if (mood === 'flirty') {
+			View.showChat();
+		} else {
+			View.hideChat();
+		}
+
 		// update the message in top left corner
 		var $p = $('#info_current_user p:nth-child(2)');
 		$p.text("Currently feeling " + mood)
 	},
+
+	showChat: function() {
+		$('#google_maps_panel').hide();
+		$('#chat_panel').show();
+		$('#chat_panel').empty();
+		View.render($('#append_to_chat_template'), StorageUser, $('#chat_panel') );
+	},
+	hideChat: function() {
+		$('#chat_panel').hide();
+		$('#google_maps_panel').show();
+	}
 
 }
 
@@ -193,8 +220,7 @@ User = {
 		})
 
 		// ***************************
-		// TO DO emit socket LIKE to server
-		// ***************************
+		// TO DO emit socket LIKE to serverc
 
 	},
 
@@ -289,6 +315,7 @@ function getRandomInt(min, max) {
 // ****************************************************************************************************************************************
 function writeLine(name, line) {
   $('.chatlines').append('<li class="talk"><span class="nick"&lt;' + name + '&gt;</span>' + line + '</li>');
+  $("#chat_container").scrollTop($("#chat_container")[0].scrollHeight);
 }
 
 
@@ -304,7 +331,8 @@ function writeLine(name, line) {
    
 
     socket.on('connected', function(){
-    	console.log('connnnnnected')
+    	console.log('connnnnnected');
+    	$('#chat panel p').hide();
 		});
 	  socket.on('chat', function(data){
       	writeLine(data.name, data.line);
