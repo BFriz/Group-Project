@@ -31,6 +31,8 @@
       <a href="/logout" class="btn btn-default btn-sm">Logout</a>  
     </div>
   </div>
+
+  
   <header>
     <h1>MooDEE</h1>
 
@@ -68,14 +70,22 @@
 
   
       <div id="middle_panel" class="panel">
-        <h4>Update your location</h4>
-            <form id="submitLocation" action="/users" method="put">
-              <input type="text" id="location_input" name="location" placeholder="Please enter your postcode">          
-              <input type="submit" value="Submit">
-            </form>
-            <div id="googleMap" class='js_googleMap' style="width:500px; height:380px;">
-            </div>
+
+        <div id="google_maps_panel">
+                <h4>Update your location</h4>
+                <form id="submitLocation" action="/users" method="put">
+                  <input type="text" id="location_input" name="location" placeholder="Please enter your postcode">          
+                  <input type="submit" value="Submit">
+                </form>
+                <div id="googleMap" class='js_googleMap' style="width:500px; height:380px;">
+                </div>
         </div>
+
+          <div id="chat_panel" class="panel">
+         <!-- use mustache to update with user name -->
+         </div>
+      </div>
+
 
 
     </div> <!-- end panels container -->
@@ -110,6 +120,20 @@
     <img src=>
     <p> {{facebook.name}}, {{dob}}</p>
   </div>
+</script>
+<script type="x-tmpl-mustache" id="append_to_chat_template">
+  <h1>Are you really flirty?</h1>
+  <button id="close_chat">Close chat</button>
+     <!-- <p class="connecting">Please wait, connecting to server...</p> -->
+
+    <ul id='chat_container' class="chatlines">
+      </ul>
+
+    <form action="#">
+      <input id="nick" type="text" value= {{ facebook.name  }}  />
+      <input type="text" id="text" placeholder="Tell them about your mood" />
+      <input type="submit" value="Speak!"  />
+    </form>
 </script>
 
 
