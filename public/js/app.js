@@ -375,6 +375,7 @@ animationClick('#chatty', 'swing');
 
 
 animationClick('#submit', 'zoomOutLeft');
+animationHover('#match', 'zoomInUp');
 
 
 	View.initialize();

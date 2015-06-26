@@ -2,7 +2,7 @@
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 
-#left_panel {
+#panels_container {
   opacity:0;  /* make things invisible upon start */
  -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
  -moz-animation:fadeIn ease-in 1;
@@ -16,20 +16,11 @@
  -moz-animation-duration:2s;
  animation-duration:2s;
  background-color: rgba(255, 255, 255, 0.3); 
-
-}
-/*
-#panels_container {
-  background-image: url('http://www.paulabrown.net/city-lights-tumblr-layouts-22.jpg');
-  background-repeat: none;
 }
 
-h4 {
-  font-style: italic;
+#match {
+  font-size: 12px;
 }
 
-#location_input {
-  padding: 6px;
-  
-}*/
+
 
