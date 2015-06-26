@@ -1,24 +1,88 @@
 
-.all_moods {
+ul, ol {
+    margin-top: -70px;
+  margin-bottom: 150px;
+
+}
+/*img {
+  width: 140px;
+  position: absolute;
+  top: 10px;*/
+/*}*/
+/*h1 {
+  font-size: 5em;
+  color: lightseagreen;*/
+/*}*/
+header {
+  text-align: right;
+  font-family: 'Rokkitt', serif;
+}
+
+#info_current_user {
   font-size: 40px;
+  position: absolute;
+  /*position: fixed;*/
+  -ms-align-items: left;
+  align-items: left;
+}
+
+#the_current_user {
+
+}
+#info_current_user p {
+  font-family: 'Rokkitt', serif;
+  font-size: 20px;
+  display: inline-block;
+}
+#info_current_user img {
+  display: inline-block;
+  vertical-align: top;
+  width: 50%;
+  margin: -20px;
+}
+#info_current_user div {
+  display: inline-block;
+}
+.facebook {
+  position: absolute;
+  z-index: 2;
+  top: 290px;
+  font-size: 40px;
+  margin-left: -115px;
+}
+.btn-default {
+  top: 200px;
+  position: relative;
+  font-size: 20px;
   text-align: center;
 }
 
-.the_logo {
-  text-align: right;
+/*Main Zone*/
 
+#mood_menu {
+  text-align: center;
+  color: grey;
+}
+#mood_menu li {
+  display: inline;
+  padding: 0 15px;
+  font-size: 40px;
 }
 
-.profile_pic{
- max-width: 60%;
+.active_mood {
+
+  border-radius: 70px;
+  background-color: lightgray;s
 }
+
+/*VArious panels*/
+
 #panels_container {
   text-align: center;
   border: 1px solid yellow;
 }
 
 .panel {
-  /*Ensure height is consistent with the gogleMAP object*/
   height: 419px;
   display: inline-block;
   border: 1px solid green;
@@ -50,7 +114,7 @@
   padding-left: 10px;
 
 }
-#mini_user_profile img {
+.js_mini_user_profile img {
   border-radius: 100px;
   height: 45px;
   width: 45px;
@@ -61,13 +125,67 @@
   display: inline;
 }
 
+/*************************
+CHAT RELATED
+************************
 
-
-
-ul
-{
-    list-style-type: none;
+#chat_panel {
+  width: 500px;
+  padding-top: 10px;
 }
+#chat_panel h1 {
+  font-size: 2em;
+  color: lightseagreen;
+  display: inline;
+  position: relative;
+  left: 32px;
+}
+#chat_panel form {
+  position: relative;
+  top: 235px;
+
+}
+
+#close_chat {
+  display: inline;
+  height: 22px;
+  width: 57px;
+  font-size: 10px;
+  position: relative;
+  left: 79px;
+  padding: 2px;
+}
+
+ul.chatlines {
+  border: 1px solid #aaa;
+/*  background-color: #ccc;*/
+  min-height: 50px;
+  overflow: hidden;
+  margin: 20px 10px 20px 10px;
+}
+
+ul.chatlines li {
+  list-style-type: none;
+  text-align: left;
+}
+#nick {
+  width: 123px;
+}
+.nick {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+
+#action {
+  font-style: italic;
+}
+#text {
+  width: 223px;
+}
+
+
+
 
 
 
@@ -91,7 +209,6 @@ ul
 
 body { 
   margin: 0;
-  /*background-image: url('../img/bg-4.jpeg')*/
 } 
 div#slider { overflow: hidden; }
 div#slider figure img { width: 20%; float: left; }
@@ -124,29 +241,23 @@ div#slider figure {
   top: 250px;
   z-index: 2;
   text-align: center;
-  /*line-height: 1.2em;*/
   z-index: 2
-  
-}
+  }
 
 
-.btn {
-  position: absolute;
+.logo {
   z-index: 2;
-  top: 290px;
-  font-size: 40px;
-  margin-left: -115px;
+  color: white;
 }
 
-
-.main_logo {
-  position: absolute;
-  text-align: right;
-  color: #0074D9;
+header {
   z-index: 2;
-  font-size: 40px;
-  font-family: 'Rokkitt', serif;
-}
+  color: white;
+};
+
+
+
+
 
 
 

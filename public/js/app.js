@@ -26,16 +26,21 @@ View = {
 	  })
 
 	  $('#mood_menu a').on('click', User.changeMood);
-
 	  $('#submitLocation').on('submit', User.changeLocation);
 
-	  $button.addEventListener('click', function() {
-  var duration = 0.3,
+	  $('#main_zone').on('click', '#close_chat', function(event) {
+	  	event.preventDefault();
+	  	$('#chat_panel').hide();
+	  	$('#google_maps_panel').show();
+	  })
+    $button.addEventListener('click', function() {
+      var duration = 0.3,
       delay = 0.08;
-  TweenMax.to($button, duration, {scaleY: 1.6, ease: Expo.easeOut});
-  TweenMax.to($button, duration, {scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay});
-  TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
-});
+        TweenMax.to($button, duration, {scaleY: 1.6, ease: Expo.easeOut});
+        TweenMax.to($button, duration, {scaleX: 1.2, scaleY: 1, ease: Back.easeOut, easeParams: [3], delay: delay});
+        TweenMax.to($button, duration * 1.25, {scaleX: 1, scaleY: 1, ease: Back.easeOut, easeParams: [6], delay: delay * 3 });
+    });
+
 
 	},
 
@@ -64,6 +69,10 @@ View = {
 			var element = $("#mood_menu a[data-mood='" +user.mood+ "']");
 			var highlight = element.parent();
   		highlight.addClass('active_mood');
+
+  		if (user.mood === 'flirty') {
+  			View.showChat();
+  		}
   },
   
 	showRandomProfile: function() { 
@@ -74,14 +83,10 @@ View = {
 
 			// if someone logged in, show profiles based on them"
 			if (current_user) {
-				// keep users with relevant gender, and not being current user, and not previously seen
 				relevant_users = response.users.filter(function (value) {
-					var oppositeGender = (value.facebook.gender !== current_user.facebook.gender 
-									&& value._id !== current_user._id);
-					// var notInLikes = 
-					return (value.facebook.gender !== current_user.facebook.gender 
-									&& value._id !== current_user._id);
+					return User.okToShow(value, current_user);
 				})
+
 				// if mood is surprise me (default upon login), show everyone ;
 				//  otherwise only show profiles with same mood as curr user
 				if (current_user.mood !== 'surprise_me') {
@@ -116,10 +121,27 @@ View = {
 		var highlight = element.parent();
 		highlight.addClass('active_mood');
 
+		if (mood === 'flirty') {
+			View.showChat();
+		} else {
+			View.hideChat();
+		}
+
 		// update the message in top left corner
 		var $p = $('#info_current_user p:nth-child(2)');
 		$p.text("Currently feeling " + mood)
 	},
+
+	showChat: function() {
+		$('#google_maps_panel').hide();
+		$('#chat_panel').show();
+		$('#chat_panel').empty();
+		View.render($('#append_to_chat_template'), StorageUser, $('#chat_panel') );
+	},
+	hideChat: function() {
+		$('#chat_panel').hide();
+		$('#google_maps_panel').show();
+	}
 
 }
 
@@ -128,6 +150,16 @@ View = {
 // *************************
 
 User = {
+
+	okToShow: function(user, current_user) {
+		// keep users with relevant gender, and not being current user, and not previously seen
+		var oppositeGender = (user.facebook.gender !== current_user.facebook.gender 
+				&& user._id !== current_user._id);
+		var notInLikes = (current_user.likes.indexOf(user._id) === -1);
+		var notInDislikes = (current_user.dislikes.indexOf(user._id) === -1);
+
+		return oppositeGender && notInLikes && notInDislikes;
+	},
 
 	showMatches: function(user, all_users) {
 		// passing it on StorageUser and AllUsers
@@ -196,8 +228,7 @@ User = {
 		})
 
 		// ***************************
-		// TO DO emit socket LIKE to server
-		// ***************************
+		// TO DO emit socket LIKE to serverc
 
 	},
 
@@ -291,7 +322,8 @@ function getRandomInt(min, max) {
 // Chat things are below
 // ****************************************************************************************************************************************
 function writeLine(name, line) {
-  $('.chatlines').append('<li class="talk"><span class="nick"&lt;' + name + '&gt;</span>' + line + '</li>');
+  $('.chatlines').append('<li class="talk"><span class="nick">&lt;' + name + '&gt;</span>' + line + '</li>');
+  $("#chat_container").scrollTop($("#chat_container")[0].scrollHeight);
 }
 
 
@@ -307,7 +339,8 @@ function writeLine(name, line) {
    
 
     socket.on('connected', function(){
-    	console.log('connnnnnected')
+    	console.log('connnnnnected');
+    	$('#chat panel p').hide();
 		});
 	  socket.on('chat', function(data){
       	writeLine(data.name, data.line);
@@ -318,13 +351,13 @@ function writeLine(name, line) {
 
 $(document).ready(function() {
 
-animationHover('.surprise_me', 'flip');
+animationHover('#surprise_me', 'flip');
 
 
 animationClick('.surprise_me', 'bounceOutDown');
-animationClick('.flirty', 'bounce');
-animationClick('.party', 'flash');
-animationClick('.chatty', 'swing');
+animationClick('#flirty', 'bounce');
+animationClick('#party', 'flash');
+animationClick('#chatty', 'swing');
 
 
 
@@ -360,7 +393,7 @@ animationClick('.chatty', 'swing');
   );
 };
 	//Animate on Click Function
-function animationClick(element, animation){
+  function animationClick(element, animation){
   element = $(element);
   element.click(
     function() {
@@ -374,4 +407,5 @@ function animationClick(element, animation){
 };
 
 });
+
 

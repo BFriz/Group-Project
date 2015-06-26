@@ -3,6 +3,11 @@ var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
 mongoose.connect("mongodb://localhost/moodsdb"); // random moodsdb title, should i change?
 
+
+// POWERFUL TO MODIFY ON THE DATABASE!!!
+// db.users.findAndModify({ query: { "_id" : ObjectId("558bb9289e7c081721a83a63")}, update: {$set : {likes: []} }, new: true }  )
+
+
 // define the schema for our user model
 var userSchema = mongoose.Schema({
     local            : {
