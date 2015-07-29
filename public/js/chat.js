@@ -43,14 +43,14 @@ Chat = {
     $("#chat_container").scrollTop($("#chat_container")[0].scrollHeight);
   },
 
-  showChat: function() {
+  show: function() {
     $('#google_maps_panel').hide();
     $('#chat_panel').show();
-    $('#chat_panel').empty();
+    // $('#chat_panel').empty();
     View.render($('#append_to_chat_template'), StorageUser, $('#chat_panel') );
   },
 
-  hideChat: function() {
+  hide: function() {
     $('#chat_panel').hide();
     $('#google_maps_panel').show();
   },
