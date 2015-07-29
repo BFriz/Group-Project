@@ -56,7 +56,7 @@
             <li id="logout"><a href="/logout">Logout</a></li>
           </ul>
         </li>
-        <li><img src="<%=user.facebook.profile_pic_url %>" alt=""></li>
+        <li><img src="<%=user.facebook.profile_pic_url %>" class="img-responsive"></li>
       </ul>  <!-- /.navbar-right -->
     </div>   <!-- /.navbar-collapse -->
 
@@ -84,15 +84,16 @@
           </div> <!-- end left panel -->
 
           <div id="right_panel" class="panel col-xs-4">        
-            <h4>Current Crushes</h4>
+            <h4 class="text-center">Current Crushes</h4>
           </div> <!-- end right panel -->
         </div>
 
         <div id="bottom_panel" class="row">
-          <div id="google_maps_panel" class="col-xs-12">
-            <h4>Update your location</h4>
+
+          <div id="google_maps_panel" class="col-xs-offset-1 col-xs-10">
+            <h4 class="text-center">Where are you now?</h4>
             <form id="submitLocation" action="/users" method="put">
-              <input type="text" id="location_input" name="location" placeholder="Please enter your postcode">          
+              <input type="text" id="location_input" name="location" placeholder="Enter your postcode">          
               <input type="submit" value="Submit">
             </form>
             <div id="googleMap" class='js_googleMap' style="width:100%; height:380px;"></div>
@@ -119,37 +120,48 @@
 
 <script type="x-tmpl-mustache" id="random_profile_template">
 
-  <div id="user_profile" class="row">
-    <div class="col-xs-12">
-      <h4>Share the Mood Around</h4>
-    </div>
-    <div class="user-profile row">
-       <div class="col-xs-12">
-          <a href="#" class="thumbnail"><img src= '{{facebook.profile_pic_url}}' ></a>
+   <div id="user_profile" class="row">
+      <div class="col-xs-12">
+         <h4>Share the Mood Around</h4>
       </div>
-    </div>
-    <div class="row">
+   </div>
+   <div class="user-profile row">
+      <div class="col-xs-12">
+      <img src= '{{facebook.profile_pic_url}}' class="img-responsive img-thumbnail center-block">
+      </div>
+   </div>
+
+   <div class="row" id="yes_no_area">
       <div class="col-xs-12">
          <ul class="list-inline">
-            <li> {{facebook.name}} </li>
+            <li class="h4"> {{facebook.name}} </li>
             <li><span class="glyphicon glyphicon-star-empty"></span></li>
-            <li> {{mood}} </li>
+            <li class="h4"> {{mood}} </li>
             <li id="showing_now_id" class="hidden">{{ _id }}</li>
          </ul>
-         <div class="btn-group" role="group" aria-label="like_or_dislike">
-           <button type="button" id="yes_button" class="btn btn-default">YES</button>
-           <button type="button" id="no_button" class="btn btn-default">NO</button>
-         </div>
-       </div>
-    </div>
-  </div>
-</script>
+         <ul class="list-inline">
+            <li id="no_button">
+               <span class="fa-stack fa-3x">
+                 <i class="fa fa-heart fa-stack-1x"></i>
+                 <i class="fa fa-ban fa-stack-2x text-danger"></i>
+               </span>
+            </li>
+            <li id="yes_button"><i class="fa fa-4x fa-heart"></i></li>
+         </ul>         
+      </div>
+   </div>
 
+</script>
+<!-- END of Random Profile -->
+
+<!--  Script to Add a Crush -->
 <script type="x-tmpl-mustache" id="append_to_matches_template">
-  <div id="mini_user_profile" class="js_mini_user_profile">
-    <img src=>
-    <p> {{facebook.name}}, {{dob}}</p>
-  </div>
+   <div id="mini_user_profile" class="row js_mini_user_profile">
+      <div class="col-xs-12 text-left">
+         <img src=  class="img-responsive img-circle">
+         <p>{{facebook.name}}</p>
+      </div>
+   </div>
 </script>
 
 <script type="x-tmpl-mustache" id="append_to_chat_template">
