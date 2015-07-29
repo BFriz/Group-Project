@@ -4,6 +4,12 @@ var User = User || {};
 var StorageUser; 
 var AllUsers;
 
+$(document).ready(function() {
+	View.initialize();
+	View.eventListeners();
+	View.showRandomProfile();
+});
+
 // *************************
 // VIEW FUNCTIONS
 // *************************
@@ -33,10 +39,10 @@ View = {
 	  })
 },
 
+	// store the current user and all the users so far
+	// update moods and matches accordingly
 	initialize: function() {
-		
 		$.get('/users', function(response) {
-			// store the current user and all the users so far
 			StorageUser = response.current_user;
 			console.log('Storage User: ', StorageUser);
 			AllUsers = response.users;
@@ -47,20 +53,12 @@ View = {
 		})
 	},
 
-  render: function(templateElement, object, parentElement) {
-    var template = templateElement.html();
-    Mustache.parse(template);
-    var rendered = Mustache.render(template, object);
-    parentElement.append(rendered);
-  },
-
   setMood: function(user) {
 			var element = $("#mood_menu a[data-mood='" +user.mood+ "']");
-			var highlight = element.parent();
-  		highlight.addClass('active_mood');
-
+			element.parent().addClass('active_mood');
+			// chat is only shown if the mood is flirty
   		if (user.mood === 'flirty') {
-  			View.showChat();
+  			Chat.show();
   		}
   },
   
@@ -107,19 +105,16 @@ View = {
 	changeActiveMood: function(element, mood) {
 		$('#mood_menu li').removeClass('active_mood');
 		// get the <li> where the new mood is
-		var highlight = element.parent();
-		highlight.addClass('active_mood');
+		element.parent().addClass('active_mood');
+		(mood === 'flirty') ? Chat.show() : Chat.hide();
+	}, 
 
-		if (mood === 'flirty') {
-			View.showChat();
-		} else {
-			View.hideChat();
-		}
-
-		// update the message in top left corner
-		var $p = $('#info_current_user p:nth-child(2)');
-		$p.text("Currently feeling " + mood)
-	}
+  render: function(templateElement, object, parentElement) {
+    var template = templateElement.html();
+    Mustache.parse(template);
+    var rendered = Mustache.render(template, object);
+    parentElement.append(rendered);
+  },
 
 }
 
@@ -298,52 +293,5 @@ function getRandomInt(min, max) {
 
 
 
-
-$(document).ready(function() {
-animationHover('#surprise_me', 'flip');
-animationClick('#surprise_me', 'bounceOutDown');
-animationClick('#flirty', 'bounce');
-animationClick('#flirty', 'bounce');
-animationClick('#party', 'flash');
-animationClick('#chatty', 'swing');
-
-	View.initialize();
-	View.eventListeners();
-	View.showRandomProfile();
-
-	// var socket = io.connect('http://localhost:3000/');
- //  console.log(socket);
-	
-
-
-	function animationHover(element, animation){
-  element = $(element);
-  element.hover(
-    function() {
-      element.addClass('animated ' + animation);
-    },
-    function(){
-      //wait for animation to finish before removing classes
-      window.setTimeout( function(){
-        element.removeClass('animated ' + animation);
-      }, 2000);
-    }
-  );
-};
-	//Animate on Click Function
-  function animationClick(element, animation){
-  element = $(element);
-  element.click(
-    function() {
-      element.addClass('animated ' + animation);
-      //wait for animation to finish before removing classes
-      window.setTimeout( function(){
-          element.removeClass('animated ' + animation);
-      }, 2000);
-    }
-  );
-};
-
-});
 
 
