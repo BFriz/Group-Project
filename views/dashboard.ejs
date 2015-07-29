@@ -4,18 +4,31 @@
   <meta charset="UTF-8">
   <title>Moodee</title>
   
-<!--   <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCzGEys1YWZjlBxSHMp_xun5e-g26E7SJs"></script> -->
-  <!-- Style -->
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!--  Bootstrap, requires jQuery, then Styling -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-  <link rel='stylesheet' href='/stylesheets/normalize.css'></style>
   <link rel="stylesheet" href="/stylesheets/animate.css"></style>
   <link rel='stylesheet' href='/stylesheets/style.css'></style>
   <link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
 
+  <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+  <script type="text/javascript" src='/js/underscore.js'></script>
+  <script type="text/javascript" src='/js/app.js'></script>
+  <script type="text/javascript" src='/js/chat.js'></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.1/mustache.min.js"></script>
+  <!-- Maps -->
+  <script type="text/javascript" src="/js/map.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?region=GB"></script>
+
 </head>
 
 <body>
+
+  <nav id="main-navbar" class="navbar navbar-default"></nav>
+
 
   <div id="info_current_user">
     <img src="<%=user.facebook.profile_pic_url %>" alt=""> 
@@ -25,11 +38,9 @@
       <a href="/logout" class="btn btn-default btn-sm">Logout</a>  
     </div>
   </div>
-
   
   <header>
     <h1>MooDEE</h1>
-
     <h2>How are you feeling today?</h2>
   </header>
 
@@ -46,60 +57,78 @@
 
     <div id="panels_container">
 
-      <div id="left_panel" class="panel">
-  
+        <div id="left_panel" class="panel">
+        </div> <!-- end left panel -->
 
-      </div> <!-- end left panel -->
+        <div id="right_panel" class="panel">        
+          <h4>Current Crushes</h4>
+        </div> <!-- end right panel -->
 
+        <div id="middle_panel" class="panel">
 
-      <div id="right_panel" class="panel">
-         
-        <h4>Current Crushes</h4>
-        <!-- <div id="mini_user_profile" class="js_mini_user_profile">
-          <img src="./img/tilda.jpg">
-          <p> Mystique, 25</p>
-        </div> -->
+          <div id="google_maps_panel">
+            <h4>Update your location</h4>
+            <form id="submitLocation" action="/users" method="put">
+              <input type="text" id="location_input" name="location" placeholder="Please enter your postcode">          
+              <input type="submit" value="Submit">
+            </form>
+            <div id="googleMap" class='js_googleMap' style="width:100%; height:380px;">
+            </div>
+          </div>
 
-      </div> <!-- end right panel -->
-
-  
-      <div id="middle_panel" class="panel">
-
-        <div id="google_maps_panel">
-                <h4>Update your location</h4>
-                <form id="submitLocation" action="/users" method="put">
-                  <input type="text" id="location_input" name="location" placeholder="Please enter your postcode">          
-                  <input type="submit" value="Submit">
-                </form>
-                <div id="googleMap" class='js_googleMap' style="width:100%; height:380px;">
-                </div>
+            <div id="chat_panel" class="panel">
+           <!-- use mustache to update with user name -->
+           </div>
         </div>
-
-          <div id="chat_panel" class="panel">
-         <!-- use mustache to update with user name -->
-         </div>
-      </div>
-
-
 
     </div> <!-- end panels container -->
 
-
   </div> <!-- end Main zone -->
 
-
-
-<script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
-  <script type="text/javascript" src='/js/jquery.js'></script>
-  <script type="text/javascript" src='/js/underscore.js'></script>
-  <script type="text/javascript" src='/js/app.js'></script>
-  <!-- <script type="text/javascript" src="/socket.io/socket.io.js"></script> -->
-  <script type="text/javascript" src="/js/mustache.js"></script>
-  <!-- Maps -->
-  <script type="text/javascript" src="/js/map.js"></script>
-  <script src="http://maps.googleapis.com/maps/api/js"></script>
-
 </body>
+
+<!-- 
+SCRIPT FOR THE NAV BAR
+  -->
+
+<!-- Script for NavBar WHEN USER IS LOGGED IN -->
+<script type="x-tmpl-mustache" id="navbar_isloggedin_template">
+  <div id="main_navbar_container" class="container-fluid">
+     <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a id="a" class="navbar-brand" href="#">Words of the World</a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li id="home-li" class="active"><a href="#" >Home <span class="sr-only">(current)</span></a></li>
+        <li id="explore-li"><a href="#">Explore</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Rules</a></li>
+        <li><a href="#">About</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ splitEmail }}<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">My account</a></li>
+            <li><a href="#">I <span class="glyphicon glyphicon-heart"></span> this app</a></li>
+            <li role="separator" class="divider"></li>
+            <li id="logout"><a href="#">Logout</a></li>
+          </ul>
+        </li>
+      </ul>  <!-- /.navbar-right -->
+    </div>   <!-- /.navbar-collapse -->
+
+  </div>   <!-- /.container-fluid -->
+</script>
+
+<!-- END of SCRIPT FOR THE NAV BAR WHEN User LOGGED IN -->
+<!-- END of SCRIPT FOR THE NAV BAR  -->
 
 <script type="x-tmpl-mustache" id="random_profile_template">
   <div id="user_profile">
@@ -124,6 +153,7 @@
     <p> {{facebook.name}}, {{dob}}</p>
   </div>
 </script>
+
 <script type="x-tmpl-mustache" id="append_to_chat_template">
   <h1>Are you really flirty?</h1>
   <button id="close_chat">Close chat</button>
@@ -131,7 +161,6 @@
 
     <ul id='chat_container' class="chatlines">
       </ul>
-
     <form action="#">
       <input id="nick" type="text" value= {{ facebook.name  }}  />
       <input type="text" id="text" placeholder="Tell them about your mood" />
