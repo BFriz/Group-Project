@@ -9,13 +9,14 @@ var AllUsers;
 // *************************
 
 View = {
-		eventListeners: function() {
+
+	eventListeners: function() {
+
 	  $('#left_panel').on('click', '#yes_button', function(event){ 
 	  	event.preventDefault();;
 	  	User.addToLikes();
 	  	View.showRandomProfile();
-	  })
-
+	  });
 	  $('#left_panel').on('click', '#no_button', function(event){
 	  	event.preventDefault();
 	  	User.addToDislikes();
@@ -30,10 +31,7 @@ View = {
 	  	$('#chat_panel').hide();
 	  	$('#google_maps_panel').show();
 	  })
-
-
-
-	},
+},
 
 	initialize: function() {
 		
@@ -121,17 +119,6 @@ View = {
 		// update the message in top left corner
 		var $p = $('#info_current_user p:nth-child(2)');
 		$p.text("Currently feeling " + mood)
-	},
-
-	showChat: function() {
-		$('#google_maps_panel').hide();
-		$('#chat_panel').show();
-		$('#chat_panel').empty();
-		View.render($('#append_to_chat_template'), StorageUser, $('#chat_panel') );
-	},
-	hideChat: function() {
-		$('#chat_panel').hide();
-		$('#google_maps_panel').show();
 	}
 
 }
@@ -309,34 +296,6 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-// ************************************************************************************************************************************************************************************************************
-// Chat things are below
-// ****************************************************************************************************************************************
-function writeLine(name, line) {
-  $('.chatlines').append('<li class="talk"><span class="nick">&lt;' + name + '&gt;</span>' + line + '</li>');
-  $("#chat_container").scrollTop($("#chat_container")[0].scrollHeight);
-}
-
-
-  $('.actions button').on('click', function(ev) {
-    var $name = $('#nick');
-    var $button = $(ev.currentTarget);
-    socket.emit('action', {name: $name.val(), action: $button.data('type')});
-      writeAction($name.val(), $button.data('type'));
-  });
-
-
-    var socket = io.connect('http://localhost:3000/');
-   
-
-    socket.on('connected', function(){
-    	console.log('connnnnnected');
-    	$('#chat panel p').hide();
-		});
-	  socket.on('chat', function(data){
-      	writeLine(data.name, data.line);
-    })
-
 
 
 
@@ -355,15 +314,7 @@ animationClick('#chatty', 'swing');
 	// var socket = io.connect('http://localhost:3000/');
  //  console.log(socket);
 	
-	// CHAT CHAT CHAT
-	$('#middle_panel').on('submit', '#chat_panel form', function(ev) {
-    ev.preventDefault();
-    var $name = $('#nick');
-    var $line = $('#text');
-    socket.emit('chat', {name: $name.val(), line: $line.val()});
-    writeLine($name.val(), $line.val());
-    $line.val("");
-	});
+
 
 	function animationHover(element, animation){
   element = $(element);

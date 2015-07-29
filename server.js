@@ -56,35 +56,20 @@ server.listen(3000, function () {
   console.log("Server running on port", port);
 });
 
+
 // ***************************
 // ROUTES AND SOCKET REQUESTS FOR THE SERVER
 // *****************************
 
+  io.sockets.on('connection', function(socket){
+    
+    socket.emit('connected');
 
-    io.sockets.on('connection', function(socket){
-      socket.emit('connected');
-
-      socket.on('chat', function(data) {
-        socket.broadcast.emit('chat', data);
-      });
-      
-      socket.on('action', function(data) {
-        socket.broadcast.emit('action', data);
-      });
+    socket.on('chat', function(data) {
+      socket.broadcast.emit('chat', data);
     });
-
-// app.get('/', function(req, res){
-//   res.render('index')
-// });
-
-
-
-
-// app.get('/chat', function(req, res){
-//   res.render('chat', {header: 'chat'})
-// })
-
-
-
-
-
+    
+    socket.on('action', function(data) {
+      socket.broadcast.emit('action', data);
+    });
+  });
