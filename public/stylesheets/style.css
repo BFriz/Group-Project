@@ -1,44 +1,5 @@
 
-ul, ol {
-    margin-top: -70px;
-  margin-bottom: 70px;
 
-}
-header {
-  text-align: right;
-  font-family: 'Rokkitt', serif;
-}
-
-#the_current_user {
-    display: inline-block;
-}
-
-#the_current_user a {
-    position: inherit;
-}
-
-#info_current_user {
-  font-size: 40px;
-  position: absolute;
-  /*position: fixed;*/
-  -ms-align-items: left;
-  align-items: left;
-}
-
-#info_current_user p {
-  font-family: 'Rokkitt', serif;
-  font-size: 20px;
-  display: inline-block;
-}
-#info_current_user img {
-  display: inline-block;
-  vertical-align: top;
-  width: 23%;
-  margin: -20px;
-}
-#info_current_user div {
-  display: inline-block;
-}
 .facebook {
   position: absolute;
   z-index: 2;
@@ -46,26 +7,11 @@ header {
   font-size: 40px;
   margin-left: -115px;
 }
-.btn-default {
-  top: 300px;
-  position: relative;
-  font-size: 20px;
-  text-align: center;
-}
+
 
 /*Main Zone*/
 
-#mood_menu {
-  text-align: center;
-  color: grey;
-}
-#mood_menu li {
-  display: inline;
-  padding: 0 15px;
-  font-size: 40px;
-}
-
-.active_mood {
+/*.active_mood {
 
   border-radius: 70px;
   background-color: lightgray;s
@@ -73,30 +19,23 @@ header {
 
 /*VArious panels*/
 
-#panels_container {
-  text-align: center;
-  /*border: 1px solid yellow;*/
-}
+
+
+/*
 
 .panel {
-  width: 500px;
-  display: inline-block;
-  /*border: 1px solid green;*/
   vertical-align: top;
 }
+
 #left_panel {
-    height: 400px;
+  height: 400px;
 }
-#middle_panel {
+
+#bottom_panel {
   height: 550px;
-  display: block;
-    width: 100%;
-  margin: 115px auto 0 auto;
-  text-align: center;
 }
 
 .user-profile {
-  overflow: hidden;
   height: 450px;
 }
 
@@ -136,11 +75,12 @@ header {
 #mini_user_profile p {
   display: inline;
 }
+*/
 
-************************
+/**************************/
 /*CHAT RELATED*/
-************************
-
+/**************************/
+/*
 #chat_panel {
   width: 500px;
   padding-top: 10px;
@@ -170,7 +110,7 @@ header {
 
 ul.chatlines {
   border: 1px solid #aaa;
-  /*background-color: #ccc;*/
+  background-color: #ccc;
   min-height: 50px;
   overflow: hidden;
   margin: 20px 10px 20px 10px;
@@ -195,7 +135,7 @@ ul.chatlines li {
 #text {
   width: 223px;
 }
-
+*/
 
 
 
