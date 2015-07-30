@@ -14,12 +14,24 @@ html, body {
   height: 100%;
 }
 
+.prime_color {
+  /* the orangy one*/
+  color: rgba(250, 18, 44, 0.68);
+}
+
+.second_color {
+  /*the darker one*/
+   color: #163177;
+}
+
+
 /********* 
 In the Navbar
  ******** */
 
 #main-navbar a {
   font-family: 'Kaushan Script';
+  /*the darker one*/
   color: #163177;
   font-size: 1.3em;
 }
@@ -58,8 +70,19 @@ Moods Menu
 In the random profile
  ******** */
 
-#yes_no_area li {
+#profile_panel ul {
+  margin: 0;
+}
+
+#yes_no_area li, span, i {
   vertical-align: middle;
+}
+
+.mini_name {
+  font-family: 'Kaushan Script';
+  /*the darker one*/
+  color: #163177;
+  font-size: 2em;
 }
 
 .yes_button i {
