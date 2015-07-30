@@ -29,7 +29,7 @@ View = {
 	  	View.showRandomProfile();
 	  })
 
-	  $('#mood_menu a').on('click', User.changeMood);
+	  $('#all_moods a').on('click', User.changeMood);
 	  $('#submitLocation').on('submit', User.changeLocation);
 
 	  $('#main_zone').on('click', '#close_chat', function(event) {
@@ -54,7 +54,7 @@ View = {
 	},
 
   setMood: function(user) {
-			var element = $("#mood_menu a[data-mood='" +user.mood+ "']");
+			var element = $("#all_moods a[data-mood='" +user.mood+ "']");
 			element.parent().addClass('active_mood');
 			// chat is only shown if the mood is flirty
   		if (user.mood === 'flirty') {
@@ -83,27 +83,20 @@ View = {
 				}
 			}
 
-			else { 	// else noone logged in so show index page so show all users
-				relevant_users = response.users;
-			}
+			// else noone logged in so show index page so show all users
+			else { relevant_users = response.users; }
 
-			// clear the profile box before adding the new one
-			$('#left_panel').empty();
+			// get random profile within the relevant ones
+			var i = getRandomInt(0, relevant_users.length);
+			(relevant_users.length > 0) ? 
+						View.render($('#random_profile_template'), relevant_users[i], $('#panels_container'))
+						: View.render($('#nobody_mood_template'), null, $('#panels_container'));
 
-			if (relevant_users.length > 0) {
-				// get random profile within the relevant ones
-				var i = getRandomInt(0, relevant_users.length);
-				View.render($('#random_profile_template'), relevant_users[i], $('#left_panel'));			
-			} 
-			else {
-				var p = "<p class='nothing_here'>No users with such mood at the moment</p>";
-				$('#left_panel').append(p);
-			}	
-		})
+		});
 	},
 
 	changeActiveMood: function(element, mood) {
-		$('#mood_menu li').removeClass('active_mood');
+		$('#all_moods li').removeClass('active_mood');
 		// get the <li> where the new mood is
 		element.parent().addClass('active_mood');
 		(mood === 'flirty') ? Chat.show() : Chat.hide();
@@ -113,8 +106,15 @@ View = {
     var template = templateElement.html();
     Mustache.parse(template);
     var rendered = Mustache.render(template, object);
-    parentElement.append(rendered);
+    parentElement.html(rendered);
   },
+
+  append: function(templateElement, object, parentElement) {
+    var template = templateElement.html();
+    Mustache.parse(template);
+    var rendered = Mustache.render(template, object);
+    parentElement.append(rendered);
+  }
 
 }
 
@@ -158,7 +158,7 @@ User = {
 			$('.no_match').remove()
 		};
 		console.log('add to match view', user)
-		View.render($('#append_to_matches_template'), user, $('#right_panel') )	
+		View.append($('#append_to_matches_template'), user, $('#right_panel') )	
 	},
 
 	addToDislikes: function() {

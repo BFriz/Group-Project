@@ -41,6 +41,7 @@ Chat = {
   writeLine: function(name, line) {
     $('.chatlines').append('<li class="talk"><span class="nick">&lt;' + name + '&gt;</span>' + line + '</li>');
     $("#chat_container").scrollTop($("#chat_container")[0].scrollHeight);
+    // think this was the command to ensure chat stays inside the div and scrolls to keep showing the latest one
   },
 
   show: function() {

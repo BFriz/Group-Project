@@ -33,6 +33,22 @@ In the Navbar
 
 
 /********* 
+Moods Menu
+ ******** */
+#all_moods li {
+  /*same border as navbar a*/
+  padding: 5px 10px;
+}
+
+#all_moods a {
+    /*same font as navbar-brand */
+  font-family: 'Kaushan Script', cursive;
+  color: rgba(250, 18, 44, 0.68);
+  font-size: 1.3em;
+}
+
+
+/********* 
 In the random profile
  ******** */
 
@@ -40,14 +56,14 @@ In the random profile
   vertical-align: middle;
 }
 
-#yes_button i {
+.yes_button i {
   color: rgb(232, 23, 23);
 }
 
-#no_button .fa-heart {
+.no_button .fa-heart {
   color: rgba(142, 142, 168, 0.71);
 }
-#no_button .fa {
+.no_button .fa {
   color: rgba(104, 122, 178, 0.59);
 }
 

@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="/stylesheets/animate.css"></style>
   <link rel='stylesheet' href='/stylesheets/style.css'></style>
   <link href='http://fonts.googleapis.com/css?family=Rokkitt' rel='stylesheet' type='text/css'>
@@ -66,46 +66,50 @@
 <!-- Create natural responsive padding by having everything in a column -->
 <div class="container-fluid">
    <div class="col-xs-offset-1 col-xs-10">
-      
-      <div id="main_zone" class="row">
-          <div id="mood_menu" class="row bounce">
-            <div class="col-xs-12 text-center h4">
-              <ul class="all_moods list-inline">
-                <li id="surprise_me"><a href="#" data-mood='surprise_me' >Surprise Me</a></li>
-                <li id="flirty"><a href="#" class="flirty" data-mood='flirty' >Flirty</a></li>
-                <li id="party"><a href="#" data-mood='party'>Party</a></li>
-                <li id="chatty"><a href="#" data-mood='chatty'>Chatty</a></li>
-              </ul>
-            </div>
-          </div>
 
-        <div id="panels_container" class="row">
-          <div id="left_panel" class="panel col-xs-8 text-center">
-          </div> <!-- end left panel -->
-
-          <div id="right_panel" class="panel col-xs-4">        
-            <h4 class="text-center">Current Crushes</h4>
-          </div> <!-- end right panel -->
+      <div id="mood_menu" class="row bounce">
+        <div class="col-xs-1 text-left h4">
+          <ul class="list-inline">
+            <li><i class="fa fa-comment fa-2x"></i></li>
+          </ul>
         </div>
+        <div class="col-xs-10 text-center h4">
+          <ul id="all_moods" class="list-inline">
+            <li id="surprise_me" class="btn btn-default"><a href="#" data-mood='surprise_me' >Surprise Me</a></li>
+            <li id="flirty" class="btn btn-default"><a href="#" class="flirty" data-mood='flirty' >Flirty</a></li>
+            <li id="party" class="btn btn-default"><a href="#" data-mood='party'>Party</a></li>
+            <li id="chatty" class="btn btn-default"><a href="#" data-mood='chatty'>Chatty</a></li>
+          </ul>
+        </div>
+        <div class="col-xs-1 text-right h4">
+          <!-- UL to display all your likes! -->
+          <ul class="list-inline">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-diamond fa-2x"></i></a>
+              <ul class="dropdown-menu">
+                <li>test</li>
+                <li>test again</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div> <!-- End Row with mood menu -->
 
-        <div id="bottom_panel" class="row">
+      <div id="panels_container" class="row">
+      </div>
 
-          <div id="google_maps_panel" class="col-xs-offset-1 col-xs-10">
-            <h4 class="text-center">Where are you now?</h4>
-            <form id="submitLocation" action="/users" method="put">
-              <input type="text" id="location_input" name="location" placeholder="Enter your postcode">          
-              <input type="submit" value="Submit">
-            </form>
-            <div id="googleMap" class='js_googleMap' style="width:100%; height:380px;"></div>
-          </div>
+    <!-- Either show the map or the chat -->
 
-           <div id="chat_panel" class="panel col-xs-12">
-          <!-- use mustache to update with user name -->
-          </div>
-       </div>
-
-      </div> 
-        <!-- End main zone -->
+      <div id="bottom_panel" class="row">
+        <div id="google_maps_panel" class="col-xs-offset-1 col-xs-10">
+          <h4 class="text-center">Where are you now?</h4>
+          <form id="submitLocation" action="/users" method="put">
+            <input type="text" id="location_input" name="location" placeholder="Enter your postcode">          
+            <input type="submit" value="Submit">
+          </form>
+          <div id="googleMap" class='js_googleMap' style="width:100%; height:380px;"></div>
+        </div>
+     </div>
 
    </div>   <!-- end artificial column for padding -->
 </div>  <!-- end container-fluid -->
@@ -118,13 +122,10 @@
 <!-- END of SCRIPT FOR THE NAV BAR WHEN User LOGGED IN -->
 <!-- END of SCRIPT FOR THE NAV BAR  -->
 
+<!-- RANDOM PROFILE -->
 <script type="x-tmpl-mustache" id="random_profile_template">
+<div id="profile_panel" class="panel col-xs-12 text-center">
 
-   <div id="user_profile" class="row">
-      <div class="col-xs-12">
-         <h4>Share the Mood Around</h4>
-      </div>
-   </div>
    <div class="user-profile row">
       <div class="col-xs-12">
       <img src= '{{facebook.profile_pic_url}}' class="img-responsive img-thumbnail center-block">
@@ -140,32 +141,68 @@
             <li id="showing_now_id" class="hidden">{{ _id }}</li>
          </ul>
          <ul class="list-inline">
-            <li id="no_button">
+            <li id="no_button" class="no_button">
                <span class="fa-stack fa-3x">
                  <i class="fa fa-heart fa-stack-1x"></i>
                  <i class="fa fa-ban fa-stack-2x text-danger"></i>
                </span>
             </li>
-            <li id="yes_button"><i class="fa fa-4x fa-heart"></i></li>
+            <li id="yes_button" class="yes_button"><i class="fa fa-4x fa-heart"></i></li>
          </ul>         
       </div>
    </div>
 
+</div>
 </script>
 <!-- END of Random Profile -->
 
-<!--  Script to Add a Crush -->
-<script type="x-tmpl-mustache" id="append_to_matches_template">
-   <div id="mini_user_profile" class="row js_mini_user_profile">
-      <div class="col-xs-12 text-left">
-         <img src=  class="img-responsive img-circle">
-         <p>{{facebook.name}}</p>
+<!-- NO PROFILE TO SHOW FOR THIS MOOD -->
+<script type="x-tmpl-mustache" id="nobody_mood_template">
+<div id="profile_panel" class="panel col-xs-12 text-center">
+
+   <div class="user-profile row">
+      <div class="col-xs-12">
+        <i class="fa fa-hourglass-half fa-5x fa-spin"></i>
+        <p>No user with such mood at the moment</p>
       </div>
    </div>
+
+   <div class="row" id="yes_no_area">
+      <div class="col-xs-12">
+         <ul class="list-inline">
+            <li><span class="glyphicon glyphicon-star-empty"></span></li>
+            <li><span class="glyphicon glyphicon-star-empty"></span></li>
+            <li><span class="glyphicon glyphicon-star-empty"></span></li>
+         </ul>
+         <ul class="list-inline">
+            <li class="no_button">
+               <span class="fa-stack fa-3x">
+                 <i class="fa fa-heart fa-stack-1x"></i>
+                 <i class="fa fa-ban fa-stack-2x text-danger"></i>
+               </span>
+            </li>
+            <li class="yes_button"><i class="fa fa-4x fa-heart"></i></li>
+         </ul>         
+      </div>
+   </div>
+
+</div>
+</script>
+<!-- NO PROFILE TO SHOW FOR THIS MOOD -->
+
+<!--  ADD A CRUSH -->
+<script type="x-tmpl-mustache" id="append_to_matches_template">
+   <li id="mini_user_profile" class="row js_mini_user_profile">
+     <img src=  class="img-responsive img-circle">
+     <p>{{facebook.name}}</p>
+   </li>
 </script>
 
-<script type="x-tmpl-mustache" id="append_to_chat_template">
-  <h1>Are you really flirty?</h1>
+<!-- CHAT -->
+<script type="x-tmpl-mustache" id="chat_template">
+<div id="chat_panel" class="panel col-xs-12">
+
+  <h1>Chatting with.... </h1>
   <button id="close_chat">Close chat</button>
      <!-- <p class="connecting">Please wait, connecting to server...</p> -->
 
@@ -176,6 +213,8 @@
       <input type="text" id="text" placeholder="Tell them about your mood" />
       <input type="submit" value="Speak!"  />
     </form>
+
+</div>
 </script>
 
 
