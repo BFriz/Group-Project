@@ -51,8 +51,24 @@ In the Navbar
 
 
 /********* 
+Panels
+ ******** */
+
+.main_panel {
+  border: 3px solid rgba(183, 183, 207, 0.77);
+  border-radius: 7px;
+}
+
+
+
+/********* 
 Moods Menu
  ******** */
+
+.crush {
+  padding: 0;
+}
+
 #all_moods li {
   /*same border as navbar a*/
   padding: 13px 13px;
@@ -69,6 +85,14 @@ Moods Menu
 /********* 
 In the random profile
  ******** */
+
+#up_panel {
+  margin-bottom: 10px;
+}
+
+#profile_panel {
+  margin: 0 0 3px 0;
+}
 
 #profile_panel ul {
   margin: 0;
@@ -108,9 +132,11 @@ In the add a crush on the right
 /********* 
 In the map
  ******** */
-
+#bottom_panel div:first-child {
+  margin-bottom: 0;
+}
 #over_the_map {
-  background-color: rgba(250, 18, 44, 0.13);
+  background-color: rgba(226, 222, 183, 0.35);
   z-index: 10;
   position: relative;
   padding-top: 6px;
@@ -132,7 +158,9 @@ In the map
 }
 
 #googleMap {
-  top: -60px;
+  min-height: 250px;
+  max-height: 409px;
+  height: 400px;
 }
 
 /**************************/

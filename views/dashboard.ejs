@@ -65,7 +65,8 @@
 
 <!-- Create natural responsive padding by having everything in a column -->
 <div class="container-fluid">
-   <div class="col-xs-offset-1 col-xs-10">
+
+   <div class="col-xs-offset-1 col-xs-10 main_panel" id="up_panel">
 
       <div id="mood_menu" class="row bounce">
         <div class="col-xs-1 text-left h4">
@@ -81,7 +82,7 @@
             <li id="chatty"><a href="#" data-mood='chatty'>Chatty</a></li>
           </ul>
         </div>
-        <div class="col-xs-1 text-right h4">
+        <div class="col-xs-1 h4 crush">
           <!-- UL to display all your likes! -->
           <ul class="list-inline">
             <li class="dropdown">
@@ -97,6 +98,9 @@
 
       <div id="panels_container" class="row">
       </div>
+    </div> <!-- end up panel -->
+
+    <div class="col-xs-offset-1 col-xs-10 main_panel" id="bottom_panel">
 
     <!-- Either show the map or the chat -->
 
@@ -104,18 +108,18 @@
         <div id="" class="panel col-xs-12">
         
           <div class="row" id="over_the_map">
-            <div class="col-xs-1 text-left">
+            <div class="col-xs-1 text-left h4">
               <ul class="list-inline"><li><i class="fa fa-comment fa-2x second_color"></i></li>
               </ul>
             </div>
             <div id="google_maps_panel" class="col-xs-10 text-center">
-              <h4>The Mood Around You</h4>
+              <h4>The Mood Around</h4>
               <form id="submitLocation" action="/users" method="put">
                 <input type="text" id="location_input" name="location" placeholder="Enter your postcode">          
                 <input type="submit" value="Submit">
               </form>
             </div>
-            <div class="col-xs-1 text-right">
+            <div class="col-xs-1 h4 crush">
               <!-- UL to display all your likes! -->
               <ul class="list-inline">
                 <li class="dropdown">
@@ -128,7 +132,7 @@
           </div>
 
           <div class="row">
-            <div id="googleMap" class='col-xs-12 js_googleMap' style="height:380px;">
+            <div id="googleMap" class='col-xs-12 js_googleMap'>
             </div>
           </div>
 
@@ -137,7 +141,7 @@
       </div> 
     </div> <!-- end bottom panel -->
 
-   </div>   <!-- end artificial column for padding -->
+   </div>   <!-- end bottom panel -->
 </div>  <!-- end container-fluid -->
 
 

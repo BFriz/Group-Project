@@ -32,11 +32,6 @@ View = {
 	  $('#all_moods a').on('click', User.changeMood);
 	  $('#bottom_panel').on('submit', '#submitLocation', User.changeLocation);
 
-	  $('#main_zone').on('click', '#close_chat', function(event) {
-	  	event.preventDefault();
-	  	$('#chat_panel').hide();
-	  	$('#google_maps_panel').show();
-	  })
 },
 
 	// store the current user and all the users so far
@@ -48,20 +43,23 @@ View = {
 			AllUsers = response.users;
 			console.log('AllUsers: ', AllUsers);
 
-			View.setMood(StorageUser);
+			View.setActiveMood(StorageUser);
 			User.showMatches(StorageUser, AllUsers);
 		})
 	},
 
-  setMood: function(user) {
-			var element = $("#all_moods a[data-mood='" +user.mood+ "']");
+	setActiveMood: function(elementOrUser) {
+		$('#all_moods li').removeClass('active_mood');
+		// if I passed in a user, get li with user.mood, 
+		// if I passed in an <a>, get its parent <li>
+		if (elementOrUser._id !== undefined) {
+			var element = $("#all_moods a[data-mood='" +elementOrUser.mood+ "']");
 			element.parent().addClass('active_mood');
-			// chat is only shown if the mood is flirty
-  		if (user.mood === 'flirty') {
-  			Chat.show();
-  		}
-  },
-  
+		} else {
+			elementOrUser.parent().addClass('active_mood');
+		}	
+	}, 
+
 	showRandomProfile: function() { 
 		$.get('/users', function(response) {
 			// response = Array with ALL users and current_user
@@ -94,13 +92,6 @@ View = {
 
 		});
 	},
-
-	changeActiveMood: function(element, mood) {
-		$('#all_moods li').removeClass('active_mood');
-		// get the <li> where the new mood is
-		element.parent().addClass('active_mood');
-		(mood === 'flirty') ? Chat.show() : Chat.hide();
-	}, 
 
   render: function(templateElement, object, parentElement) {
     var template = templateElement.html();
@@ -263,7 +254,7 @@ User = {
 		})
 
 		View.showRandomProfile();
-		View.changeActiveMood($(this), mood);
+		View.setActiveMood($(this), mood);
 
 		// ***************************
 		// TO DO emit socket new mood
