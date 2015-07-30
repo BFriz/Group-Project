@@ -27,8 +27,14 @@ In the Navbar
 #main-navbar .navbar-brand {
   font-family: 'Kaushan Script', cursive;
   font-weight: 900;
+  /* the orangy one*/
   color: rgba(250, 18, 44, 0.68);
   font-size: 3em;
+}
+
+.active_mood {
+  background-color: rgba(250, 18, 44, 0.15);
+  border-radius: 65%;
 }
 
 
@@ -37,7 +43,7 @@ Moods Menu
  ******** */
 #all_moods li {
   /*same border as navbar a*/
-  padding: 5px 10px;
+  padding: 13px 13px;
 }
 
 #all_moods a {
