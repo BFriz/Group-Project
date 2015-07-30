@@ -16,6 +16,9 @@ function initialize() {
   var mapOptions = {
       zoom: 12,
       center: latlng,
+      zoomControlOptions: {
+        position: google.maps.ControlPosition.LEFT_CENTER
+      },
       mapTypeControl: false,
       panControl: false,
       styles: snazzyMap

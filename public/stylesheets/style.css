@@ -109,23 +109,31 @@ In the add a crush on the right
 In the map
  ******** */
 
-#submitLocation {
+#over_the_map {
+  background-color: rgba(250, 18, 44, 0.13);
   z-index: 10;
   position: relative;
-  text-align: center;
+  padding-top: 6px;
+}
+#over_the_map i {
+  vertical-align: bottom;
 }
 
-#googleMap {
-  position: relative;
-  top: -28px;
+#submitLocation {
+  text-align: center;
+  font-size: 0.8em;
 }
 
 #google_maps_panel h4 {
   font-family: 'Kaushan Script', cursive;
   color: rgba(250, 18, 44, 0.68);
   font-size: 2em;
+  margin: 0 0 3px 0;
 }
 
+#googleMap {
+  top: -60px;
+}
 
 /**************************/
 /*CHAT RELATED*/

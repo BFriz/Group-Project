@@ -18,19 +18,19 @@ View = {
 
 	eventListeners: function() {
 
-	  $('#left_panel').on('click', '#yes_button', function(event){ 
+	  $('#panels_container').on('click', '#yes_button', function(event){ 
 	  	event.preventDefault();;
 	  	User.addToLikes();
 	  	View.showRandomProfile();
 	  });
-	  $('#left_panel').on('click', '#no_button', function(event){
+	  $('#panels_container').on('click', '#no_button', function(event){
 	  	event.preventDefault();
 	  	User.addToDislikes();
 	  	View.showRandomProfile();
 	  })
 
 	  $('#all_moods a').on('click', User.changeMood);
-	  $('#submitLocation').on('submit', User.changeLocation);
+	  $('#bottom_panel').on('submit', '#submitLocation', User.changeLocation);
 
 	  $('#main_zone').on('click', '#close_chat', function(event) {
 	  	event.preventDefault();

@@ -86,7 +86,7 @@
           <ul class="list-inline">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-diamond fa-2x second_color"></i></a>
-              <ul class="dropdown-menu">
+              <ul class="dropdown-menu add_profiles">
                 <li>test</li>
                 <li>test again</li>
               </ul>
@@ -101,15 +101,41 @@
     <!-- Either show the map or the chat -->
 
       <div id="bottom_panel" class="row">
-        <div id="google_maps_panel" class="col-xs-offset-1 col-xs-10">
-          <h4 class="text-center">The Mood Around You</h4>
-          <form id="submitLocation" action="/users" method="put">
-            <input type="text" id="location_input" name="location" placeholder="Enter your postcode">          
-            <input type="submit" value="Submit">
-          </form>
-          <div id="googleMap" class='js_googleMap' style="width:100%; height:380px;"></div>
-        </div>
-     </div>
+        <div id="" class="panel col-xs-12">
+        
+          <div class="row" id="over_the_map">
+            <div class="col-xs-1 text-left">
+              <ul class="list-inline"><li><i class="fa fa-comment fa-2x second_color"></i></li>
+              </ul>
+            </div>
+            <div id="google_maps_panel" class="col-xs-10 text-center">
+              <h4>The Mood Around You</h4>
+              <form id="submitLocation" action="/users" method="put">
+                <input type="text" id="location_input" name="location" placeholder="Enter your postcode">          
+                <input type="submit" value="Submit">
+              </form>
+            </div>
+            <div class="col-xs-1 text-right">
+              <!-- UL to display all your likes! -->
+              <ul class="list-inline">
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-diamond fa-2x second_color"></i></a>
+                  <ul class="dropdown-menu add_profiles">
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="row">
+            <div id="googleMap" class='col-xs-12 js_googleMap' style="height:380px;">
+            </div>
+          </div>
+
+
+
+      </div> 
+    </div> <!-- end bottom panel -->
 
    </div>   <!-- end artificial column for padding -->
 </div>  <!-- end container-fluid -->
