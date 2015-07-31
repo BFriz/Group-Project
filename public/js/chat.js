@@ -1,5 +1,8 @@
 var Chat = Chat = {};
 
+// I think best way is tht on chat load we grab the chat history from the server
+// same on chat load with a single person
+
 $(document).ready(function(){
   $('#bottom_panel').on('submit', '#chat_area form', Chat.emit)
   $('.container-fluid').on('click', '.icon-map', Map.show);

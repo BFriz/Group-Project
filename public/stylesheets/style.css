@@ -86,8 +86,8 @@ Moods Menu
 In the random profile
  ******** */
 
-#up_panel {
-  margin-bottom: 10px;
+ .main_panel {
+ margin-bottom: 10px; 
 }
 
 #profile_panel {
@@ -157,42 +157,18 @@ In the map
   margin: 0 0 3px 0;
 }
 
-#googleMap {
+#googleMap, #chat_container {
   min-height: 250px;
   max-height: 409px;
   height: 400px;
 }
+#chat_container {
+  overflow: hidden;
+}
 
 /**************************/
-/*CHAT RELATED*/
+/*CHAT
 /**************************/
-/*
-#chat_panel {
-  width: 500px;
-  padding-top: 10px;
-}
-#chat_panel h1 {
-  font-size: 2em;
-  color: lightseagreen;
-  display: inline;
-  position: relative;
-  left: 32px;
-}
-#chat_panel form {
-  position: relative;
-  top: 235px;
-
-}
-
-#close_chat {
-  display: inline;
-  height: 22px;
-  width: 57px;
-  font-size: 10px;
-  position: relative;
-  left: 79px;
-  padding: 2px;
-}
 
 ul.chatlines {
   border: 1px solid #aaa;
@@ -214,6 +190,9 @@ ul.chatlines li {
   margin-right: 5px;
 }
 
+#chat_area form, input {
+  text-align: center;
+}
 
 #action {
   font-style: italic;
@@ -221,7 +200,7 @@ ul.chatlines li {
 #text {
   width: 223px;
 }
-*/
+
 
 
 
