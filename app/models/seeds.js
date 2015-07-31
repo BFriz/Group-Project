@@ -89,7 +89,7 @@ User.create({
 						console.log(jeremy.likes);
 						console.log(lexie.matches);
 						//Take care with process.exit(), this will break the code
-	//     // process.exit()
+	    process.exit();
 					})
 			})
 		})
