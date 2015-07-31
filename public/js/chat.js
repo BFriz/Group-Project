@@ -2,6 +2,7 @@ var Chat = Chat = {};
 
 $(document).ready(function(){
   $('#bottom_panel').on('submit', '#chat_area form', Chat.emit)
+  $('.container-fluid').on('click', '.icon-map', Map.show);
   // actions removed for the moment
   // $('.actions button').on('click', Chat.actionButton)
 })
@@ -45,8 +46,12 @@ Chat = {
     // think this was the command to ensure chat stays inside the div and scrolls to keep showing the latest one
   },
 
+  // show chat means icon shows map
   show: function() {
     View.render($('#chat_template'), StorageUser, $('#bottom_panel') );
+    $('#mood_menu .icon-map').removeClass('hidden');
+    $('#mood_menu .icon-map').show();
+    $('#mood_menu .icon-chat').hide();
   }
 
   // actionButton: function(event) {

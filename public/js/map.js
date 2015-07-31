@@ -2,9 +2,10 @@ var Map = Map || {};
 
 //Document.ready function and event listener for the map to load.
 $(document).ready(function() {
-  Map.initialize();
+  Map.show();
   Map.listLocation();
   $('#bottom_panel').on('click', '.mini_marker_info', Map.showInsideProfiles);  
+  $('.container-fluid').on('click', '.icon-chat', Chat.show);
 });
 
 var locations = [];
@@ -13,10 +14,16 @@ var all_users;
 
 Map = {
 
-//Initialize function for Google Maps
- initialize: function() {
+  // show map and switch small icon to go back to chat
+  show: function() {
+    View.render($('#map_panel_template'), StorageUser, $('#bottom_panel') );
+    Map.initialize();
+    $('#mood_menu .icon-chat').show();
+    $('#mood_menu .icon-map').hide();
+  },
 
-    Map.show();
+ //Initialize function for Google Maps
+ initialize: function() {
 
     Map.latlng = new google.maps.LatLng(51.50722, -0.12750);
     var snazzyMap = [{"featureType":"landscape.man_made","elementType":"geometry","stylers":[{"color":"#f7f1df"}]},{"featureType":"landscape.natural","elementType":"geometry","stylers":[{"color":"#d0e3b4"}]},{"featureType":"landscape.natural.terrain","elementType":"geometry","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi.business","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"poi.medical","elementType":"geometry","stylers":[{"color":"#fbd3da"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#bde6ab"}]},{"featureType":"road","elementType":"geometry.stroke","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.highway","elementType":"geometry.fill","stylers":[{"color":"#ffe15f"}]},{"featureType":"road.highway","elementType":"geometry.stroke","stylers":[{"color":"#efd151"}]},{"featureType":"road.arterial","elementType":"geometry.fill","stylers":[{"color":"#ffffff"}]},{"featureType":"road.local","elementType":"geometry.fill","stylers":[{"color":"black"}]},{"featureType":"transit.station.airport","elementType":"geometry.fill","stylers":[{"color":"#cfb2db"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#a2daf2"}]}]
@@ -100,12 +107,6 @@ Map = {
         }
       });
     }
-  },
-
-  // show map and switch small icon to go back to chat
-  show: function() {
-    View.render($('#map_panel_template'), StorageUser, $('#bottom_panel') );
-    $('#mood_menu').
   },
 
   showInsideProfiles: function() {
