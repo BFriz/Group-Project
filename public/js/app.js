@@ -128,7 +128,9 @@ User = {
 	showMatches: function(user, all_users) {
 		// passing it on StorageUser and AllUsers
 		if (user.matches.length === 0) {
-			$('#right_panel').append($('<p class="no_match">No matches yet</p>'));
+			var html = "<li class='no_match text-center'>No matches yet</li>"
+			$('.add_profiles').html(html);
+			$('.add_profiles').html(html);
 		}
 		else {
 			// for each id in user.matches, go into all_users and select the user having this id
@@ -145,11 +147,12 @@ User = {
 	},
 
 	addToMatchView: function(user) {
+		// remove the "no match yet" if it was there, and append the new match
 		if ($('.no_match')) {  
 			$('.no_match').remove()
 		};
 		console.log('add to match view', user)
-		View.append($('#append_to_matches_template'), user, $('#right_panel') )	
+		View.append($('#append_to_matches_template'), user, $('.add_profiles') )	
 	},
 
 	addToDislikes: function() {

@@ -1,8 +1,9 @@
 var Chat = Chat = {};
 
 $(document).ready(function(){
-  $('#middle_panel').on('submit', '#chat_panel form', Chat.emit)
-  $('.actions button').on('click', Chat.actionButton)
+  $('#bottom_panel').on('submit', '#chat_area form', Chat.emit)
+  // actions removed for the moment
+  // $('.actions button').on('click', Chat.actionButton)
 })
 
 // Use Socket.io to manage the Chat
@@ -45,24 +46,16 @@ Chat = {
   },
 
   show: function() {
-    $('#google_maps_panel').hide();
-    $('#chat_panel').show();
-    // $('#chat_panel').empty();
-    View.render($('#append_to_chat_template'), StorageUser, $('#chat_panel') );
-  },
-
-  hide: function() {
-    $('#chat_panel').hide();
-    $('#google_maps_panel').show();
-  },
-
-  actionButton: function(event) {
-    var $name = $('#nick');
-    var $button = $(event.currentTarget);
-    socket.emit('action', {
-      name: $name.val(), action: $button.data('type')
-    });
-    writeAction($name.val(), $button.data('type'));
+    View.render($('#chat_template'), StorageUser, $('#bottom_panel') );
   }
+
+  // actionButton: function(event) {
+  //   var $name = $('#nick');
+  //   var $button = $(event.currentTarget);
+  //   socket.emit('action', {
+  //     name: $name.val(), action: $button.data('type')
+  //   });
+  //   writeAction($name.val(), $button.data('type'));
+  // }
 
 }
