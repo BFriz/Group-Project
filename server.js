@@ -10,7 +10,7 @@ var app = express();
 var path = require("path");
 // // create a server and attach it to our main express-app
 var server = require('http').createServer(app);
-var port = process.env.PORT || 4000;
+var port = process.env.PORT || 3000;
 // // tell socket.io we use this server (?)
 var io = require('socket.io').listen(server);
 // //morgan handles the middleware and lets us know about our routes and connections
