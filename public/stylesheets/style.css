@@ -24,6 +24,10 @@ html, body {
    color: #163177;
 }
 
+.soft_background {
+  background-color: rgba(234, 217, 55, 0.11);
+}
+
 
 /********* 
 In the Navbar
@@ -57,6 +61,7 @@ Panels
 .main_panel {
   border: 3px solid rgba(183, 183, 207, 0.77);
   border-radius: 7px;
+  margin-bottom: 10px; 
 }
 
 
@@ -85,11 +90,6 @@ Moods Menu
 /********* 
 In the random profile
  ******** */
-
- .main_panel {
- margin-bottom: 10px; 
- /*height: 500px;*/
-}
 
 #the_truth {
   height: 333px;
@@ -129,7 +129,15 @@ In the random profile
 In the add a crush on the right
  ******** */
 
-#mini_user_profile img+p {
+.mini_user_profile {
+  padding: 5px 10px;
+}
+
+.mini_user_profile img {
+  display: inline-block;
+  height: 40px;
+}
+.mini_user_profile p {
   display: inline-block;
 }
 
@@ -141,7 +149,6 @@ In the map
   margin-bottom: 0;
 }
 #over_the_map {
-  background-color: rgba(234, 217, 55, 0.11);
   z-index: 10;
   position: relative;
   padding-top: 6px;
@@ -174,6 +181,12 @@ In the map
 /**************************/
 /*CHAT
 /**************************/
+
+#chatting_with {
+  font-family: 'Kaushan Script', cursive;
+  color: rgba(250, 18, 44, 0.68);
+  font-size: 2em;
+}
 
 ul.chatlines {
   border: 1px solid #aaa;

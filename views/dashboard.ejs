@@ -68,7 +68,7 @@
 
   <div class="col-xs-offset-1 col-xs-10 main_panel" id="up_panel">
 
-    <div id="mood_menu" class="row bounce">
+    <div id="mood_menu" class="row">
       <div class="col-xs-1 text-left h4">
         <ul class="list-inline">
           <li class="icon-chat"><i class="fa fa-comments-o fa-2x second_color"></i></li>
@@ -184,8 +184,8 @@
 
 <!--  ADD A CRUSH -->
 <script type="x-tmpl-mustache" id="append_to_matches_template">
-   <li id="mini_user_profile" class="js_mini_user_profile">
-     <img src=  class="img-responsive img-circle">
+   <li class="mini_user_profile">
+     <img src={{facebook.profile_pic_url}} class="img-responsive img-circle">
      <p>{{facebook.name}}</p>
    </li>
 </script>
@@ -232,8 +232,8 @@
       <li class="icon-map"><i class="fa fa-map-marker fa-2x second_color"></i></li>
     </ul>
   </div>
-  <div id="" class="col-xs-10 text-center">
-    <h4>Chat with XYZ</h4>
+  <div class="col-xs-10 text-center">
+    <h4 id="chatting_with">Join the group chat</h4>
   </div>
   <div class="col-xs-1 h4 crush">
     <!-- UL to display all your likes! -->

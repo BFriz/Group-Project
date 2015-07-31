@@ -105,6 +105,12 @@ View = {
     Mustache.parse(template);
     var rendered = Mustache.render(template, object);
     parentElement.append(rendered);
+  },
+  prepend: function(templateElement, object, parentElement) {
+    var template = templateElement.html();
+    Mustache.parse(template);
+    var rendered = Mustache.render(template, object);
+    parentElement.prepend(rendered);
   }
 
 }
@@ -140,8 +146,8 @@ User = {
 				var retrieved_match = _.find(all_users, function(user){
 					return user._id === id;
 				});
-			User.addToMatchView(retrieved_match);
-			console.log('the match is', retrieved_match);
+				User.addToMatchView(retrieved_match);
+				console.log('the match is', retrieved_match);
 			})
 		}	
 	},
@@ -151,8 +157,10 @@ User = {
 		if ($('.no_match')) {  
 			$('.no_match').remove()
 		};
-		console.log('add to match view', user)
-		View.append($('#append_to_matches_template'), user, $('.add_profiles') )	
+		console.log('add to match view', user);
+		View.prepend($('#append_to_matches_template'), user, $('.add_profiles') );
+		$("#chat_container").scrollTop($("#chat_container")[0].scrollHeight);
+    // think this was the command to ensure chat stays inside the div and scrolls to keep showing the latest one
 	},
 
 	addToDislikes: function() {
@@ -193,7 +201,6 @@ User = {
 			// put request is also returning the "liked" profile
 			User.chechIfMatch(data[0]);
 		})
-
 		// ***************************
 		// TO DO emit socket LIKE to serverc
 
