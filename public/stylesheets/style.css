@@ -88,6 +88,11 @@ In the random profile
 
  .main_panel {
  margin-bottom: 10px; 
+ /*height: 500px;*/
+}
+
+#the_truth {
+  height: 333px;
 }
 
 #profile_panel {
