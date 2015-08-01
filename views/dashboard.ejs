@@ -71,8 +71,8 @@
     <div id="mood_menu" class="row">
       <div class="col-xs-1 text-left h4">
         <ul class="list-inline">
-          <li class="icon-chat"><i class="fa fa-comments-o fa-2x second_color"></i></li>
-          <li class="hidden icon-map"><i class="fa fa-map-marker fa-2x second_color"></i></li>
+          <li class="icon-chat"><a href="" role="button"><i class="fa fa-comments-o fa-2x"></i></a></li>
+          <li class="hidden icon-map"><a href="" role="button"><i class="fa fa-map-marker fa-2x"></i></a></li>
         </ul>
       </div>
       <div class="col-xs-10 text-center h4">
@@ -86,7 +86,7 @@
       <div class="col-xs-1 h4 crush">
         <ul class="list-inline">
           <li class="dropdown">
-            <a href="#" role="button" class="show_matches"><i class="fa fa-diamond fa-2x second_color"></i></a>
+            <a href="#" role="button" class="show_matches"><i class="fa fa-diamond fa-2x"></i></a>
           </li>
         </ul>
       </div>
@@ -131,13 +131,13 @@
             <li id="showing_now_id" class="hidden">{{ _id }}</li>
          </ul>
          <ul class="list-inline">
-            <li id="no_button" class="no_button">
+            <li><a href='#' id="no_button" class="no_button">
                <span class="fa-stack fa-3x">
                  <i class="fa fa-heart fa-stack-1x"></i>
                  <i class="fa fa-ban fa-stack-2x text-danger"></i>
                </span>
-            </li>
-            <li id="yes_button" class="yes_button"><i class="fa fa-4x fa-heart"></i></li>
+            </a></li>
+            <li><a href="" id="yes_button" class="yes_button"><i class="fa fa-4x fa-heart"></i></a></li>
          </ul>         
       </div>
    </div>
@@ -149,18 +149,14 @@
 <script type="x-tmpl-mustache" id="nobody_mood_template">
 
  <div class="user-profile row">
-    <div class="col-xs-12">
-      <i class="fa fa-hourglass-half fa-5x fa-spin"></i>
-      <p>No user with such mood at the moment</p>
+    <div id="nobody" class="col-xs-12">
+      <i class="fa fa-hourglass-half fa-4x fa-spin"></i>
+      <p class="mini_name">No user with such mood right now</p>
     </div>
  </div>
 
  <div class="row" id="yes_no_area">
     <div class="col-xs-12">
-       <ul class="list-inline">
-          <li><span class="glyphicon glyphicon-star-empty"></span></li>
-          <li><span class="glyphicon glyphicon-star-empty"></span></li>
-          <li><span class="glyphicon glyphicon-star-empty"></span></li>
        </ul>
        <ul class="list-inline">
           <li class="no_button">
@@ -180,21 +176,35 @@
 <!--  ADD A CRUSH -->
 <script type="x-tmpl-mustache" id="append_to_matches_template">
 <div class="row mini_user_profile">
-  <div class="col-xs-4">
+  <div class="col-xs-offset-3 col-xs-2 text-left">
     <img src={{facebook.profile_pic_url}} class="img-responsive img-circle">
   </div> 
-  <div class="col-xs-8">
-    <p>{{facebook.name}}</p>
+  <div class="col-xs-7 text-left">
+    <p>{{facebook.name}} <span class="glyphicon glyphicon-star-empty"></span> {{mood}}</p>
   </div> 
 </div> 
 </script>
+<!-- end add crush -->
+
+<!-- no crushes -->
+<script type="x-tmpl-mustache" id="no_matches_template">
+<div class="row mini_user_profile">
+  <div class="col-xs-offset-3 col-xs-2 text-left">
+    <i class="fa fa-hourglass-half fa-3x fa-spin"></i>
+  </div> 
+  <div class="col-xs-7 text-left">
+    <p>No matches yet</p>
+  </div> 
+</div> 
+</script>
+
 
 <!--  MAP TEMPLATE -->
 <script type="x-tmpl-mustache" id="map_panel_template">
   <div class="row" id="over_the_map">
     <div class="col-xs-1 text-left h4">
       <ul class="list-inline">
-        <li class="icon-chat"><i class="fa fa-comments-o fa-2x second_color"></i></li>
+        <li class="icon-chat"><a href="" role="button"><i class="fa fa-comments-o fa-2x"></i></a></li>
       </ul>
     </div>
     <div id="google_maps_panel" class="col-xs-10 text-center">
@@ -207,7 +217,7 @@
     <div class="col-xs-1 h4 crush">
       <ul class="list-inline">
         <li class="dropdown">
-          <a href="#" role="button" class="show_matches"><i class="fa fa-diamond fa-2x second_color"></i></a>
+          <a href="#" role="button" class="show_matches"><i class="fa fa-diamond fa-2x"></i></a>
         </li>
       </ul>
     </div>
@@ -225,19 +235,16 @@
 <div class="row" id="chat_header">
   <div class="col-xs-1 text-left h4">
     <ul class="list-inline">
-      <li class="icon-map"><i class="fa fa-map-marker fa-2x second_color"></i></li>
+      <li class="icon-map"><a href="" role="button"><i class="fa fa-map-marker fa-2x"></i></a></li>
     </ul>
   </div>
   <div class="col-xs-10 text-center">
     <h4 id="chatting_with">Join the group chat</h4>
   </div>
   <div class="col-xs-1 h4 crush">
-    <!-- UL to display all your likes! -->
     <ul class="list-inline">
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-diamond fa-2x second_color"></i></a>
-        <ul class="dropdown-menu add_profiles">
-        </ul>
+        <a href="#" role="button" class="show_matches"><i class="fa fa-diamond fa-2x"></i></a>
       </li>
     </ul>
   </div>
