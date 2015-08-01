@@ -1,15 +1,15 @@
 var Map = Map || {};
 
+
 //Document.ready function and event listener for the map to load.
 $(document).ready(function() {
-  Map.show();
-  Map.listLocation();
+  // see View.initialize for 2 more map functions starting once we get current user
+
   $('#bottom_panel').on('click', '.mini_marker_info', Map.showInsideProfiles);  
   $('.container-fluid').on('click', '.icon-chat', Chat.show);
 });
 
-var locations = [];
-var all_users;
+
 //var locations = {};
 
 Map = {
@@ -47,48 +47,52 @@ Map = {
       map: Map.map,
     });
 
+    // now show all users on map
+    Map.listLocations();
+
   },
 
 //Function for obtaining the locations 
-  listLocation: function() {
-    $.get('/map', function(response) {
-      $.each(response, function(index, user) {
-        locations.push(user.location);
-        all_users = response;
-      });
-      return all_users;
-    })
-    .done(function(all_users){
-      Map.addMarkers(all_users, function(coords) {
-        var usersAndCoordinates = _.zip(all_users, coords);
-
-        for (var i = 0; i < usersAndCoordinates.length; i++) {
-          var name = usersAndCoordinates[i][0].facebook.name;
-          var mood = usersAndCoordinates[i][0].mood;
-          var pic = usersAndCoordinates[i][0].facebook.profile_pic_url;
-          var id = usersAndCoordinates[i][0]._id;
-
-          var marker = new google.maps.Marker({
-            position: usersAndCoordinates[i][1],
-            map: map,
-            html: '<div class="mini_marker_info" data-pic="' + pic + '" data-id="' + id + '"><p>' + name + '</p> <p>' + mood + '</p></div>' 
-          });
-
-          var infoWindow = new google.maps.InfoWindow( { content: "Loading content..." } );
-
-          google.maps.event.addListener( marker, 'click', function() {
-            infoWindow.setContent(this.html);
-            infoWindow.open(map, this);
-          });
-        };
-      });
+  listLocations: function() {
+      console.log('list locations');
+    // push loc of all users into an array
+    Map.usersLocations = [];
+    $.each(AllUsers, function(index, user) {
+      Map.usersLocations.push(user.location);
     });
+
+    // callback function to run on Map.addMarkers
+    Map.addMarkers(AllUsers, function(coords){
+      console.log('adding markers');
+      var usersAndCoordinates = _.zip(AllUsers, coords);
+
+      for (var i = 0; i < usersAndCoordinates.length; i++) {
+        var name = usersAndCoordinates[i][0].facebook.name;
+        var mood = usersAndCoordinates[i][0].mood;
+        var pic = usersAndCoordinates[i][0].facebook.profile_pic_url;
+        var id = usersAndCoordinates[i][0]._id;
+        var position = usersAndCoordinates[i][1];
+
+        var marker = new google.maps.Marker({
+          position: position ,
+          map: Map.map,
+          draggable: true,
+          html: '<div class="mini_marker_info" data-pic="' + pic + '" data-id="' + id + '"><p>' + name + '</p> <p>' + mood + '</p></div>' 
+        });
+        var infoWindow = new google.maps.InfoWindow();
+
+        google.maps.event.addListener(marker, 'click', function() {
+          infoWindow.setContent(this.html);
+          infoWindow.open(Map.map, this);
+        });
+      };
+    });
+
   },
 
 //Function for adding markers to the page based on the locations from the database.
-  addMarkers: function(all_users, callback) {
+  addMarkers: function(users, callback) {
     var coords = [];
-    var users = all_users;
     Map.geocoder = new google.maps.Geocoder();
 
     for (var i = 0; i < users.length; i++) {
@@ -96,15 +100,16 @@ Map = {
         // address will then be locations(i)(0)
         // name will then be locations(i)(1)
       var address = users[i].location;
-      var windowContent = '<h1>' + users[i].facebook.name + '</h1>';
+      var windowContent = '<p>' + users[i].facebook.name + '</p>';
 
       Map.geocoder.geocode( {'address': address}, function(results, status) {
+        console.log('status', status );
         if (status == google.maps.GeocoderStatus.OK) {
           coords.push(results[0].geometry.location);
+        }
 
-          if(coords.length === users.length) {
-            callback(coords);
-          }
+        if (i === users.length) {
+          callback(coords);
         }
       });
     }
