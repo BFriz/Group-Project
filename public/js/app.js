@@ -32,6 +32,10 @@ View = {
 	  $('#all_moods a').on('click', User.changeMood);
 	  $('#bottom_panel').on('submit', '#submitLocation', User.changeLocation);
 
+	  $('.show_matches').on('click', function(){
+	  	User.showMatches(StorageUser, AllUsers);
+	  })
+
 },
 
 	// store the current user and all the users so far
@@ -44,7 +48,6 @@ View = {
 			console.log('AllUsers: ', AllUsers);
 
 			View.setActiveMood(StorageUser);
-			User.showMatches(StorageUser, AllUsers);
 		})
 	},
 
@@ -87,8 +90,8 @@ View = {
 			// get random profile within the relevant ones
 			var i = getRandomInt(0, relevant_users.length);
 			(relevant_users.length > 0) ? 
-						View.render($('#random_profile_template'), relevant_users[i], $('#panels_container'))
-						: View.render($('#nobody_mood_template'), null, $('#panels_container'));
+						View.render($('#random_profile_template'), relevant_users[i], $('#profile_panel'))
+						: View.render($('#nobody_mood_template'), null, $('#profile_panel'));
 
 		});
 	},
@@ -133,10 +136,10 @@ User = {
 
 	showMatches: function(user, all_users) {
 		// passing it on StorageUser and AllUsers
+		console.log('show matches');
 		if (user.matches.length === 0) {
 			var html = "<li class='no_match text-center'>No matches yet</li>"
-			$('.add_profiles').html(html);
-			$('.add_profiles').html(html);
+			$('#profile_panel').html(html);
 		}
 		else {
 			// for each id in user.matches, go into all_users and select the user having this id
@@ -158,8 +161,8 @@ User = {
 			$('.no_match').remove()
 		};
 		console.log('add to match view', user);
-		View.prepend($('#append_to_matches_template'), user, $('.add_profiles') );
-		$("#chat_container").scrollTop($("#chat_container")[0].scrollHeight);
+		View.prepend($('#append_to_matches_template'), user, $('#profile_panel') );
+		// $("#chat_container").scrollTop($("#chat_container")[0].scrollHeight);
     // think this was the command to ensure chat stays inside the div and scrolls to keep showing the latest one
 	},
 

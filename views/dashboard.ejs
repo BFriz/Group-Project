@@ -84,18 +84,17 @@
         </ul>
       </div>
       <div class="col-xs-1 h4 crush">
-        <!-- UL to display all your likes! -->
         <ul class="list-inline">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-diamond fa-2x second_color"></i></a>
-            <ul class="dropdown-menu add_profiles">
-            </ul>
+            <a href="#" role="button" class="show_matches"><i class="fa fa-diamond fa-2x second_color"></i></a>
           </li>
         </ul>
       </div>
     </div> <!-- End Row with mood menu -->
 
     <div id="panels_container" class="row">
+      <div id="profile_panel" class="panel col-xs-12 text-center">
+      </div>
     </div>
 
   </div> <!-- end up panel -->
@@ -116,7 +115,6 @@
 
 <!-- RANDOM PROFILE -->
 <script type="x-tmpl-mustache" id="random_profile_template">
-<div id="profile_panel" class="panel col-xs-12 text-center">
 
    <div class="user-profile row">
       <div class="col-xs-12">
@@ -144,50 +142,51 @@
       </div>
    </div>
 
-</div>
 </script>
 <!-- END of Random Profile -->
 
 <!-- NO PROFILE TO SHOW FOR THIS MOOD -->
 <script type="x-tmpl-mustache" id="nobody_mood_template">
-<div id="profile_panel" class="panel col-xs-12 text-center">
 
-   <div class="user-profile row">
-      <div class="col-xs-12">
-        <i class="fa fa-hourglass-half fa-5x fa-spin"></i>
-        <p>No user with such mood at the moment</p>
-      </div>
-   </div>
+ <div class="user-profile row">
+    <div class="col-xs-12">
+      <i class="fa fa-hourglass-half fa-5x fa-spin"></i>
+      <p>No user with such mood at the moment</p>
+    </div>
+ </div>
 
-   <div class="row" id="yes_no_area">
-      <div class="col-xs-12">
-         <ul class="list-inline">
-            <li><span class="glyphicon glyphicon-star-empty"></span></li>
-            <li><span class="glyphicon glyphicon-star-empty"></span></li>
-            <li><span class="glyphicon glyphicon-star-empty"></span></li>
-         </ul>
-         <ul class="list-inline">
-            <li class="no_button">
-               <span class="fa-stack fa-3x">
-                 <i class="fa fa-heart fa-stack-1x"></i>
-                 <i class="fa fa-ban fa-stack-2x text-danger"></i>
-               </span>
-            </li>
-            <li class="yes_button"><i class="fa fa-4x fa-heart"></i></li>
-         </ul>         
-      </div>
-   </div>
+ <div class="row" id="yes_no_area">
+    <div class="col-xs-12">
+       <ul class="list-inline">
+          <li><span class="glyphicon glyphicon-star-empty"></span></li>
+          <li><span class="glyphicon glyphicon-star-empty"></span></li>
+          <li><span class="glyphicon glyphicon-star-empty"></span></li>
+       </ul>
+       <ul class="list-inline">
+          <li class="no_button">
+             <span class="fa-stack fa-3x">
+               <i class="fa fa-heart fa-stack-1x"></i>
+               <i class="fa fa-ban fa-stack-2x text-danger"></i>
+             </span>
+          </li>
+          <li class="yes_button"><i class="fa fa-4x fa-heart"></i></li>
+       </ul>         
+    </div>
+ </div>
 
-</div>
 </script>
 <!-- NO PROFILE TO SHOW FOR THIS MOOD -->
 
 <!--  ADD A CRUSH -->
 <script type="x-tmpl-mustache" id="append_to_matches_template">
-   <li class="mini_user_profile">
-     <img src={{facebook.profile_pic_url}} class="img-responsive img-circle">
-     <p>{{facebook.name}}</p>
-   </li>
+<div class="row mini_user_profile">
+  <div class="col-xs-4">
+    <img src={{facebook.profile_pic_url}} class="img-responsive img-circle">
+  </div> 
+  <div class="col-xs-8">
+    <p>{{facebook.name}}</p>
+  </div> 
+</div> 
 </script>
 
 <!--  MAP TEMPLATE -->
@@ -206,12 +205,9 @@
       </form>
     </div>
     <div class="col-xs-1 h4 crush">
-      <!-- UL to display all your likes! -->
       <ul class="list-inline">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-diamond fa-2x second_color"></i></a>
-          <ul class="dropdown-menu add_profiles">
-          </ul>
+          <a href="#" role="button" class="show_matches"><i class="fa fa-diamond fa-2x second_color"></i></a>
         </li>
       </ul>
     </div>
