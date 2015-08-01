@@ -32,7 +32,7 @@ View = {
 	  $('#all_moods a').on('click', User.changeMood);
 	  $('#bottom_panel').on('submit', '#submitLocation', User.changeLocation);
 
-	  $('.show_matches').on('click', function(){
+	  $('.container-fluid').on('click', '.show_matches', function(){
 	  	User.showMatches(StorageUser, AllUsers);
 	  })
 
@@ -135,11 +135,12 @@ User = {
 	},
 
 	showMatches: function(user, all_users) {
-		// passing it on StorageUser and AllUsers
-		console.log('show matches');
+		// check objects StorageUser and AllUsers to retrieve matches
+		$('#profile_panel').empty();
+
+		// special msg if no matches
 		if (user.matches.length === 0) {
-			var html = "<li class='no_match text-center'>No matches yet</li>"
-			$('#profile_panel').html(html);
+			View.append( $('#no_matches_template'), null, $('#profile_panel') )
 		}
 		else {
 			// for each id in user.matches, go into all_users and select the user having this id
@@ -152,17 +153,15 @@ User = {
 				User.addToMatchView(retrieved_match);
 				console.log('the match is', retrieved_match);
 			})
-		}	
+		}
+		// finally add the message telling how to play again
+
 	},
 
 	addToMatchView: function(user) {
-		// remove the "no match yet" if it was there, and append the new match
-		if ($('.no_match')) {  
-			$('.no_match').remove()
-		};
 		console.log('add to match view', user);
 		View.prepend($('#append_to_matches_template'), user, $('#profile_panel') );
-		// $("#chat_container").scrollTop($("#chat_container")[0].scrollHeight);
+		$("#profile_panel").scrollTop($("#profile_panel")[0].scrollHeight);
     // think this was the command to ensure chat stays inside the div and scrolls to keep showing the latest one
 	},
 
