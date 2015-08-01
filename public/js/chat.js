@@ -51,6 +51,7 @@ Chat = {
 
   // show chat means icon shows map
   show: function() {
+    event.preventDefault();
     View.render($('#chat_template'), StorageUser, $('#bottom_panel') );
     $('#mood_menu .icon-map').removeClass('hidden');
     $('#mood_menu .icon-map').show();

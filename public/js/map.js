@@ -16,6 +16,7 @@ Map = {
 
   // show map and switch small icon to go back to chat
   show: function() {
+    event.preventDefault();
     View.render($('#map_panel_template'), StorageUser, $('#bottom_panel') );
     Map.initialize();
     $('#mood_menu .icon-chat').show();
