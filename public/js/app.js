@@ -152,10 +152,10 @@ User = {
 				});
 				User.addToMatchView(retrieved_match);
 				console.log('the match is', retrieved_match);
-			})
+			});		
+			// finally add the message telling how to play again
+			View.prepend($('#matches_msg_template'), null, $('#profile_panel'));
 		}
-		// finally add the message telling how to play again
-
 	},
 
 	addToMatchView: function(user) {
