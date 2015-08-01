@@ -40,6 +40,7 @@ View = {
 
 	// store the current user and all the users so far
 	// update moods and matches accordingly
+	// everything starts here as we need the current user and all users to process the map
 	initialize: function() {
 		$.get('/users', function(response) {
 			StorageUser = response.current_user;
@@ -47,7 +48,9 @@ View = {
 			AllUsers = response.users;
 			console.log('AllUsers: ', AllUsers);
 
+			// all functions to initalize the rest of the app
 			View.setActiveMood(StorageUser);
+		  Map.show();
 		})
 	},
 
