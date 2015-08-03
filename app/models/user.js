@@ -1,7 +1,19 @@
 // load the things we need
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
-mongoose.connect("mongodb://localhost/moodsdb"); // random moodsdb title, should i change?
+
+// mongoose.connect("mongodb://localhost/moodsdb"); // random moodsdb title, should i change?
+var uristring = 
+  process.env.MONGOLAB_URI || 
+  'mongodb://localhost/moodsdb';
+
+mongoose.connect(uristring, function (err, res) {
+  if (err) { 
+    console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+  } else {
+    console.log ('Succeeded connected to: ' + uristring);
+  }
+});
 
 
 // POWERFUL TO MODIFY ON THE DATABASE!!!
