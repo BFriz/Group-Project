@@ -4,7 +4,7 @@ $(document).ready(function() {
 
   // see View.initialize for 2 more map functions starting once we get current user
 
-  $('#bottom_panel').on('click', '.mini_marker_info', Map.showInsideProfiles);  
+  $('#bottom_panel').on('submit', '#submitLocation', Map.changeUserLocation); 
   $('.container-fluid').on('click', '.icon-chat', Chat.show);
 });
 
@@ -71,25 +71,32 @@ Map = {
     console.log('adding markers');
     // Iterates through users but only create marker if the user has a valid location as per Google
     _.each(userArray, function(user){
+
       if (user.ggl_coords !== 'invalid') {
 
         var html = "<div class='mini_marker_info' data-id='" + user._id + "'>";
         html += "<img src='" + user.facebook.profile_pic_url + "' class='img-responsive img-circle'><p>" + user.facebook.name + " <span class='glyphicon glyphicon-star-empty'></span> ";
         html += user.mood + "</p></div>";
 
-        user.marker = new google.maps.Marker({
-          position: user.ggl_coords,
-          map: Map.map,
-          draggable: true,
-          html: html
-        });
-
-        // special icon for current user
-        // only add to the marker array if it is Not the current user, so that current user never gets removed from the map
+        // special icon for current user - and instructions to hide the previous icon
         if (user._id === StorageUser._id) {
-          user.marker.setIcon(Map.currUserIcon);
+          if (!!StorageUser.marker) { StorageUser.marker.setMap(null);};
+          user.marker = new google.maps.Marker({
+            position: user.ggl_coords,
+            map: Map.map,
+            draggable: false,
+            html: html, 
+            animation: google.maps.Animation.DROP,
+            icon: Map.currUserIcon
+          });
           StorageUser.marker = user.marker;
         } else {
+          user.marker = new google.maps.Marker({
+            position: user.ggl_coords,
+            map: Map.map,
+            html: html
+          });
+        // only add to the marker array if it is Not the current user, so that current user never gets removed from the map
           Map.markerArray.push(user.marker)
         }
 
@@ -99,6 +106,10 @@ Map = {
           infoWindow.setContent(this.html);
           infoWindow.open(Map.map, this);
         });                          
+      } 
+      // else if current user has put an invalid, adress, do nothing but show alert msg 
+      else if ( (user.ggl_coords !== 'invalid') && (user._id === StorageUser._id)  ) {
+        alert('You entered an invalid location, please try again');
       }
     });
   },
@@ -112,6 +123,24 @@ Map = {
       });
       Map.markerArray = [];
     }
+  },
+
+  changeUserLocation: function(event) {
+    event.preventDefault();
+    var location = $('#location_input').val();  
+    // server not return the new user, only a 201 msg, so update ourselves
+    StorageUser.location = location;
+
+    $.ajax({
+      type: 'PUT',
+      url: '/users/location',
+      data: {location: location}, 
+      dataType: 'json'
+    })
+    .done(function(data) {
+      console.log('changed location', StorageUser.location);
+      Map.getCoords([StorageUser]);
+    })
   }
 
 } // end Map object

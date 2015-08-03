@@ -30,7 +30,6 @@ View = {
 	  })
 
 	  $('#all_moods a').on('click', User.changeMood);
-	  $('#bottom_panel').on('submit', '#submitLocation', User.changeLocation);
 
 	  $('.container-fluid').on('click', '.show_matches', function(){
 	  	User.showMatches(StorageUser, AllUsers);
@@ -95,7 +94,7 @@ View = {
 				View.render($('#random_profile_template'), relevant_users[i], $('#profile_panel'))
 				console.log('relevant_users', relevant_users);
 
-				// finally, ensure map only shows the relevant users
+				// and show these profiles on the map
 				Map.getCoords(relevant_users);
 
 			} else {
@@ -282,21 +281,6 @@ User = {
 		// TO DO emit socket new mood
 		// TO DO update matches shown
 		// ***************************
-	},
-
-	changeLocation: function(event) {
-		event.preventDefault();
-		var location = $('#location_input').val();	
-
-		$.ajax({
-			type: 'PUT',
-			url: '/users/location',
-			data: {location: location}, 
-			dataType: 'json'
-		})
-		.done(function(data) {
-			console.log('succes updated location');
-		})
 	}
 }
 
