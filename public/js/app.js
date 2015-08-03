@@ -50,6 +50,7 @@ View = {
 
 			// all functions to initalize the rest of the app
 			View.setActiveMood(StorageUser);
+	    Map.markerArray = [];
 		  Map.show();
       Map.initialize();
 		})
@@ -80,7 +81,7 @@ View = {
 				})
 
 				// if mood is surprise me (default upon login), show everyone ;
-				//  otherwise only show profiles with same mood as curr user
+				//  otherwise reduce relevant_users to only show profiles with same mood as curr user
 				if (current_user.mood !== 'surprise_me') {
 					relevant_users = relevant_users.filter(function (value) {
 						return (value.mood === current_user.mood)
@@ -88,15 +89,20 @@ View = {
 				}
 			}
 
-			// else noone logged in so show index page so show all users
-			else { relevant_users = response.users; }
-
 			// get random profile within the relevant ones
-			var i = getRandomInt(0, relevant_users.length);
-			(relevant_users.length > 0) ? 
-						View.render($('#random_profile_template'), relevant_users[i], $('#profile_panel'))
-						: View.render($('#nobody_mood_template'), null, $('#profile_panel'));
+			if (relevant_users.length > 0) {
+				var i = getRandomInt(0, relevant_users.length);
+				View.render($('#random_profile_template'), relevant_users[i], $('#profile_panel'))
+				console.log('relevant_users', relevant_users);
 
+				// finally, ensure map only shows the relevant users
+				Map.getCoords(relevant_users);
+
+			} else {
+					View.render($('#nobody_mood_template'), null, $('#profile_panel'));
+					// remove markers from map
+			    Map.clearMarkerArray();
+			}
 		});
 	},
 

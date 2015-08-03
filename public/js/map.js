@@ -41,38 +41,36 @@ Map = {
     Map.map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
     Map.geocoder = new google.maps.Geocoder();
 
-    // now show all users on map
-    // invoke a callback function as getting user lcoations from Ggl is asynchronous
-    Map.getCoords();
+    // show position of current user
+    Map.getCoords([StorageUser]);
+
   },
 
-  getCoords: function(){
+  getCoords: function(userArray){
     // iterates through all users and adds their location into the user object
-    // once the count of async calls is AllUsers.length, we run the callback to now show all locations on the map
+    // once the count of async calls is userArray.length, we run the callback to now show all locations on the map
     var count = 0;
-    _.each(AllUsers, function(user){
+    _.each(userArray, function(user){
       Map.geocoder.geocode( {'address': user.location}, function(results, status) {
         count++;
         // later on need to ensure that no marker is created if the coords are invalid
-        if (status == google.maps.GeocoderStatus.OK) {
-          user.ggl_coords = results[0].geometry.location;
-        } else {
-          user.ggl_coords = 'invalid';
-        }
+        (status == google.maps.GeocoderStatus.OK) ? user.ggl_coords = results[0].geometry.location : user.ggl_coords = 'invalid';
         // as for a callback, only run this once we did iterate through the whole array
-        if (count === AllUsers.length) {
-          Map.showUsers();
+        if (count === userArray.length) {
+          Map.showUsers(userArray);
         }
       });
     })
   },
 
 // Create a marker for every user on the map and show their details on the infowindow
-  showUsers: function() {
+  showUsers: function(userArray) {
+
+    Map.clearMarkerArray();
 
     console.log('adding markers');
     // Iterates through users but only create marker if the user has a valid location as per Google
-    _.each(AllUsers, function(user){
+    _.each(userArray, function(user){
       if (user.ggl_coords !== 'invalid') {
 
         var html = "<div class='mini_marker_info' data-id='" + user._id + "'>";
@@ -87,9 +85,12 @@ Map = {
         });
 
         // special icon for current user
+        // only add to the marker array if it is Not the current user, so that current user never gets removed from the map
         if (user._id === StorageUser._id) {
           user.marker.setIcon(Map.currUserIcon);
           StorageUser.marker = user.marker;
+        } else {
+          Map.markerArray.push(user.marker)
         }
 
         // show infowindow on click
@@ -100,6 +101,17 @@ Map = {
         });                          
       }
     });
+  },
+
+  clearMarkerArray: function(){
+    console.log('marker arra', Map.markerArray);
+    if (Map.markerArray.length > 0) {
+      _.each(Map.markerArray, function(marker){
+        console.log(marker);
+        marker.setMap(null);
+      });
+      Map.markerArray = [];
+    }
   }
 
 } // end Map object
