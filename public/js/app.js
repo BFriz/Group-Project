@@ -250,6 +250,7 @@ User = {
 		.done(function(data) {
 			console.log('succes add Match', data);
 			User.addToMatchView(data[0]);
+			alert('It is a match!!');
 
 			// ***************************
 			// TO DO emit socket Match,
@@ -281,6 +282,10 @@ User = {
 		// TO DO emit socket new mood
 		// TO DO update matches shown
 		// ***************************
+	}, 
+
+	shortenName: function(name) {
+		return name.split(' ')[0];
 	}
 }
 
