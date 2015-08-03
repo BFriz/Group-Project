@@ -203,6 +203,17 @@ In the map
   overflow: hidden;
 }
 
+.mini_marker_info img {
+  height: 30px;
+  margin: 0 auto;
+}
+.mini_marker_info p {
+  margin-bottom: 0px;
+  font-family: 'Kaushan Script', cursive;
+  color: #163177;
+  font-size: 1em;
+}
+
 /**************************/
 /*CHAT
 /**************************/
