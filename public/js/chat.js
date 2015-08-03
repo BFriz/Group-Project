@@ -12,7 +12,8 @@ $(document).ready(function(){
 
 // Use Socket.io to manage the Chat
 
-var socket = io.connect('http://localhost:3000/');
+var socket = io.connect('https://moodee.herokuapp.com/');
+// var socket = io.connect('http://localhost:3000/');
    
 socket.on('connected', function(){
   console.log('connected');
