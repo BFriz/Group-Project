@@ -4,8 +4,8 @@ module.exports = {
     'facebookAuth' : {
         'clientID'      : '861178280623948', // your App ID
         'clientSecret'  : '49a099e322831ac5f0945581dfa7cd76', // your App Secret
-        'callbackURL'   : 'http://lvh.me:3000/auth/facebook/callback'
-    },
+        'callbackURL'   : 'https://moodee.herokuapp.com/auth/facebook/callback'
+    }
 
 //     'twitterAuth' : {
 //         'consumerKey'       : 'your-consumer-key-here',
