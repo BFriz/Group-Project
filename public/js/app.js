@@ -51,6 +51,7 @@ View = {
 			// all functions to initalize the rest of the app
 			View.setActiveMood(StorageUser);
 		  Map.show();
+      Map.initialize();
 		})
 	},
 
