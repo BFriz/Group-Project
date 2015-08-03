@@ -98,7 +98,7 @@ View = {
 			if (relevantUsers.length > 0) {
 				var i = getRandomInt(0, relevantUsers.length);
 				// add shortened name to all users // VERY temporary soluion, of course much better to do that at DB leve
-				relevantUsers[i].shortName = User.shortenName(relevantUsers[i]);
+				relevantUsers[i].shortName = User.shortenName(relevantUsers[i].facebook.name);
 				View.render($('#random_profile_template'), relevantUsers[i], $('#profile_panel'))
 				console.log('relevantUsers', relevantUsers);
 
