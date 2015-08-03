@@ -1,8 +1,7 @@
 var Map = Map || {};
 
-
-//Document.ready function and event listener for the map to load.
 $(document).ready(function() {
+
   // see View.initialize for 2 more map functions starting once we get current user
 
   $('#bottom_panel').on('click', '.mini_marker_info', Map.showInsideProfiles);  
@@ -10,15 +9,12 @@ $(document).ready(function() {
 });
 
 
-//var locations = {};
-
 Map = {
 
-  // show map and switch small icon to go back to chat
+  // show map and ensure the small icon enables to click and show the chat
   show: function() {
     event.preventDefault();
     View.render($('#map_panel_template'), StorageUser, $('#bottom_panel') );
-    Map.initialize();
     $('#mood_menu .icon-chat').show();
     $('#mood_menu .icon-map').hide();
   },
@@ -43,91 +39,67 @@ Map = {
       };
 
     Map.map = new google.maps.Map(document.getElementById('googleMap'), mapOptions);
+    Map.geocoder = new google.maps.Geocoder();
 
     // now show all users on map
-    Map.listLocations();
-
+    // invoke a callback function as getting user lcoations from Ggl is asynchronous
+    Map.getCoords();
   },
 
-//Function for obtaining the locations 
-  listLocations: function() {
-    // push loc of all users into an array
-    Map.usersLocations = [];
-    $.each(AllUsers, function(index, user) {
-      Map.usersLocations.push(user.location);
-    });
+  getCoords: function(){
+    // iterates through all users and adds their location into the user object
+    // once the count of async calls is AllUsers.length, we run the callback to now show all locations on the map
+    var count = 0;
+    _.each(AllUsers, function(user){
+      Map.geocoder.geocode( {'address': user.location}, function(results, status) {
+        count++;
+        // later on need to ensure that no marker is created if the coords are invalid
+        if (status == google.maps.GeocoderStatus.OK) {
+          user.ggl_coords = results[0].geometry.location;
+        } else {
+          user.ggl_coords = 'invalid';
+        }
+        // as for a callback, only run this once we did iterate through the whole array
+        if (count === AllUsers.length) {
+          Map.showUsers();
+        }
+      });
+    })
+  },
 
-    // callback function to run on Map.addMarkers, see definition below for explanations
-    // NOTE underscore _.after() function seems like an easier choice
-    Map.addMarkers(AllUsers, function(coords){
-      console.log('adding markers');
-      // add markers will push all users' coords in an array which we 'zip' with all users
-      var usersAndCoordinates = _.zip(AllUsers, coords);
-      console.log(usersAndCoordinates);
+// Create a marker for every user on the map and show their details on the infowindow
+  showUsers: function() {
 
-      for (var i = 0; i < usersAndCoordinates.length; i++) {
+    console.log('adding markers');
+    // Iterates through users but only create marker if the user has a valid location as per Google
+    _.each(AllUsers, function(user){
+      if (user.ggl_coords !== 'invalid') {
 
-        var name = usersAndCoordinates[i][0].facebook.name;
-        var mood = usersAndCoordinates[i][0].mood;
-        var pic = usersAndCoordinates[i][0].facebook.profile_pic_url;
-        var id = usersAndCoordinates[i][0]._id;
-        var position = usersAndCoordinates[i][1];
-       
-        // Click on a marker will show the user info on the infowindow
-        var html = "<div class='mini_marker_info' data-id='" +id + "'>";
-        html += "<img src='" +pic+ "' class='img-responsive img-circle'><p>" +name+ " <span class='glyphicon glyphicon-star-empty'></span> ";
-        html += mood + "</p></div>";
+        var html = "<div class='mini_marker_info' data-id='" + user._id + "'>";
+        html += "<img src='" + user.facebook.profile_pic_url + "' class='img-responsive img-circle'><p>" + user.facebook.name + " <span class='glyphicon glyphicon-star-empty'></span> ";
+        html += user.mood + "</p></div>";
 
-        var marker = new google.maps.Marker({
-          position: position,
+        user.marker = new google.maps.Marker({
+          position: user.ggl_coords,
           map: Map.map,
           draggable: true,
           html: html
         });
+
         // special icon for current user
-        if (id === StorageUser._id) {
-          Map.currUsermarker = marker;
-          marker.setIcon(Map.currUserIcon)
+        if (user._id === StorageUser._id) {
+          user.marker.setIcon(Map.currUserIcon);
+          StorageUser.marker = user.marker;
         }
 
-        // infowindow on click
+        // show infowindow on click
         var infoWindow = new google.maps.InfoWindow();
-        google.maps.event.addListener(marker, 'click', function() {
+        google.maps.event.addListener(user.marker, 'click', function() {
           infoWindow.setContent(this.html);
           infoWindow.open(Map.map, this);
-        });
-      };
+        });                          
+      }
     });
-
-  },
-
-//Function for adding markers to the page based on the locations from the database.
-// as there is an external call to gglmap to retrieve the coords of the marker,
-// we trigger a callback function when the 'google work' is done
-// NOTE underscore _.after() function seems like an easier choice
-  addMarkers: function(users, callback) {
-    var coords = [];
-    var count = 0;
-    Map.geocoder = new google.maps.Geocoder();
-
-    for (var i = 0; i < users.length; i++) {
-       // var windowContent = '<h1>'+ locations(i)(1)) +'</h1>';
-        // address will then be locations(i)(0)
-        // name will then be locations(i)(1)
-      var address = users[i].location;
-      var windowContent = '<p>' + users[i].facebook.name + '</p>';
-
-      Map.geocoder.geocode( {'address': address}, function(results, status) {
-        count++;
-        if (status == google.maps.GeocoderStatus.OK) {
-          coords.push(results[0].geometry.location);
-        }
-        if (count === users.length) {
-          console.log('callback');
-          callback(coords);
-        }
-      });
-    }
   }
 
 } // end Map object
