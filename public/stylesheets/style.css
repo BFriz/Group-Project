@@ -32,7 +32,8 @@ html, body {
 The icons 
  ******** */
 .yes_button i {
-  color: rgb(232, 23, 23);
+  /*color: rgb(232, 23, 23);*/
+  color: rgba(250, 18, 44, 1);
 }
 
 .no_button .fa-heart {
@@ -45,6 +46,11 @@ The icons
 .fa-comments-o, .fa-diamond, .fa-map-marker, .fa-hourglass-half {
   /*the second color, darker one*/
   color: #163177;
+}
+
+
+.glyphicon-heart {
+  color: rgba(250, 18, 44, 0.68);
 }
 
 /********* 
