@@ -47,6 +47,12 @@ View = {
 			AllUsers = response.users;
 			console.log('AllUsers: ', AllUsers);
 
+			// add shortened name to all users // VERY temporary soluion, of course much better to do that at DB leve
+			_.each(AllUsers, function(user){
+				user.shortName = User.shortenName(user.facebook.name);
+			});
+			StorageUser.shortName = User.shortenName(StorageUser.facebook.name);
+
 			// all functions to initalize the rest of the app
 			View.setActiveMood(StorageUser);
 	    Map.markerArray = [];
@@ -69,33 +75,35 @@ View = {
 
 	showRandomProfile: function() { 
 		$.get('/users', function(response) {
-			// response = Array with ALL users and current_user
-			var relevant_users = [];
-			var current_user = response.current_user;
+			// response = Array with ALL users and currentUser
+			var relevantUsers = [];
+			var currentUser = response.current_user;
 
 			// if someone logged in, show profiles based on them"
-			if (current_user) {
-				relevant_users = response.users.filter(function (value) {
-					return User.okToShow(value, current_user);
+			if (currentUser) {
+				relevantUsers = response.users.filter(function (value) {
+					return User.okToShow(value, currentUser);
 				})
 
 				// if mood is surprise me (default upon login), show everyone ;
-				//  otherwise reduce relevant_users to only show profiles with same mood as curr user
-				if (current_user.mood !== 'surprise_me') {
-					relevant_users = relevant_users.filter(function (value) {
-						return (value.mood === current_user.mood)
+				//  otherwise reduce relevantUsers to only show profiles with same mood as curr user
+				if (currentUser.mood !== 'surprise_me') {
+					relevantUsers = relevantUsers.filter(function (value) {
+						return (value.mood === currentUser.mood)
 					})
 				}
 			}
 
 			// get random profile within the relevant ones
-			if (relevant_users.length > 0) {
-				var i = getRandomInt(0, relevant_users.length);
-				View.render($('#random_profile_template'), relevant_users[i], $('#profile_panel'))
-				console.log('relevant_users', relevant_users);
+			if (relevantUsers.length > 0) {
+				var i = getRandomInt(0, relevantUsers.length);
+				// add shortened name to all users // VERY temporary soluion, of course much better to do that at DB leve
+				relevantUsers[i].shortName = User.shortenName(relevantUsers[i]);
+				View.render($('#random_profile_template'), relevantUsers[i], $('#profile_panel'))
+				console.log('relevantUsers', relevantUsers);
 
 				// and show these profiles on the map
-				Map.getCoords(relevant_users);
+				Map.getCoords(relevantUsers);
 
 			} else {
 					View.render($('#nobody_mood_template'), null, $('#profile_panel'));
@@ -133,12 +141,12 @@ View = {
 
 User = {
 
-	okToShow: function(user, current_user) {
+	okToShow: function(user, currentUser) {
 		// keep users with relevant gender, and not being current user, and not previously seen
-		var oppositeGender = (user.facebook.gender !== current_user.facebook.gender 
-				&& user._id !== current_user._id);
-		var notInLikes = (current_user.likes.indexOf(user._id) === -1);
-		var notInDislikes = (current_user.dislikes.indexOf(user._id) === -1);
+		var oppositeGender = (user.facebook.gender !== currentUser.facebook.gender 
+				&& user._id !== currentUser._id);
+		var notInLikes = (currentUser.likes.indexOf(user._id) === -1);
+		var notInDislikes = (currentUser.dislikes.indexOf(user._id) === -1);
 
 		return oppositeGender && notInLikes && notInDislikes;
 	},

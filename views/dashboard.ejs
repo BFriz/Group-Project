@@ -125,7 +125,7 @@
    <div class="row" id="yes_no_area">
       <div class="col-xs-12">
          <ul class="list-inline">
-            <li class="mini_name"> {{facebook.name.split(' ')[0]}} </li>
+            <li class="mini_name"> {{shortName}} </li>
             <li><span class="glyphicon glyphicon-star-empty"></span></li>
             <li class="mini_name"> {{mood}} </li>
             <li id="showing_now_id" class="hidden">{{ _id }}</li>
@@ -180,7 +180,7 @@
     <img src={{facebook.profile_pic_url}} class="img-responsive img-circle">
   </div> 
   <div class="col-xs-7 text-left">
-    <p>{{facebook.name.split(' ')[0]}} <span class="glyphicon glyphicon-star-empty"></span> {{mood}}</p>
+    <p>{{shortName}} <span class="glyphicon glyphicon-star-empty"></span> {{mood}}</p>
   </div> 
 </div> 
 </script>

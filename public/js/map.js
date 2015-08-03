@@ -75,7 +75,7 @@ Map = {
       if (user.ggl_coords !== 'invalid') {
 
         var html = "<div class='mini_marker_info' data-id='" + user._id + "'>";
-        html += "<img src='" + user.facebook.profile_pic_url + "' class='img-responsive img-circle'><p>" + user.facebook.name + " <span class='glyphicon glyphicon-star-empty'></span> ";
+        html += "<img src='" + user.facebook.profile_pic_url + "' class='img-responsive img-circle'><p>" + user.shortName + " <span class='glyphicon glyphicon-star-empty'></span> ";
         html += user.mood + "</p></div>";
 
         // special icon for current user - and instructions to hide the previous icon
