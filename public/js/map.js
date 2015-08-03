@@ -51,7 +51,6 @@ Map = {
 
 //Function for obtaining the locations 
   listLocations: function() {
-      console.log('list locations');
     // push loc of all users into an array
     Map.usersLocations = [];
     $.each(AllUsers, function(index, user) {
@@ -64,6 +63,7 @@ Map = {
       console.log('adding markers');
       // add markers will push all users' coords in an array which we 'zip' with all users
       var usersAndCoordinates = _.zip(AllUsers, coords);
+      console.log(usersAndCoordinates);
 
       for (var i = 0; i < usersAndCoordinates.length; i++) {
 
@@ -85,7 +85,10 @@ Map = {
           html: html
         });
         // special icon for current user
-        if (id === StorageUser._id) { marker.setIcon(Map.currUserIcon)}
+        if (id === StorageUser._id) {
+          Map.currUsermarker = marker;
+          marker.setIcon(Map.currUserIcon)
+        }
 
         // infowindow on click
         var infoWindow = new google.maps.InfoWindow();
@@ -104,6 +107,7 @@ Map = {
 // NOTE underscore _.after() function seems like an easier choice
   addMarkers: function(users, callback) {
     var coords = [];
+    var count = 0;
     Map.geocoder = new google.maps.Geocoder();
 
     for (var i = 0; i < users.length; i++) {
@@ -114,19 +118,16 @@ Map = {
       var windowContent = '<p>' + users[i].facebook.name + '</p>';
 
       Map.geocoder.geocode( {'address': address}, function(results, status) {
+        count++;
         if (status == google.maps.GeocoderStatus.OK) {
           coords.push(results[0].geometry.location);
         }
-        if (i === users.length) {
+        if (count === users.length) {
+          console.log('callback');
           callback(coords);
         }
       });
     }
-  },
-
-  showInsideProfiles: function() {
-    event.preventDefault();
-    console.log('show me in the profile');
   }
 
 } // end Map object
