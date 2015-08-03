@@ -257,7 +257,7 @@ User = {
 		})
 		.done(function(data) {
 			console.log('succes add Match', data);
-			User.addToMatchView(data[0]);
+			User.addToMatchView(data);
 			alert('It is a match!!');
 
 			// ***************************
